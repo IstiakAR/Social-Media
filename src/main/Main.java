@@ -19,5 +19,6 @@ public class Main {
     System.out.println(post1.totalReaction);
     System.out.println(post2.totalReaction);
     System.out.println(post1.getReaction(user1));
+    // comment
   }
 }
