@@ -1,0 +1,16 @@
+### Build and Run
+
+```
+cd ~/Documents/JAVA_PROJECT && javac -d bin -cp "lib/*" $(find src -name "*.java") && java --module-path lib --add-modules javafx.base,javafx.controls,javafx.fxml,javafx.graphics -cp bin:res main.Main
+```
+#### CHECK THE DIRECTORY AND MAKE SURE JAVAFX LIB FOLDER IS IN CORRECT PLACE 
+
+#### JAVA_PROJECT
+
+├── bin
+
+├── lib
+
+├── res
+
+└── src
