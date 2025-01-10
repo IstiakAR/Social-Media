@@ -8,7 +8,7 @@ public class User {
   public int userID;
   public int[] friends = new int[1000];
   public Post[] posts = new Post[1000];
-  private int postCount=0;
+  private int postCount = 0;
 
   public User(String username, String password, String name, int uid) {
     this.username = username;
@@ -36,7 +36,7 @@ public class User {
   }
 
   public void addPost(Post post) {
-	  posts[postCount] = post;
-      postCount++;
+    posts[postCount] = post;
+    postCount++;
   }
 }

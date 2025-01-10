@@ -4,7 +4,6 @@ package model;
 import java.util.HashMap;
 import java.util.Map;
 
-
 public class Post extends Reaction {
 	public String postContent;
 	public int postID;
@@ -15,10 +14,10 @@ public class Post extends Reaction {
 
 	public Post(String content, int postID, User user) {
 		this.postContent = content;
-		this.user=user;
+		this.user = user;
 		this.user.addPost(post);
 	}
-	
+
 	public int getReaction(User user) {
 		return reactions.getOrDefault(user, 0);
 	}
