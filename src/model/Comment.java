@@ -2,11 +2,13 @@
 package model;
 
 public class Comment {
-	String commentText;
+	public String commentText;
 	User user;
-	
-	public void addComment(String text, int id) {
-		user.userID=id;
-		commentText = text;
+	Post post;
+
+	Comment(String text, Post post, User user) { // constructor
+		this.commentText = text;
+		this.user = user;
+		this.post = post;
 	}
 }

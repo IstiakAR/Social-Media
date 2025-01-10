@@ -1,14 +1,15 @@
 
 package model;
 
+import java.util.ArrayList;
+
 public class User {
   public String username;
   public String password;
   public String name;
   public int userID;
-  public int[] friends = new int[1000];
-  public Post[] posts = new Post[1000];
-  private int postCount = 0;
+  public ArrayList<Post> posts = new ArrayList<>();
+  public ArrayList<User> friends = new ArrayList<>();
 
   public User(String username, String password, String name, int uid) {
     this.username = username;
@@ -17,26 +18,33 @@ public class User {
     this.userID = uid;
   }
 
-  public void addFriend(int id) {
-    for (int i = 0; i < friends.length; i++) {
-      if (friends[i] == 0) {
-        friends[i] = id;
-        break;
-      }
-    }
+  public void addFriend(User user) {
+    if (friends.contains(user))
+      return;
+    friends.add(user);
+    user.addFriend(this);
   }
 
-  public void removeFriend(int id) {
-    for (int i = 0; i < friends.length; i++) {
-      if (friends[i] == id) {
-        friends[i] = 0;
-        break;
-      }
-    }
+  public void removeFriend(User user) {
+    if (!friends.contains(user))
+      return;
+    friends.remove(user);
+    user.removeFriend(this);
+  }
+
+  public int getFriendCount() {
+    return friends.size();
   }
 
   public void addPost(Post post) {
-    posts[postCount] = post;
-    postCount++;
+    posts.add(post);
+  }
+
+  public void deletePost(Post post) {
+    posts.remove(post);
+  }
+
+  public int getPostCount() {
+    return posts.size();
   }
 }
