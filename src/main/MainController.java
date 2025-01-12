@@ -19,7 +19,7 @@ public class MainController extends Application {
   }
 
   public static void gotoLoginPage() throws Exception {
-    FXMLLoader loader = new FXMLLoader(MainController.class.getResource("/loginPage.fxml"));
+    FXMLLoader loader = new FXMLLoader(MainController.class.getResource("/fxml/loginPage.fxml"));
     Parent root = loader.load();
 
     Scene scene = new Scene(root);
@@ -27,7 +27,7 @@ public class MainController extends Application {
   }
 
   public static void gotoHomepage() throws Exception {
-    FXMLLoader loader = new FXMLLoader(MainController.class.getResource("/homePage.fxml"));
+    FXMLLoader loader = new FXMLLoader(MainController.class.getResource("/fxml/homePage.fxml"));
     Parent root = loader.load();
 
     Scene scene = new Scene(root);

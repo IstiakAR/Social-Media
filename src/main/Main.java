@@ -54,6 +54,6 @@ public class Main {
       System.out.println(user1.posts.get(i).postContent);
     }
 
-    // MainController.launch(MainController.class, args);
+    MainController.launch(MainController.class, args);
   }
 }
