@@ -22,7 +22,7 @@
                      <image>
                         <Image url="@../images/Social.png" />
                      </image></ImageView>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="SocialShare" wrappingWidth="178.38201141357422">
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="SocialShare" wrappingWidth="186.38201141357422">
                      <font>
                         <Font name="System Bold Italic" size="24.0" />
                      </font></Text>
@@ -52,26 +52,6 @@
                <children>
                   <ImageView accessibleRole="BUTTON" fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../images/add.png" />
-                     </image>
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                     <HBox.margin>
-                        <Insets right="10.0" />
-                     </HBox.margin>
-                  </ImageView>
-                  <Text fill="#393636" strokeType="OUTSIDE" strokeWidth="0.0" text="Create" wrappingWidth="82.18199920654297">
-                     <font>
-                        <Font name="System Bold" size="17.0" />
-                     </font>
-                  </Text>
-               </children>
-            </HBox>
-            <HBox alignment="CENTER" prefHeight="40.0" prefWidth="267.0">
-               <children>
-                  <ImageView accessibleRole="BUTTON" fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
                         <Image url="@../images/friends.png" />
                      </image>
                      <cursor>
@@ -81,47 +61,7 @@
                         <Insets right="10.0" />
                      </HBox.margin>
                   </ImageView>
-                  <Text fill="#393636" strokeType="OUTSIDE" strokeWidth="0.0" text="Friends" wrappingWidth="73.18199920654297">
-                     <font>
-                        <Font name="System Bold" size="17.0" />
-                     </font>
-                  </Text>
-               </children>
-            </HBox>
-            <HBox alignment="CENTER" prefHeight="40.0" prefWidth="267.0">
-               <children>
-                  <ImageView accessibleRole="BUTTON" fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../images/message.png" />
-                     </image>
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                     <HBox.margin>
-                        <Insets right="10.0" />
-                     </HBox.margin>
-                  </ImageView>
-                  <Text fill="#393636" strokeType="OUTSIDE" strokeWidth="0.0" text="Message" wrappingWidth="104.98201751708984">
-                     <font>
-                        <Font name="System Bold" size="17.0" />
-                     </font>
-                  </Text>
-               </children>
-            </HBox>
-            <HBox alignment="CENTER" prefHeight="40.0" prefWidth="267.0">
-               <children>
-                  <ImageView accessibleRole="BUTTON" fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../images/notifications.png" />
-                     </image>
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                     <HBox.margin>
-                        <Insets right="10.0" />
-                     </HBox.margin>
-                  </ImageView>
-                  <Text fill="#393636" strokeType="OUTSIDE" strokeWidth="0.0" text="Notifications" wrappingWidth="136.38201141357422">
+                  <Text fill="#393636" strokeType="OUTSIDE" strokeWidth="0.0" text="Friends" wrappingWidth="93.18199920654297">
                      <font>
                         <Font name="System Bold" size="17.0" />
                      </font>
@@ -168,9 +108,109 @@
                   </Text>
                </children>
             </HBox>
+            <HBox alignment="CENTER" prefHeight="40.0" prefWidth="267.0">
+               <children>
+                  <ImageView accessibleRole="BUTTON" fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/profile.png" />
+                     </image>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                     <HBox.margin>
+                        <Insets right="10.0" />
+                     </HBox.margin>
+                  </ImageView>
+                  <Text fill="#393636" strokeType="OUTSIDE" strokeWidth="0.0" text="Saved" wrappingWidth="81.18199920654297">
+                     <font>
+                        <Font name="System Bold" size="17.0" />
+                     </font>
+                  </Text>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="40.0" prefWidth="267.0">
+               <children>
+                  <ImageView accessibleRole="BUTTON" fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/profile.png" />
+                     </image>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                     <HBox.margin>
+                        <Insets right="10.0" />
+                     </HBox.margin>
+                  </ImageView>
+                  <Text fill="#393636" strokeType="OUTSIDE" strokeWidth="0.0" text="Birthdays" wrappingWidth="105.18199920654297">
+                     <font>
+                        <Font name="System Bold" size="17.0" />
+                     </font>
+                  </Text>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="40.0" prefWidth="267.0">
+               <children>
+                  <ImageView accessibleRole="BUTTON" fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/profile.png" />
+                     </image>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                     <HBox.margin>
+                        <Insets right="10.0" />
+                     </HBox.margin>
+                  </ImageView>
+                  <Text fill="#393636" strokeType="OUTSIDE" strokeWidth="0.0" text="About Social" wrappingWidth="125.18199920654297">
+                     <font>
+                        <Font name="System Bold" size="17.0" />
+                     </font>
+                  </Text>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="40.0" prefWidth="267.0">
+               <children>
+                  <ImageView accessibleRole="BUTTON" fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/profile.png" />
+                     </image>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                     <HBox.margin>
+                        <Insets right="10.0" />
+                     </HBox.margin>
+                  </ImageView>
+                  <Text fill="#393636" strokeType="OUTSIDE" strokeWidth="0.0" text="Help" wrappingWidth="58.18199920654297">
+                     <font>
+                        <Font name="System Bold" size="17.0" />
+                     </font>
+                  </Text>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="40.0" prefWidth="267.0">
+               <children>
+                  <ImageView accessibleRole="BUTTON" fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/profile.png" />
+                     </image>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                     <HBox.margin>
+                        <Insets right="10.0" />
+                     </HBox.margin>
+                  </ImageView>
+                  <Text fill="#393636" strokeType="OUTSIDE" strokeWidth="0.0" text="Stats" wrappingWidth="74.18199920654297">
+                     <font>
+                        <Font name="System Bold" size="17.0" />
+                     </font>
+                  </Text>
+               </children>
+            </HBox>
          </children>
       </VBox>
-      <HBox alignment="TOP_RIGHT" layoutX="305.0" layoutY="19.0" prefHeight="23.0" prefWidth="961.0">
+      <HBox alignment="CENTER" layoutX="305.0" layoutY="19.0" prefHeight="23.0" prefWidth="961.0">
          <children>
             <HBox alignment="CENTER_RIGHT" prefHeight="40.0" prefWidth="759.0">
                <children>
@@ -188,16 +228,49 @@
                   </ImageView>
                </children>
             </HBox>
+            <ImageView accessibleRole="BUTTON" fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/add.png" />
+               </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <HBox.margin>
+                  <Insets right="10.0" />
+               </HBox.margin>
+            </ImageView>
+            <ImageView accessibleRole="BUTTON" fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/message.png" />
+               </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <HBox.margin>
+                  <Insets right="10.0" />
+               </HBox.margin>
+            </ImageView>
+            <ImageView accessibleRole="BUTTON" fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/notifications.png" />
+               </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <HBox.margin>
+                  <Insets right="10.0" />
+               </HBox.margin>
+            </ImageView>
             <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/profile.png" />
                </image>
                <HBox.margin>
-                  <Insets left="200.0" />
+                  <Insets />
                </HBox.margin>
             </ImageView>
          </children>
       </HBox>
-      <ScrollPane layoutX="305.0" layoutY="91.0" prefHeight="633.0" prefWidth="920.0" />
+      <ScrollPane layoutX="305.0" layoutY="81.0" prefHeight="643.0" prefWidth="931.0" />
    </children>
 </AnchorPane>
