@@ -17,14 +17,14 @@
       <Button layoutX="581.0" layoutY="297.0" mnemonicParsing="false" onAction="#gotoHomepage" prefHeight="26.0" prefWidth="109.0" text="Login" />
       <Button layoutX="702.0" layoutY="297.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="122.0" text="Forgot?" />
       <Button layoutX="581.0" layoutY="350.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="242.0" text="Sign up?" />
-      <Text fill="#d7c2c2" layoutX="253.0" layoutY="253.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Social Media" textAlignment="CENTER" wrappingWidth="173.0">
+      <Text fill="#d7c2c2" layoutX="253.0" layoutY="253.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Social Share" textAlignment="CENTER" wrappingWidth="173.0">
          <font>
-            <Font size="45.0" />
+            <Font name="System Bold Italic" size="45.0" />
          </font>
       </Text>
       <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="53.0" layoutY="199.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../images/chatgpt.png" />
+            <Image url="@../images/Social.png" />
          </image></ImageView>
    </children>
 </AnchorPane>
