@@ -22,7 +22,7 @@
                      <image>
                         <Image url="@../images/Social.png" />
                      </image></ImageView>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="SocialShare" wrappingWidth="151.18199920654297">
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="SocialShare" wrappingWidth="178.38201141357422">
                      <font>
                         <Font name="System Bold Italic" size="24.0" />
                      </font></Text>
@@ -101,7 +101,7 @@
                         <Insets right="10.0" />
                      </HBox.margin>
                   </ImageView>
-                  <Text fill="#393636" strokeType="OUTSIDE" strokeWidth="0.0" text="Message" wrappingWidth="76.18199920654297">
+                  <Text fill="#393636" strokeType="OUTSIDE" strokeWidth="0.0" text="Message" wrappingWidth="104.98201751708984">
                      <font>
                         <Font name="System Bold" size="17.0" />
                      </font>
@@ -121,7 +121,7 @@
                         <Insets right="10.0" />
                      </HBox.margin>
                   </ImageView>
-                  <Text fill="#393636" strokeType="OUTSIDE" strokeWidth="0.0" text="Notifications" wrappingWidth="117.18199920654297">
+                  <Text fill="#393636" strokeType="OUTSIDE" strokeWidth="0.0" text="Notifications" wrappingWidth="136.38201141357422">
                      <font>
                         <Font name="System Bold" size="17.0" />
                      </font>
