@@ -7,15 +7,17 @@ public class User {
   public String username;
   public String password;
   public String name;
+  public String clue;
   public int userID;
   public ArrayList<Post> posts = new ArrayList<>();
   public ArrayList<User> friends = new ArrayList<>();
 
-  public User(String username, String password, String name, int uid) {
+  public User(String username, String password, String name,String clue, int uid) {
     this.username = username;
     this.password = password;
     this.name = name;
     this.userID = uid;
+    this.clue = clue;
   }
 
   public void addFriend(User user) {
