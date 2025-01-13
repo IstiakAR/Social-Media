@@ -1,3 +1,8 @@
 lib/
 .classpath
 .project
+.idea/
+.vscode/
+.vs/
+.netbeans-projects/
+
