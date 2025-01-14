@@ -2,37 +2,25 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
-<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="759.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="759.0" prefWidth="1280.0" style="-fx-background-color: #0e1113;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <VBox layoutX="14.0" layoutY="19.0" prefHeight="716.0" prefWidth="267.0">
+      <VBox layoutX="4.0" layoutY="92.0" prefHeight="455.0" prefWidth="235.0">
          <children>
-            <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
-               <children>
-                  <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../images/Social.png" />
-                     </image></ImageView>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="SocialShare" wrappingWidth="186.38201141357422">
-                     <font>
-                        <Font name="System Bold Italic" size="24.0" />
-                     </font></Text>
-               </children>
-            </HBox>
-            <HBox alignment="CENTER" prefHeight="40.0" prefWidth="267.0">
+            <HBox alignment="CENTER_LEFT" prefHeight="40.0" prefWidth="267.0" style="-fx-background-radius: 100;">
                <children>
                   <ImageView accessibleRole="BUTTON" fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../images/homePage.png" />
+                        <Image url="@../images/home_white.png" />
                      </image>
                      <cursor>
                         <Cursor fx:constant="HAND" />
@@ -41,18 +29,24 @@
                         <Insets right="10.0" />
                      </HBox.margin>
                   </ImageView>
-                  <Text fill="#393636" strokeType="OUTSIDE" strokeWidth="0.0" text="Home" wrappingWidth="66.18199920654297">
+                  <Text fill="#eceff1" strokeType="OUTSIDE" strokeWidth="0.0" text="Home" wrappingWidth="82.18199920654297">
                      <font>
                         <Font name="System Bold" size="17.0" />
                      </font>
                   </Text>
                </children>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <padding>
+                  <Insets left="30.0" />
+               </padding>
             </HBox>
-            <HBox alignment="CENTER" prefHeight="40.0" prefWidth="267.0">
+            <HBox alignment="CENTER_LEFT" prefHeight="45.0" prefWidth="269.0" style="-fx-background-radius: 100;">
                <children>
-                  <ImageView accessibleRole="BUTTON" fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView accessibleRole="BUTTON" fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../images/friends.png" />
+                        <Image url="@../images/friends_white.png" />
                      </image>
                      <cursor>
                         <Cursor fx:constant="HAND" />
@@ -61,18 +55,21 @@
                         <Insets right="10.0" />
                      </HBox.margin>
                   </ImageView>
-                  <Text fill="#393636" strokeType="OUTSIDE" strokeWidth="0.0" text="Friends" wrappingWidth="93.18199920654297">
+                  <Text fill="#eceff1" strokeType="OUTSIDE" strokeWidth="0.0" text="Friends" wrappingWidth="93.18199920654297">
                      <font>
                         <Font name="System Bold" size="17.0" />
                      </font>
                   </Text>
                </children>
+               <padding>
+                  <Insets left="30.0" />
+               </padding>
             </HBox>
-            <HBox alignment="CENTER" prefHeight="40.0" prefWidth="267.0">
+            <HBox alignment="CENTER_LEFT" prefHeight="40.0" prefWidth="267.0" style="-fx-background-radius: 100;">
                <children>
-                  <ImageView accessibleRole="BUTTON" fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView accessibleRole="BUTTON" fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../images/todo.png" />
+                        <Image url="@../images/todo_white.png" />
                      </image>
                      <cursor>
                         <Cursor fx:constant="HAND" />
@@ -81,18 +78,21 @@
                         <Insets right="10.0" />
                      </HBox.margin>
                   </ImageView>
-                  <Text fill="#393636" strokeType="OUTSIDE" strokeWidth="0.0" text="ToDo" wrappingWidth="80.18199920654297">
+                  <Text fill="#eceff1" strokeType="OUTSIDE" strokeWidth="0.0" text="ToDo" wrappingWidth="80.18199920654297">
                      <font>
                         <Font name="System Bold" size="17.0" />
                      </font>
                   </Text>
                </children>
+               <padding>
+                  <Insets left="30.0" />
+               </padding>
             </HBox>
-            <HBox alignment="CENTER" prefHeight="40.0" prefWidth="267.0">
+            <HBox alignment="CENTER_LEFT" prefHeight="40.0" prefWidth="267.0" style="-fx-background-radius: 100;">
                <children>
                   <ImageView accessibleRole="BUTTON" fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../images/profile.png" />
+                        <Image url="@../images/profile_white.png" />
                      </image>
                      <cursor>
                         <Cursor fx:constant="HAND" />
@@ -101,18 +101,21 @@
                         <Insets right="10.0" />
                      </HBox.margin>
                   </ImageView>
-                  <Text fill="#393636" strokeType="OUTSIDE" strokeWidth="0.0" text="Profile" wrappingWidth="81.18199920654297">
+                  <Text fill="#eceff1" strokeType="OUTSIDE" strokeWidth="0.0" text="Profile" wrappingWidth="81.18199920654297">
                      <font>
                         <Font name="System Bold" size="17.0" />
                      </font>
                   </Text>
                </children>
+               <padding>
+                  <Insets left="30.0" />
+               </padding>
             </HBox>
-            <HBox alignment="CENTER" prefHeight="40.0" prefWidth="267.0">
+            <HBox alignment="CENTER_LEFT" prefHeight="40.0" prefWidth="267.0" style="-fx-background-radius: 100;">
                <children>
                   <ImageView accessibleRole="BUTTON" fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../images/profile.png" />
+                        <Image url="@../images/saved_white.png" />
                      </image>
                      <cursor>
                         <Cursor fx:constant="HAND" />
@@ -121,18 +124,21 @@
                         <Insets right="10.0" />
                      </HBox.margin>
                   </ImageView>
-                  <Text fill="#393636" strokeType="OUTSIDE" strokeWidth="0.0" text="Saved" wrappingWidth="81.18199920654297">
+                  <Text fill="#eceff1" strokeType="OUTSIDE" strokeWidth="0.0" text="Saved" wrappingWidth="81.18199920654297">
                      <font>
                         <Font name="System Bold" size="17.0" />
                      </font>
                   </Text>
                </children>
+               <padding>
+                  <Insets left="30.0" />
+               </padding>
             </HBox>
-            <HBox alignment="CENTER" prefHeight="40.0" prefWidth="267.0">
+            <HBox alignment="CENTER_LEFT" prefHeight="40.0" prefWidth="267.0" style="-fx-background-radius: 100;">
                <children>
-                  <ImageView accessibleRole="BUTTON" fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView accessibleRole="BUTTON" fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../images/profile.png" />
+                        <Image url="@../images/birthday_white.png" />
                      </image>
                      <cursor>
                         <Cursor fx:constant="HAND" />
@@ -141,18 +147,21 @@
                         <Insets right="10.0" />
                      </HBox.margin>
                   </ImageView>
-                  <Text fill="#393636" strokeType="OUTSIDE" strokeWidth="0.0" text="Birthdays" wrappingWidth="105.18199920654297">
+                  <Text fill="#eceff1" strokeType="OUTSIDE" strokeWidth="0.0" text="Birthdays" wrappingWidth="100.18199920654297">
                      <font>
                         <Font name="System Bold" size="17.0" />
                      </font>
                   </Text>
                </children>
+               <padding>
+                  <Insets left="30.0" />
+               </padding>
             </HBox>
-            <HBox alignment="CENTER" prefHeight="40.0" prefWidth="267.0">
+            <HBox alignment="CENTER_LEFT" prefHeight="40.0" prefWidth="267.0" style="-fx-background-radius: 100;">
                <children>
                   <ImageView accessibleRole="BUTTON" fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../images/profile.png" />
+                        <Image url="@../images/stats_white.png" />
                      </image>
                      <cursor>
                         <Cursor fx:constant="HAND" />
@@ -161,18 +170,21 @@
                         <Insets right="10.0" />
                      </HBox.margin>
                   </ImageView>
-                  <Text fill="#393636" strokeType="OUTSIDE" strokeWidth="0.0" text="About Social" wrappingWidth="125.18199920654297">
+                  <Text fill="#eceff1" strokeType="OUTSIDE" strokeWidth="0.0" text="Stats" wrappingWidth="74.18199920654297">
                      <font>
                         <Font name="System Bold" size="17.0" />
                      </font>
                   </Text>
                </children>
+               <padding>
+                  <Insets left="30.0" />
+               </padding>
             </HBox>
-            <HBox alignment="CENTER" prefHeight="40.0" prefWidth="267.0">
+            <HBox alignment="CENTER_LEFT" prefHeight="40.0" prefWidth="267.0" style="-fx-background-radius: 100;">
                <children>
                   <ImageView accessibleRole="BUTTON" fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../images/profile.png" />
+                        <Image url="@../images/help_white.png" />
                      </image>
                      <cursor>
                         <Cursor fx:constant="HAND" />
@@ -181,18 +193,21 @@
                         <Insets right="10.0" />
                      </HBox.margin>
                   </ImageView>
-                  <Text fill="#393636" strokeType="OUTSIDE" strokeWidth="0.0" text="Help" wrappingWidth="58.18199920654297">
+                  <Text fill="#eceff1" strokeType="OUTSIDE" strokeWidth="0.0" text="Help" wrappingWidth="58.18199920654297">
                      <font>
                         <Font name="System Bold" size="17.0" />
                      </font>
                   </Text>
                </children>
+               <padding>
+                  <Insets left="30.0" />
+               </padding>
             </HBox>
-            <HBox alignment="CENTER" prefHeight="40.0" prefWidth="267.0">
+            <HBox alignment="CENTER_LEFT" prefHeight="40.0" prefWidth="267.0" style="-fx-background-radius: 100;">
                <children>
                   <ImageView accessibleRole="BUTTON" fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../images/profile.png" />
+                        <Image url="@../images/about_white.png" />
                      </image>
                      <cursor>
                         <Cursor fx:constant="HAND" />
@@ -201,76 +216,78 @@
                         <Insets right="10.0" />
                      </HBox.margin>
                   </ImageView>
-                  <Text fill="#393636" strokeType="OUTSIDE" strokeWidth="0.0" text="Stats" wrappingWidth="74.18199920654297">
+                  <Text fill="#eceff1" strokeType="OUTSIDE" strokeWidth="0.0" text="About Us" wrappingWidth="133.18199920654297">
                      <font>
                         <Font name="System Bold" size="17.0" />
                      </font>
                   </Text>
                </children>
+               <padding>
+                  <Insets left="30.0" />
+               </padding>
             </HBox>
          </children>
       </VBox>
-      <HBox alignment="CENTER" layoutX="305.0" layoutY="19.0" prefHeight="23.0" prefWidth="961.0">
+      <HBox alignment="CENTER" layoutX="384.0" layoutY="12.0" prefHeight="47.0" prefWidth="529.0">
          <children>
-            <HBox alignment="CENTER_RIGHT" prefHeight="40.0" prefWidth="759.0">
-               <children>
-                  <TextField prefHeight="40.0" prefWidth="686.0" promptText="Search" />
-                  <ImageView accessibleRole="BUTTON" fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../images/search.png" />
-                     </image>
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                     <HBox.margin>
-                        <Insets right="10.0" />
-                     </HBox.margin>
-                  </ImageView>
-               </children>
-            </HBox>
-            <ImageView accessibleRole="BUTTON" fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+            <TextField opacity="0.36" prefHeight="40.0" prefWidth="477.0" promptText="Search" style="-fx-background-radius: 100; -fx-background-color: #2a3236;" />
+            <ImageView accessibleRole="BUTTON" fitHeight="25.0" fitWidth="46.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../images/add.png" />
+                  <Image url="@../images/search_white.png" />
                </image>
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
                <HBox.margin>
-                  <Insets right="10.0" />
-               </HBox.margin>
-            </ImageView>
-            <ImageView accessibleRole="BUTTON" fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../images/message.png" />
-               </image>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-               <HBox.margin>
-                  <Insets right="10.0" />
-               </HBox.margin>
-            </ImageView>
-            <ImageView accessibleRole="BUTTON" fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../images/notifications.png" />
-               </image>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-               <HBox.margin>
-                  <Insets right="10.0" />
-               </HBox.margin>
-            </ImageView>
-            <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../images/profile.png" />
-               </image>
-               <HBox.margin>
-                  <Insets />
+                  <Insets left="5.0" right="5.0" />
                </HBox.margin>
             </ImageView>
          </children>
       </HBox>
-      <ScrollPane layoutX="305.0" layoutY="81.0" prefHeight="643.0" prefWidth="931.0" />
+      <Line endX="913.29296875" endY="9.0" layoutX="373.0" layoutY="59.0" startX="-373.0" startY="9.0" stroke="#2f3233" />
+      <HBox alignment="CENTER_LEFT" layoutX="14.0" layoutY="12.0" prefHeight="9.0" prefWidth="245.0" style="-fx-background-radius: 100;">
+         <children>
+            <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/symbol_white.png" />
+               </image>
+            </ImageView>
+            <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="SocialShare" wrappingWidth="172.38201141357422">
+               <font>
+                  <Font name="System Bold Italic" size="24.0" />
+               </font>
+            </Text>
+         </children>
+      </HBox>
+      <Line endX="-36.0" endY="644.0" layoutX="275.0" layoutY="115.0" startX="-36.0" startY="-47.5" stroke="#2f3233" />
+      <ImageView fx:id="userImage" fitHeight="40.0" fitWidth="40.0" layoutX="1226.0" layoutY="20.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/profile_white.png" />
+         </image>
+      </ImageView>
+      <ImageView accessibleRole="BUTTON" fitHeight="25.0" fitWidth="25.0" layoutX="1187.0" layoutY="28.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/notification_white.png" />
+         </image>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </ImageView>
+      <ImageView accessibleRole="BUTTON" fitHeight="25.0" fitWidth="25.0" layoutX="1144.0" layoutY="28.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/message_white.png" />
+         </image>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </ImageView>
+      <ImageView accessibleRole="BUTTON" fitHeight="30.0" fitWidth="30.0" layoutX="1101.0" layoutY="26.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/add_white.png" />
+         </image>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </ImageView>
    </children>
 </AnchorPane>
