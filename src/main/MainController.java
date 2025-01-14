@@ -33,4 +33,12 @@ public class MainController extends Application {
     Scene scene = new Scene(root);
     primaryStage.setScene(scene);
   }
+
+  public static void gotoSignup() throws Exception {
+    FXMLLoader loader = new FXMLLoader(MainController.class.getResource("/fxml/signupPage.fxml"));
+    Parent root = loader.load();
+
+    Scene scene = new Scene(root);
+    primaryStage.setScene(scene);
+  }
 }

@@ -16,8 +16,8 @@ public class User {
     this.username = username;
     this.password = password;
     this.name = name;
-    this.userID = uid;
     this.clue = clue;
+    this.userID = uid;
   }
 
   public void addFriend(User user) {
