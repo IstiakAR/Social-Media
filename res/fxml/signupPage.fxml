@@ -12,10 +12,15 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="548.0" prefWidth="980.0" style="-fx-background-color: #212a3a;" AnchorPane.leftAnchor="64.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.SignUpController">
+<AnchorPane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="548.0" prefWidth="980.0" style="-fx-background-color: linear-gradient(to bottom right, #91C9F7, #1E3A5F);" AnchorPane.leftAnchor="64.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.SignUpController">
    <children>
       <Line endX="13.0" endY="103.0" layoutX="477.0" layoutY="313.0" startX="13.0" startY="-181.0" stroke="#244855" />
+      <Label fx:id="errorMessage" layoutX="581.0" layoutY="48.0" prefHeight="26.0" prefWidth="248.0" text="Label" textFill="#9c2424" />
+      <TextField fx:id="signupFullName" layoutX="581.0" layoutY="80.0" prefHeight="45.0" prefWidth="248.0" promptText="Full Name" />
       <TextField fx:id="signupUsername" layoutX="581.0" layoutY="146.0" prefHeight="45.0" prefWidth="248.0" promptText="Username" />
+      <PasswordField fx:id="signupPassword" layoutX="581.0" layoutY="216.0" prefHeight="45.0" prefWidth="248.0" promptText="Password" />
+      <PasswordField fx:id="signupRePassword" layoutX="581.0" layoutY="284.0" prefHeight="45.0" prefWidth="248.0" promptText="Retype Password" />
+      <TextField fx:id="signupPasswordClue" layoutX="581.0" layoutY="349.0" prefHeight="45.0" prefWidth="248.0" promptText="Clue for Password" />
       <Button layoutX="581.0" layoutY="410.0" mnemonicParsing="false" onAction="#handleSignUp" prefHeight="26.0" prefWidth="109.0" text="Sign Up" />
       <Text fill="#d7c2c2" layoutX="218.0" layoutY="248.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Social Share" textAlignment="CENTER" wrappingWidth="204.0">
          <font>
@@ -26,16 +31,11 @@
          <image>
             <Image url="@../images/Social.png" />
          </image></ImageView>
-      <PasswordField fx:id="signupPassword" layoutX="581.0" layoutY="216.0" prefHeight="45.0" prefWidth="248.0" promptText="Password" />
       <Text fill="#f2e9e9" layoutX="581.0" layoutY="465.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Have a Account?" wrappingWidth="128.51900482177734">
          <font>
             <Font size="14.0" />
          </font>
       </Text>
-      <Label fx:id="errorMessage" layoutX="581.0" layoutY="48.0" prefHeight="26.0" prefWidth="248.0" text="Label" textFill="#9c2424" />
-      <TextField fx:id="signupFullName" layoutX="581.0" layoutY="80.0" prefHeight="45.0" prefWidth="248.0" promptText="Full Name" />
-      <TextField fx:id="signupPasswordClue" layoutX="581.0" layoutY="349.0" prefHeight="45.0" prefWidth="248.0" promptText="Clue for Password" />
-      <PasswordField fx:id="signupRePassword" layoutX="581.0" layoutY="284.0" prefHeight="45.0" prefWidth="248.0" promptText="Retype Password" />
-      <Hyperlink layoutX="721.0" layoutY="448.0" onAction="#handleLogin" prefHeight="24.0" prefWidth="102.0" text="Sign In?" textFill="#f5dfdf" underline="true" />
+      <Hyperlink layoutX="770.0" layoutY="448.0" onAction="#handleLogin" prefHeight="24.0" prefWidth="59.0" text="Sign In?" textFill="#f5dfdf" underline="true" />
    </children>
 </AnchorPane>

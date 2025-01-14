@@ -2,10 +2,11 @@ package view;
 
 import main.*;
 import model.*;
-
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.Label;
 
@@ -23,8 +24,12 @@ public class SignUpController {
   @FXML
   private Label errorMessage;
   @FXML
+  private AnchorPane rootPane;
+
+  @FXML
   public void initialize() {
     errorMessage.setVisible(false);
+    Platform.runLater(() -> rootPane.requestFocus());
   }
   @FXML
   public void handleLogin(ActionEvent event) {

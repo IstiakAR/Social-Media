@@ -2,10 +2,11 @@
 package view;
 
 import main.*;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
-import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.Label;
 
@@ -18,20 +19,33 @@ public class LoginController {
   private Label errorMessage;
   @FXML
   private Label passwordClue;
+  @FXML
+  private AnchorPane rootPane;
 
   @FXML
   public void initialize() {
     errorMessage.setVisible(false);
+    passwordClue.setVisible(false);
+    Platform.runLater(() -> rootPane.requestFocus());
   }
 
-  public void handleForgotPassword(MouseEvent event) {
+  @FXML
+  public void handleForgotPassword(ActionEvent event) {
+    errorMessage.setVisible(false);
     System.out.println("Forgot Password clicked!");
     String username = loginUsername.getText();
-    if (Main.users.containsKey(username)) {
+    if(username.isEmpty()){
+      passwordClue.setText("Please enter username.");
+      passwordClue.setVisible(true);
+      return;
+    }
+    else if (Main.users.containsKey(username)) {
+      passwordClue.setVisible(true);
       passwordClue.setText("Your Clue: " + Main.users.get(username).clue);
     } else {
       passwordClue.setText("Username not found.");
     }
+    passwordClue.setVisible(true);
   }
 
   public void handleSignUp(ActionEvent event) {
@@ -44,6 +58,7 @@ public class LoginController {
   }
 
   public void handleLogin(ActionEvent event) {
+    passwordClue.setVisible(false);
     String username = loginUsername.getText();
     String password = loginPassword.getText();
     System.out.println("Login clicked!");
