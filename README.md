@@ -14,5 +14,3 @@ cd ~/Documents/Social-Media && javac -d bin -cp "lib/*" $(find src -name "*.java
 ├── res
 
 └── src
-
-    └──packages 
