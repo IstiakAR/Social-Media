@@ -56,14 +56,14 @@ public class LoginController {
       e.printStackTrace();
     }
   }
-
+  @FXML
   public void handleLogin(ActionEvent event) {
     passwordClue.setVisible(false);
-    String username = loginUsername.getText();
-    String password = loginPassword.getText();
+    String u = loginUsername.getText();
+    String p = loginPassword.getText();
     System.out.println("Login clicked!");
-    if (Main.users.containsKey(username)) {
-      if (Main.users.get(username).password.equals(password)) {
+    if (MainStorage.getUsersSMap().containsKey(u)) {
+      if (MainStorage.getUsersSMap().get(u).password.equals(p)) {
         System.out.println("Login Matched!");
         errorMessage.setVisible(false);
         try {

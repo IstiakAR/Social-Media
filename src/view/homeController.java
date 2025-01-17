@@ -11,20 +11,21 @@ public class homeController {
     @FXML
     private ScrollPane homeScrollPane;
     @FXML
-    private VBox contentVBox;
+    private VBox postsContainer;
+
     @FXML
     public void initialize(){
         homeScrollBar.valueProperty().bindBidirectional(homeScrollPane.vvalueProperty());
         homeScrollBar.maxProperty().bind(homeScrollPane.vmaxProperty());
-        homeScrollBar.visibleAmountProperty().bind(homeScrollPane.heightProperty().divide(contentVBox.heightProperty()));
+        homeScrollBar.visibleAmountProperty().bind(homeScrollPane.heightProperty().divide(postsContainer.heightProperty()));
         homeScrollBar.valueProperty().bindBidirectional(homeScrollPane.vvalueProperty());
-        contentVBox.heightProperty().addListener((obs, oldVal, newVal) -> updateScrollBarVisibility());
+        postsContainer.heightProperty().addListener((obs, oldVal, newVal) -> updateScrollBarVisibility());
         homeScrollPane.heightProperty().addListener((obs, oldVal, newVal) -> updateScrollBarVisibility());
         updateScrollBarVisibility();
     }
 
     private void updateScrollBarVisibility() {
-        boolean shouldShowScrollBar = contentVBox.getHeight() > homeScrollPane.getHeight();
+        boolean shouldShowScrollBar = postsContainer.getHeight() > homeScrollPane.getHeight();
         homeScrollBar.setVisible(shouldShowScrollBar);
     }
 }

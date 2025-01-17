@@ -2,6 +2,7 @@ package view;
 
 import main.*;
 import model.*;
+import database.Database;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -58,8 +59,9 @@ public class SignUpController {
     else if(Main.users.containsKey(username)){
       errorMessage.setText("Username already exists.");
       errorMessage.setVisible(true);
-    } else {
-      Main.users.put(username, new User(username, password, fullName, passwordClue, Main.users.size()));
+    } 
+    else {
+      Database.insertUser(new User(username, password, fullName, passwordClue));
       try {
         MainController.gotoHomepage();
       } catch (Exception e) {

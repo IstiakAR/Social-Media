@@ -2,6 +2,9 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.Random;
+
+import main.MainStorage;
 
 public class User {
   public String username;
@@ -19,7 +22,22 @@ public class User {
     this.clue = clue;
     this.userID = uid;
   }
-
+  public User(String u, String p, String n, String c) {
+    this.username = u;
+    this.password = p;
+    this.name = n;
+    this.clue = c;
+    this.userID = genRandom();
+  }
+  private int genRandom(){
+    while(true){
+      Random rnd = new Random();
+      int n = 10000000 + rnd.nextInt(90000000);
+      if(!MainStorage.getUsersIMap().containsKey(n)){
+        return n;
+      }
+    }
+  }
   public void addFriend(User user) {
     if (friends.contains(user))
       return;
