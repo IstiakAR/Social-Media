@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import model.User;
-import database.Database;
+import database.DatabaseGetter;
 
 public class MainStorage {
     private static Map<Integer, String> usersKeyMap = new HashMap<>();
@@ -13,11 +13,11 @@ public class MainStorage {
     private static Map<Integer, User> usersIMap = new HashMap<>();
 
     public void loadUsers() {
-        List<User> users = Database.getUsers();
+        List<User> users = DatabaseGetter.getUsers();
         for (User user : users) {
-            usersKeyMap.put(user.userID, user.username);
-            usersSMap.put(user.username, user);
-            usersIMap.put(user.userID, user);
+            usersKeyMap.put(user.getUserID(), user.getUsername());
+            usersSMap.put(user.getUsername(), user);
+            usersIMap.put(user.getUserID(), user);
         }
     }
     public static Map<Integer, String> getUsersKeyMap() {

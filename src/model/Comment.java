@@ -1,14 +1,16 @@
 
 package model;
 
-public class Comment {
-	public String commentText;
-	User user;
-	Post post;
+public class Comment extends Interaction {
+	private String commentText;
 
-	Comment(String text, Post post, User user) { // constructor
+	public Comment(String text, int commentID, int postID, int userID) {
+		super(commentID, userID, postID);
 		this.commentText = text;
-		this.user = user;
-		this.post = post;
 	}
+
+    @Override
+    public void getInteraction() {
+        System.out.println("Comment by User " + userID + " on Post " + postID + ": " + commentText);
+    }
 }

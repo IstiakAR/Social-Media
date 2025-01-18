@@ -207,7 +207,7 @@
       </VBox>
       <HBox alignment="CENTER" layoutX="384.0" layoutY="12.0" prefHeight="47.0" prefWidth="529.0">
          <children>
-            <TextField opacity="0.36" prefHeight="40.0" prefWidth="477.0" promptText="Search" style="-fx-background-radius: 100; -fx-background-color: #2a3236;" />
+            <TextField opacity="0.46" prefHeight="40.0" prefWidth="477.0" promptText="Search" style="-fx-background-radius: 100; -fx-background-color: #2a3236;" />
             <ImageView accessibleRole="BUTTON" fitHeight="25.0" fitWidth="46.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/search_white.png" />
@@ -327,6 +327,6 @@
         </content>
     </ScrollPane>
       <ScrollBar fx:id="homeScrollBar" layoutX="1273.0" layoutY="94.0" orientation="VERTICAL" prefHeight="625.0" prefWidth="28.0" stylesheets="@../css/scrollMain.css" />
-      <ScrollPane layoutX="1024.0" layoutY="94.0" prefHeight="625.0" prefWidth="228.0" stylesheets="@../css/homeRecent.css" />
+      <ScrollPane focusTraversable="false" layoutX="1024.0" layoutY="94.0" prefHeight="625.0" prefWidth="228.0" stylesheets="@../css/homeRecent.css" />
    </children>
 </AnchorPane>

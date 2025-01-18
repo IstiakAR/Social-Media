@@ -7,13 +7,15 @@ import java.util.Random;
 import main.MainStorage;
 
 public class User {
-  public String username;
-  public String password;
-  public String name;
-  public String clue;
-  public int userID;
-  public ArrayList<Post> posts = new ArrayList<>();
-  public ArrayList<User> friends = new ArrayList<>();
+  private String username;
+  private String password;
+  private String name;
+  private String clue;
+  private String bio;
+  private String picturePath;
+  private int userID;
+  private ArrayList<Post> posts = new ArrayList<>();
+  private ArrayList<User> friends = new ArrayList<>();
 
   public User(String username, String password, String name,String clue, int uid) {
     this.username = username;
@@ -29,7 +31,28 @@ public class User {
     this.clue = c;
     this.userID = genRandom();
   }
-  private int genRandom(){
+  public String getUsername() {
+    return username;
+  }
+  public String getPassword() {
+    return password;
+  }
+  public String getName() {
+    return name;
+  }
+  public String getClue() {
+    return clue;
+  }
+  public String getBio() {
+    return bio;
+  }
+  public String getPicturePath() {
+    return picturePath;
+  }
+  public int getUserID() {
+    return userID;
+  }
+  public int genRandom(){
     while(true){
       Random rnd = new Random();
       int n = 10000000 + rnd.nextInt(90000000);

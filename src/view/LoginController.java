@@ -39,9 +39,10 @@ public class LoginController {
       passwordClue.setVisible(true);
       return;
     }
-    else if (Main.users.containsKey(username)) {
+    else if (MainStorage.getUsersSMap().containsKey(username)
+    ) {
       passwordClue.setVisible(true);
-      passwordClue.setText("Your Clue: " + Main.users.get(username).clue);
+      passwordClue.setText("Your Clue: " + MainStorage.getUsersSMap().get(username).getClue());
     } else {
       passwordClue.setText("Username not found.");
     }
@@ -63,7 +64,7 @@ public class LoginController {
     String p = loginPassword.getText();
     System.out.println("Login clicked!");
     if (MainStorage.getUsersSMap().containsKey(u)) {
-      if (MainStorage.getUsersSMap().get(u).password.equals(p)) {
+      if (MainStorage.getUsersSMap().get(u).getPassword().equals(p)) {
         System.out.println("Login Matched!");
         errorMessage.setVisible(false);
         try {
