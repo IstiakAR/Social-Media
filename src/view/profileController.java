@@ -4,11 +4,11 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.text.Text;
 import main.MainController;
+
+
 public class profileController {
-    private String username;
     @FXML
     private Text profilename;
-
 
     public void initialize() {
         if (LoginController.name == null) {
@@ -23,6 +23,16 @@ public class profileController {
         try {
             MainController.gotoHomepage();
         } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    @FXML
+    public void handleMyPost(ActionEvent event){
+        System.out.println("Posts clicked");
+        try{
+            MainController.gotoMyPost();
+            
+        }catch(Exception e){
             e.printStackTrace();
         }
     }

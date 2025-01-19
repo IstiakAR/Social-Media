@@ -13,7 +13,7 @@ public class Main {
 
     // User user1 = new User("a", "a", "John", "clue1", 1);
     // DatabaseInsert.insertUser(user1);
-    // Post post1 = new Post("This is a test postAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA", 3, user1.getUserID());
+    // Post post1 = new Post("This is a test ", 4, 38114975);
     // DatabaseInsert.insertPost(post1);
 
     // post1.addComment("This is a comment", user1.getUserID());

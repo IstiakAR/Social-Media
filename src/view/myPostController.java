@@ -1,5 +1,9 @@
 package view;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
+import database.DatabaseGetter;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -11,47 +15,39 @@ import javafx.scene.layout.VBox;
 import main.MainController;
 import main.MainStorage;
 import model.Post;
-import database.DatabaseGetter;
 
-import java.util.List;
-import java.util.stream.Collectors;
 
-public class homeController {
+public class myPostController {
     @FXML
-    private ScrollBar homeScrollBar;
+    private ScrollBar ScrollBar;
     @FXML
-    private ScrollPane homeScrollPane;
+    private ScrollPane ScrollPane;
     @FXML
     private VBox postsContainer;
 
-    @FXML
-    public void initialize(){
-        homeScrollBar.valueProperty().bindBidirectional(homeScrollPane.vvalueProperty());
-        homeScrollBar.maxProperty().bind(homeScrollPane.vmaxProperty());
-        homeScrollBar.visibleAmountProperty().bind(homeScrollPane.heightProperty().divide(postsContainer.heightProperty()));
-        homeScrollBar.valueProperty().bindBidirectional(homeScrollPane.vvalueProperty());
+    public void initialize() {
+        ScrollBar.valueProperty().bindBidirectional(ScrollPane.vvalueProperty());
+        ScrollBar.maxProperty().bind(ScrollPane.vmaxProperty());
+        ScrollBar.visibleAmountProperty().bind(ScrollPane.heightProperty().divide(postsContainer.heightProperty()));
+        ScrollBar.valueProperty().bindBidirectional(ScrollPane.vvalueProperty());
         postsContainer.heightProperty().addListener((obs, oldVal, newVal) -> updateScrollBarVisibility());
-        homeScrollPane.heightProperty().addListener((obs, oldVal, newVal) -> updateScrollBarVisibility());
+        ScrollPane.heightProperty().addListener((obs, oldVal, newVal) -> updateScrollBarVisibility());
         updateScrollBarVisibility();
-
         displayPostsLatest();
     }
-
     private void updateScrollBarVisibility() {
-        boolean shouldShowScrollBar = postsContainer.getHeight() > homeScrollPane.getHeight();
-        homeScrollBar.setVisible(shouldShowScrollBar);
+        boolean shouldShowScrollBar = postsContainer.getHeight() > ScrollPane.getHeight();
+        ScrollBar.setVisible(shouldShowScrollBar);
+    }
+    public void handleHome(ActionEvent event) {
+        System.out.println("Home clicked");
+        try {
+            MainController.gotoHomepage();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
     
-    public void handleProfile(ActionEvent event) {
-        System.out.println("Profile clicked");
-        try {
-            MainController.gotoProfile();
-        }
-        catch(Exception e){
-           e.printStackTrace();
-        }
-    }
-
     private void displayPostsLatest() {
         List<Post> posts = DatabaseGetter.getPosts();
         posts = posts.stream()
@@ -66,8 +62,10 @@ public class homeController {
                 .collect(Collectors.toList());
 
         for (Post post : posts) {
-            VBox postBox = createPostBox(post);
-            postsContainer.getChildren().add(postBox);
+            if(post.getUserID()==LoginController.userID){   
+                VBox postBox = createPostBox(post);
+                postsContainer.getChildren().add(postBox);
+            }
         }
     }
 
@@ -81,7 +79,7 @@ public class homeController {
         Button commentButton = new Button("󰍨");
         postBox.setStyle("-fx-background-color: #0e1113; -fx-padding: 10; -fx-border-color: #0e1113; -fx-border-width: 1; -fx-border-radius: 5; -fx-background-radius: 5;");
 
-        postBox.prefWidthProperty().bind(homeScrollPane.widthProperty().subtract(20));
+        postBox.prefWidthProperty().bind(ScrollPane.widthProperty().subtract(20));
 
 
         String buttonStyle = "-fx-background-color: #0e1113; -fx-text-fill: #ffffff; -fx-padding: 5; -fx-border-color: #0e1113; -fx-border-width: 1; -fx-border-radius: 5;";
@@ -135,3 +133,4 @@ public class homeController {
         return postBox;
     }
 }
+

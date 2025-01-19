@@ -22,6 +22,7 @@ public class LoginController {
   @FXML
   private AnchorPane rootPane;
   public static String name;
+  public static int userID;
   @FXML
   public void initialize() {
     errorMessage.setVisible(false);
@@ -34,15 +35,13 @@ public class LoginController {
     errorMessage.setVisible(false);
     System.out.println("Forgot Password clicked!");
     String username = loginUsername.getText();
-  
 
     if(username.isEmpty()){
       passwordClue.setText("Please enter username.");
       passwordClue.setVisible(true);
       return;
     }
-    else if (MainStorage.getUsersSMap().containsKey(username)
-    ) {
+    else if (MainStorage.getUsersSMap().containsKey(username)) {
       passwordClue.setVisible(true);
       passwordClue.setText("Your Clue: " + MainStorage.getUsersSMap().get(username).getClue());
     } else {
@@ -69,6 +68,7 @@ public class LoginController {
       if (MainStorage.getUsersSMap().get(u).getPassword().equals(p)) {
         System.out.println("Login Matched!");
         name = u;
+        userID=MainStorage.getUsersSMap().get(u).getUserID();
         errorMessage.setVisible(false);
         try {
           MainController.gotoHomepage();
