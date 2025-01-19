@@ -61,11 +61,11 @@
                         <Insets right="5.0" />
                      </HBox.margin>
                   </ImageView>
-                  <Text fill="#eceff1" strokeType="OUTSIDE" strokeWidth="0.0" text="Friends" wrappingWidth="93.18199920654297">
+                  <Hyperlink onAction="#handleFriends" text="Friends" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="17.0" />
                      </font>
-                  </Text>
+                  </Hyperlink>
                </children>
                <padding>
                   <Insets left="30.0" />

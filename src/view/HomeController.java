@@ -39,4 +39,12 @@ public class HomeController extends BaseController {
             e.printStackTrace();
         }
     }
+    public void handleFriends(ActionEvent event) {
+        System.out.println("Friends Button clicked!");
+        try {
+            MainController.gotoFriends();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }
