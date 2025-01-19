@@ -60,4 +60,22 @@ public class MainController extends Application {
     Scene scene = new Scene(root);
     primaryStage.setScene(scene);
   }
+  public static void gotoFriends() throws Exception {
+    FXMLLoader loader = new FXMLLoader(MainController.class.getResource("/fxml/friendsPage.fxml"));
+    Parent root = loader.load();
+    Scene scene = new Scene(root);
+    primaryStage.setScene(scene);
+  }
+  public static void gotoFriendRequest() throws Exception {
+    FXMLLoader loader = new FXMLLoader(MainController.class.getResource("/fxml/friendRequest.fxml"));
+    Parent root = loader.load();
+    Scene scene = new Scene(root);
+    primaryStage.setScene(scene);
+  }
+  public static void gotoAllFriends() throws Exception {
+    FXMLLoader loader = new FXMLLoader(MainController.class.getResource("/fxml/allFriendsPage.fxml"));
+    Parent root = loader.load();
+    Scene scene = new Scene(root);
+    primaryStage.setScene(scene);
+  }
 }
