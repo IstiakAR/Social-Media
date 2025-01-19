@@ -321,13 +321,13 @@
          </children>
       </VBox>
 
-      <ScrollPane fx:id="homeScrollPane" layoutX="259.0" layoutY="96.0" prefHeight="625.0" prefWidth="739.0" style="-fx-background: #0e1113; -fx-border-color: #0e1113;" stylesheets="@../css/homePosts.css">
+      <ScrollPane fx:id="ScrollPane" layoutX="259.0" layoutY="96.0" prefHeight="625.0" prefWidth="739.0" style="-fx-background: #0e1113; -fx-border-color: #0e1113;" stylesheets="@../css/homePosts.css">
         <content>
             <VBox fx:id="postsContainer" style="-fx-background-color: #000000;">
             </VBox>
         </content>
     </ScrollPane>
-      <ScrollBar fx:id="homeScrollBar" layoutX="1273.0" layoutY="94.0" orientation="VERTICAL" prefHeight="625.0" prefWidth="28.0" stylesheets="@../css/scrollMain.css" />
+      <ScrollBar fx:id="ScrollBar" layoutX="1273.0" layoutY="94.0" orientation="VERTICAL" prefHeight="625.0" prefWidth="28.0" stylesheets="@../css/scrollMain.css" />
       <ScrollPane focusTraversable="false" layoutX="1024.0" layoutY="94.0" prefHeight="625.0" prefWidth="228.0" stylesheets="@../css/homeRecent.css" />
    </children>
 </AnchorPane>

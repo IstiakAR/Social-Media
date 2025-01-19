@@ -12,21 +12,21 @@ import model.Post;
 
 public abstract class BaseController {
     @FXML
-    protected ScrollBar homeScrollBar;
+    protected ScrollBar ScrollBar;
     @FXML
-    protected ScrollPane homeScrollPane;
+    protected ScrollPane ScrollPane;
     @FXML
     protected VBox postsContainer;
 
     @SuppressWarnings("unused")
     @FXML
     public void initialize() {
-        homeScrollBar.valueProperty().bindBidirectional(homeScrollPane.vvalueProperty());
-        homeScrollBar.maxProperty().bind(homeScrollPane.vmaxProperty());
-        homeScrollBar.visibleAmountProperty().bind(homeScrollPane.heightProperty().divide(postsContainer.heightProperty()));
-        homeScrollBar.valueProperty().bindBidirectional(homeScrollPane.vvalueProperty());
+        ScrollBar.valueProperty().bindBidirectional(ScrollPane.vvalueProperty());
+        ScrollBar.maxProperty().bind(ScrollPane.vmaxProperty());
+        ScrollBar.visibleAmountProperty().bind(ScrollPane.heightProperty().divide(postsContainer.heightProperty()));
+        ScrollBar.valueProperty().bindBidirectional(ScrollPane.vvalueProperty());
         postsContainer.heightProperty().addListener((obs, oldVal, newVal) -> updateScrollBarVisibility());
-        homeScrollPane.heightProperty().addListener((obs, oldVal, newVal) -> updateScrollBarVisibility());
+        ScrollPane.heightProperty().addListener((obs, oldVal, newVal) -> updateScrollBarVisibility());
         updateScrollBarVisibility();
 
         displayPostsLatest();
@@ -35,8 +35,8 @@ public abstract class BaseController {
     protected abstract void displayPostsLatest();
 
     private void updateScrollBarVisibility() {
-        boolean shouldShowScrollBar = postsContainer.getHeight() > homeScrollPane.getHeight();
-        homeScrollBar.setVisible(shouldShowScrollBar);
+        boolean shouldShowScrollBar = postsContainer.getHeight() > ScrollPane.getHeight();
+        ScrollBar.setVisible(shouldShowScrollBar);
     }
     
     @SuppressWarnings("unused")
@@ -49,7 +49,7 @@ public abstract class BaseController {
         Button commentButton = new Button("󰍨");
         postBox.setStyle("-fx-background-color: #0e1113; -fx-padding: 10; -fx-border-color: #0e1113; -fx-border-width: 1; -fx-border-radius: 5; -fx-background-radius: 5;");
 
-        postBox.prefWidthProperty().bind(homeScrollPane.widthProperty().subtract(20));
+        postBox.prefWidthProperty().bind(ScrollPane.widthProperty().subtract(20));
 
 
         String buttonStyle = "-fx-background-color: #0e1113; -fx-text-fill: #ffffff; -fx-padding: 5; -fx-border-color: #0e1113; -fx-border-width: 1; -fx-border-radius: 5;";
