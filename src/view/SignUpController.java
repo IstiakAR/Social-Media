@@ -2,7 +2,6 @@ package view;
 
 import main.*;
 import model.*;
-import database.Database;
 import database.DatabaseInsert;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
