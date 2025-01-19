@@ -1,15 +1,34 @@
 package view;
 
-import javafx.event.ActionEvent;
-import javafx.scene.layout.VBox;
-import main.MainController;
-import model.Post;
-import database.DatabaseGetter;
-
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class HomeController extends BaseController {
+import database.DatabaseGetter;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.scene.control.ScrollBar;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.layout.VBox;
+import main.MainController;
+import model.Post;
+
+
+public class myPostController extends BaseController {
+    @FXML
+    private ScrollBar ScrollBar;
+    @FXML
+    private ScrollPane ScrollPane;
+    @FXML
+    private VBox postsContainer;
+
+    public void handleHome(ActionEvent event) {
+        System.out.println("Home clicked");
+        try {
+            MainController.gotoHomepage();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
     @Override
     protected void displayPostsLatest() {
@@ -26,17 +45,11 @@ public class HomeController extends BaseController {
                 .collect(Collectors.toList());
 
         for (Post post : posts) {
-            VBox postBox = createPostBox(post);
-            postsContainer.getChildren().add(postBox);
-        }
-    }
-    
-    public void handleProfile(ActionEvent event) {
-        System.out.println("Profile clicked");
-        try {
-            MainController.gotoProfile();
-        } catch (Exception e) {
-            e.printStackTrace();
+            if(post.getUserID()==LoginController.userID){   
+                VBox postBox = createPostBox(post);
+                postsContainer.getChildren().add(postBox);
+            }
         }
     }
 }
+

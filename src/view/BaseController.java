@@ -18,6 +18,7 @@ public abstract class BaseController {
     @FXML
     protected VBox postsContainer;
 
+    @SuppressWarnings("unused")
     @FXML
     public void initialize() {
         homeScrollBar.valueProperty().bindBidirectional(homeScrollPane.vvalueProperty());
@@ -37,7 +38,9 @@ public abstract class BaseController {
         boolean shouldShowScrollBar = postsContainer.getHeight() > homeScrollPane.getHeight();
         homeScrollBar.setVisible(shouldShowScrollBar);
     }
-        protected VBox createPostBox(Post post) {
+    
+    @SuppressWarnings("unused")
+    protected VBox createPostBox(Post post) {
         VBox postBox = new VBox();
         HBox voteBox = new HBox();
         HBox voteTempBox = new HBox();
@@ -63,7 +66,7 @@ public abstract class BaseController {
         voteTempBox.setStyle("-fx-alignment:center;");
         voteBox.getChildren().add(voteTempBox);
         voteBox.setStyle("-fx-alignment:left;");
-
+        
         postBox.setOnMouseEntered(event -> {
             postBox.setStyle("-fx-background-color: #181c1f; -fx-padding: 10; -fx-border-color: #0e1113; -fx-border-width: 1; -fx-border-radius: 5; -fx-background-radius: 5;");
             upvoteButton.setStyle(buttonHoverStyle);
