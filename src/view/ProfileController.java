@@ -4,8 +4,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.text.Text;
 import main.MainController;
-public class profileController {
-    private String username;
+public class ProfileController {
     @FXML
     private Text profilename;
 
