@@ -1,6 +1,7 @@
 
 package main;
 
+import view.*;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -38,6 +39,14 @@ public class MainController extends Application {
     FXMLLoader loader = new FXMLLoader(MainController.class.getResource("/fxml/signupPage.fxml"));
     Parent root = loader.load();
 
+    Scene scene = new Scene(root);
+    primaryStage.setScene(scene);
+  }
+  public static void gotoProfile() throws Exception {
+    FXMLLoader loader = new FXMLLoader(MainController.class.getResource("/fxml/profile.fxml"));
+    Parent root = loader.load();
+//    profileController profileController = loader.getController();
+//    profileController.setProfilename();
     Scene scene = new Scene(root);
     primaryStage.setScene(scene);
   }

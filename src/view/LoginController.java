@@ -10,6 +10,8 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.Label;
 
+import static main.MainController.gotoHomepage;
+
 public class LoginController {
   @FXML
   private TextField loginUsername;
@@ -21,7 +23,7 @@ public class LoginController {
   private Label passwordClue;
   @FXML
   private AnchorPane rootPane;
-
+ public static String name;
   @FXML
   public void initialize() {
     errorMessage.setVisible(false);
@@ -56,7 +58,6 @@ public class LoginController {
       e.printStackTrace();
     }
   }
-
   public void handleLogin(ActionEvent event) {
     passwordClue.setVisible(false);
     String username = loginUsername.getText();
@@ -65,9 +66,10 @@ public class LoginController {
     if (Main.users.containsKey(username)) {
       if (Main.users.get(username).password.equals(password)) {
         System.out.println("Login Matched!");
+        name = username;
         errorMessage.setVisible(false);
         try {
-          MainController.gotoHomepage();
+          gotoHomepage();
         } catch (Exception e) {
           e.printStackTrace();
         }
@@ -80,5 +82,6 @@ public class LoginController {
       errorMessage.setText("Username not found. Please try again.");
       errorMessage.setVisible(true);
     }
+
   }
 }

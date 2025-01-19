@@ -25,7 +25,7 @@ public class SignUpController {
   private Label errorMessage;
   @FXML
   private AnchorPane rootPane;
-
+  public static String name;
   @FXML
   public void initialize() {
     errorMessage.setVisible(false);
@@ -43,6 +43,7 @@ public class SignUpController {
   @FXML
   public void handleSignUp(ActionEvent event) {
     String username = signupUsername.getText();
+    name = username;
     String password = signupPassword.getText();
     String fullName = signupFullName.getText();
     String retypePassword = signupRePassword.getText();

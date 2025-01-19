@@ -4,7 +4,6 @@
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.ScrollBar?>
-<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -15,7 +14,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="759.0" prefWidth="1293.0" style="-fx-background-color: #0e1113;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.homeController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="759.0" prefWidth="1293.0" style="-fx-background-color: #0e1113;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.profileController">
    <children>
       <VBox layoutX="4.0" layoutY="96.0" prefHeight="382.0" prefWidth="235.0">
          <children>
@@ -32,11 +31,11 @@
                         <Insets left="5.0" right="10.0" />
                      </HBox.margin>
                   </ImageView>
-                  <Text fill="#eceff1" strokeType="OUTSIDE" strokeWidth="0.0" text="Home" wrappingWidth="85.18199920654297">
+                  <Hyperlink onAction="#handleHome" text="Home" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="17.0" />
                      </font>
-                  </Text>
+                  </Hyperlink>
                </children>
                <opaqueInsets>
                   <Insets />
@@ -110,14 +109,14 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                      <HBox.margin>
-                        <Insets right="10.0" />
+                        <Insets right="15.0" />
                      </HBox.margin>
                   </ImageView>
-                  <Hyperlink onAction="#handleProfile" prefHeight="26.0" prefWidth="86.0" text="Profile" textFill="#f2f0f0">
+                  <Text fill="#eceff1" strokeType="OUTSIDE" strokeWidth="0.0" text="Profile" wrappingWidth="81.18199920654297">
                      <font>
-                        <Font name="System Bold" size="16.0" />
+                        <Font name="System Bold" size="17.0" />
                      </font>
-                  </Hyperlink>
+                  </Text>
                </children>
                <padding>
                   <Insets left="30.0" />
@@ -320,14 +319,26 @@
             </HBox>
          </children>
       </VBox>
-
-      <ScrollPane fx:id="homeScrollPane" layoutX="259.0" layoutY="96.0" prefHeight="625.0" prefWidth="763.0" style="-fx-background: #0e1113; -fx-border-color: #0e1113;" stylesheets="@../css/homePosts.css">
-        <content>
-            <VBox fx:id="contentVBox" style="-fx-background-color: #000000;">
-            </VBox>
-        </content>
-    </ScrollPane>
-      <ScrollPane layoutX="1048.0" layoutY="96.0" prefHeight="625.0" prefWidth="200.0" style="-fx-background: #000000;" stylesheets="@../css/homeRecent.css" />
-      <ScrollBar fx:id="homeScrollBar" layoutX="1271.0" layoutY="96.0" orientation="VERTICAL" prefHeight="618.0" prefWidth="1.0" stylesheets="@../css/scrollMain.css" />
+      <VBox layoutX="228.0" layoutY="84.0" prefHeight="679.0" prefWidth="1033.0">
+         <children>
+            <ImageView accessibleRole="BUTTON" fitHeight="139.0" fitWidth="156.0" layoutX="19.0" layoutY="19.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/profile_white.png" />
+               </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <VBox.margin>
+                  <Insets left="450.0" right="100.0" />
+               </VBox.margin>
+            </ImageView>
+            <Text fx:id="profilename" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="1035.4701232910156">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Text>
+            <ScrollBar fx:id="homeScrollBar" orientation="VERTICAL" prefHeight="541.0" prefWidth="1037.0" stylesheets="@../css/scrollMain.css" />
+         </children>
+      </VBox>
    </children>
 </AnchorPane>

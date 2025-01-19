@@ -10,8 +10,9 @@ public class Main {
   public static Map<String, User> users= new HashMap<>();
 
   public static void main(String[] args) {
-    User user1 = new User("user1", "password", "John", "clue1", 1);
-    User user2 = new User("user2", "password", "Tom","clue2", 2);
+    User n=new User("","","abc","abc",0);
+    User user1 = new User("ghashkata", "password", "John", "clue1", 1);
+    User user2 = new User("a", "b", "Tom","clue2", 2);
     User user3 = new User("user3", "password", "Jane","clue3", 3);
     User user4 = new User("user4", "password", "Bob","clue4", 4);
     users.put(user1.username,user1);
