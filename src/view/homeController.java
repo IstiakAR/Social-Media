@@ -8,16 +8,13 @@ import javafx.scene.control.ScrollBar;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-<<<<<<< HEAD
 import main.MainController;
-=======
 import main.MainStorage;
 import model.Post;
 import database.DatabaseGetter;
 
 import java.util.List;
 import java.util.stream.Collectors;
->>>>>>> 97dd3110a02d861a5f958fc4ab65a5b4e05999af
 
 public class homeController {
     @FXML
@@ -44,7 +41,6 @@ public class homeController {
         boolean shouldShowScrollBar = postsContainer.getHeight() > homeScrollPane.getHeight();
         homeScrollBar.setVisible(shouldShowScrollBar);
     }
-<<<<<<< HEAD
     public void handleProfile(ActionEvent event) {
         System.out.println("Profile clicked");
         try {
@@ -54,8 +50,6 @@ public class homeController {
            e.printStackTrace();
         }
     }
-}
-=======
 
     private void displayPostsLatest() {
         List<Post> posts = DatabaseGetter.getPosts();
@@ -140,4 +134,3 @@ public class homeController {
         return postBox;
     }
 }
->>>>>>> 97dd3110a02d861a5f958fc4ab65a5b4e05999af

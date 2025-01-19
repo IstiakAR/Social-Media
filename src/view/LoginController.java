@@ -10,8 +10,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.Label;
 
-import static main.MainController.gotoHomepage;
-
 public class LoginController {
   @FXML
   private TextField loginUsername;
@@ -23,7 +21,7 @@ public class LoginController {
   private Label passwordClue;
   @FXML
   private AnchorPane rootPane;
- public static String name;
+  public static String name;
   @FXML
   public void initialize() {
     errorMessage.setVisible(false);
@@ -36,6 +34,8 @@ public class LoginController {
     errorMessage.setVisible(false);
     System.out.println("Forgot Password clicked!");
     String username = loginUsername.getText();
+  
+
     if(username.isEmpty()){
       passwordClue.setText("Please enter username.");
       passwordClue.setVisible(true);
@@ -59,10 +59,7 @@ public class LoginController {
       e.printStackTrace();
     }
   }
-<<<<<<< HEAD
-=======
   @FXML
->>>>>>> 97dd3110a02d861a5f958fc4ab65a5b4e05999af
   public void handleLogin(ActionEvent event) {
     passwordClue.setVisible(false);
     String u = loginUsername.getText();
@@ -71,10 +68,10 @@ public class LoginController {
     if (MainStorage.getUsersSMap().containsKey(u)) {
       if (MainStorage.getUsersSMap().get(u).getPassword().equals(p)) {
         System.out.println("Login Matched!");
-        name = username;
+        name = u;
         errorMessage.setVisible(false);
         try {
-          gotoHomepage();
+          MainController.gotoHomepage();
         } catch (Exception e) {
           e.printStackTrace();
         }
@@ -87,6 +84,5 @@ public class LoginController {
       errorMessage.setText("Username not found. Please try again.");
       errorMessage.setVisible(true);
     }
-
   }
 }
