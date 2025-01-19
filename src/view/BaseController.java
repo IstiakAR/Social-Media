@@ -1,6 +1,5 @@
 package view;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -8,24 +7,19 @@ import javafx.scene.control.ScrollBar;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import main.MainController;
 import main.MainStorage;
 import model.Post;
-import database.DatabaseGetter;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
-public class homeController {
+public abstract class BaseController {
     @FXML
-    private ScrollBar homeScrollBar;
+    protected ScrollBar homeScrollBar;
     @FXML
-    private ScrollPane homeScrollPane;
+    protected ScrollPane homeScrollPane;
     @FXML
-    private VBox postsContainer;
+    protected VBox postsContainer;
 
     @FXML
-    public void initialize(){
+    public void initialize() {
         homeScrollBar.valueProperty().bindBidirectional(homeScrollPane.vvalueProperty());
         homeScrollBar.maxProperty().bind(homeScrollPane.vmaxProperty());
         homeScrollBar.visibleAmountProperty().bind(homeScrollPane.heightProperty().divide(postsContainer.heightProperty()));
@@ -37,42 +31,13 @@ public class homeController {
         displayPostsLatest();
     }
 
+    protected abstract void displayPostsLatest();
+
     private void updateScrollBarVisibility() {
         boolean shouldShowScrollBar = postsContainer.getHeight() > homeScrollPane.getHeight();
         homeScrollBar.setVisible(shouldShowScrollBar);
     }
-    
-    public void handleProfile(ActionEvent event) {
-        System.out.println("Profile clicked");
-        try {
-            MainController.gotoProfile();
-        }
-        catch(Exception e){
-           e.printStackTrace();
-        }
-    }
-
-    private void displayPostsLatest() {
-        List<Post> posts = DatabaseGetter.getPosts();
-        posts = posts.stream()
-                .sorted((p1, p2) -> {
-                    int compareDate = p2.getCreationTime().compareTo(p1.getCreationTime());
-                    if (compareDate != 0) {
-                        return compareDate;
-                    }
-                    int compareInteractions = Integer.compare(p2.getTotalReaction() + p2.getCommentCount(), p1.getTotalReaction() + p1.getCommentCount());
-                    return compareInteractions;
-                })
-                .collect(Collectors.toList());
-
-        for (Post post : posts) {
-            VBox postBox = createPostBox(post);
-            postsContainer.getChildren().add(postBox);
-        }
-    }
-
-
-    private VBox createPostBox(Post post) {
+        protected VBox createPostBox(Post post) {
         VBox postBox = new VBox();
         HBox voteBox = new HBox();
         HBox voteTempBox = new HBox();

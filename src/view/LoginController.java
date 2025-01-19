@@ -21,8 +21,10 @@ public class LoginController {
   private Label passwordClue;
   @FXML
   private AnchorPane rootPane;
+
   public static String name;
   public static int userID;
+  
   @FXML
   public void initialize() {
     errorMessage.setVisible(false);
