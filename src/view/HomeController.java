@@ -1,6 +1,8 @@
 package view;
 
+import javafx.event.ActionEvent;
 import javafx.scene.layout.VBox;
+import main.MainController;
 import model.Post;
 import database.DatabaseGetter;
 
@@ -26,6 +28,15 @@ public class HomeController extends BaseController {
         for (Post post : posts) {
             VBox postBox = createPostBox(post);
             postsContainer.getChildren().add(postBox);
+        }
+    }
+    
+    public void handleProfile(ActionEvent event) {
+        System.out.println("Profile clicked");
+        try {
+            MainController.gotoProfile();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 }

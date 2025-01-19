@@ -1,8 +1,6 @@
 package main;
 
 import database.Database;
-import database.DatabaseInsert;
-import model.*;
 
 public class Main {
   public static void main(String[] args) {
