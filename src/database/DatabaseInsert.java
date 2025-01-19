@@ -42,4 +42,19 @@ public class DatabaseInsert {
             e.printStackTrace();
         }
     }
+
+
+    public static void savePost(int userID, int postID) {
+        String sql = "INSERT INTO saved_posts(userID, postID) VALUES(?, ?)";
+
+        try (Connection conn = Database.connect();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setInt(1, userID);
+            pstmt.setInt(2, postID);
+            pstmt.executeUpdate();
+            System.out.println("Post saved.");
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
 }

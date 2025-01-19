@@ -136,4 +136,32 @@ public class DatabaseGetter {
         }
         return user;
     }
+
+    public static List<Post> getSavedPosts(int userID) {
+        String sql = "SELECT p.* FROM posts p " +
+                     "INNER JOIN saved_posts sp ON p.postID = sp.postID " +
+                     "WHERE sp.userID = ?";
+        List<Post> posts = new ArrayList<>();
+    
+        try (Connection conn = Database.connect();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setInt(1, userID);
+            ResultSet rs = pstmt.executeQuery();
+    
+            while (rs.next()) {
+                Post post = new Post(
+                    rs.getString("postContent"),
+                    rs.getInt("postID"),
+                    rs.getInt("userID")
+                );
+                post.setCreationTime(LocalDateTime.parse(rs.getString("creationDate")));
+                posts.add(post);
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        
+        return posts;
+    }
+    
 }

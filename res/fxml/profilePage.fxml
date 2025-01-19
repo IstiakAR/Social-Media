@@ -132,14 +132,14 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                      <HBox.margin>
-                        <Insets right="15.0" />
+                        <Insets right="10.0" />
                      </HBox.margin>
                   </ImageView>
-                  <Text fill="#eceff1" strokeType="OUTSIDE" strokeWidth="0.0" text="Saved" wrappingWidth="81.18199920654297">
+                  <Hyperlink onAction="#handleSaved" prefHeight="34.0" prefWidth="91.0" text="Saved" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="17.0" />
                      </font>
-                  </Text>
+                  </Hyperlink>
                </children>
                <padding>
                   <Insets left="30.0" />

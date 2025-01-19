@@ -56,10 +56,18 @@ public class Database {
             + "FOREIGN KEY (userID) REFERENCES users(userID)"
             + ");";
 
+            String savedPostsTable = "CREATE TABLE IF NOT EXISTS saved_posts ("
+            + "userID INTEGER,"
+            + "postID INTEGER,"
+            + "FOREIGN KEY (userID) REFERENCES users(userID),"
+            + "FOREIGN KEY (postID) REFERENCES posts(postID)"
+            + ");";
+
         try (Connection conn = connect();
-             Statement stmt = conn.createStatement()) {
+        Statement stmt = conn.createStatement()) {
             stmt.execute(usersTable);
             stmt.execute(postsTable);
+            stmt.execute(savedPostsTable);
             System.out.println("Tables created.");
         } catch (SQLException e) {
             System.out.println(e.getMessage());
