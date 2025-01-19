@@ -47,6 +47,7 @@ public abstract class BaseController {
         Button upvoteButton = new Button("▲");
         Button downvoteButton = new Button("▼");
         Button commentButton = new Button("󰍨");
+        Button saveButton = new Button("Save");
         postBox.setStyle("-fx-background-color: #0e1113; -fx-padding: 10; -fx-border-color: #0e1113; -fx-border-width: 1; -fx-border-radius: 5; -fx-background-radius: 5;");
 
         postBox.prefWidthProperty().bind(ScrollPane.widthProperty().subtract(20));

@@ -34,5 +34,14 @@ public class ProfileController {
             e.printStackTrace();
         }
     }
+    @FXML
+    public void handleSaved(ActionEvent event){
+        System.out.println("Saved clicked");
+        try{
+            MainController.gotoSaved();
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }
 }
 

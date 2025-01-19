@@ -53,5 +53,11 @@ public class MainController extends Application {
     Parent root = loader.load();
     Scene scene = new Scene(root);
     primaryStage.setScene(scene);
+  }  
+  public static void gotoSaved() throws Exception {
+    FXMLLoader loader = new FXMLLoader(MainController.class.getResource("/fxml/savedPost.fxml"));
+    Parent root = loader.load();
+    Scene scene = new Scene(root);
+    primaryStage.setScene(scene);
   }
 }
