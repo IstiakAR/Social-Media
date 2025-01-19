@@ -41,9 +41,10 @@ public class LoginController {
       passwordClue.setVisible(true);
       return;
     }
-    else if (Main.users.containsKey(username)) {
+    else if (MainStorage.getUsersSMap().containsKey(username)
+    ) {
       passwordClue.setVisible(true);
-      passwordClue.setText("Your Clue: " + Main.users.get(username).clue);
+      passwordClue.setText("Your Clue: " + MainStorage.getUsersSMap().get(username).getClue());
     } else {
       passwordClue.setText("Username not found.");
     }
@@ -58,13 +59,17 @@ public class LoginController {
       e.printStackTrace();
     }
   }
+<<<<<<< HEAD
+=======
+  @FXML
+>>>>>>> 97dd3110a02d861a5f958fc4ab65a5b4e05999af
   public void handleLogin(ActionEvent event) {
     passwordClue.setVisible(false);
-    String username = loginUsername.getText();
-    String password = loginPassword.getText();
+    String u = loginUsername.getText();
+    String p = loginPassword.getText();
     System.out.println("Login clicked!");
-    if (Main.users.containsKey(username)) {
-      if (Main.users.get(username).password.equals(password)) {
+    if (MainStorage.getUsersSMap().containsKey(u)) {
+      if (MainStorage.getUsersSMap().get(u).getPassword().equals(p)) {
         System.out.println("Login Matched!");
         name = username;
         errorMessage.setVisible(false);

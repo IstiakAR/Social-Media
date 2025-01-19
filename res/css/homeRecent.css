@@ -1,28 +1,23 @@
 .scroll-pane {
-    -fx-background-color:  #000000;
-    -fx-background-radius: 100em;
+    -fx-background: #000000;
+    -fx-border-color: #000000;
 }
-
-.scroll-bar:horizontal, .scroll-bar:vertical{
-    -fx-background-color:transparent;
-}
-
 .increment-button, .decrement-button {
     -fx-background-color: transparent;
     -fx-border-color: transparent;
     -fx-opacity: 0;
 }
-
 .scroll-bar:horizontal .track,
-.scroll-bar:vertical .track{
+.scroll-bar:vertical .track {
     -fx-background-color: transparent;
     -fx-border-color: transparent;
 }
-
 .scroll-bar:horizontal .thumb,
 .scroll-bar:vertical .thumb {
-    -fx-background-color:  #000000;
+    -fx-background-color: #000000;
+    -fx-background-radius: 10px;
 }
-.scroll-pane > .corner {
-    -fx-background-color:  #000000;
+
+.scroll-bar:horizontal, .scroll-bar:vertical {
+    -fx-background-color: transparent;
 }

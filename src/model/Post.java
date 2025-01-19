@@ -1,54 +1,80 @@
-
 package model;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
+import main.MainStorage;
+
 public class Post {
-	public String postContent;
-	public int postID;
-	public int totalReaction;
-	public User user;
-	public ArrayList<Comment> commentList = new ArrayList<>();
-	public ArrayList<Reaction> reactions = new ArrayList<>();
+    private String postContent;
+    private int postID;
+    private int totalReaction;
+	private int commentCount;
+    private int userID;
+	private LocalDateTime creationTime;
+    public ArrayList<Interaction> interactions = new ArrayList<>();
 
-	public Post(String content, int postID, User user) { // constructor
-		this.postContent = content;
-		this.user = user;
-		this.user.addPost(this);
-		this.postID = postID;
+    public Post(String content, int postID, int userID) {
+        this.postContent = content;
+		this.userID = userID;
+        this.postID = postID;
+		this.creationTime = LocalDateTime.now();
+        User user = MainStorage.getUsersIMap().get(userID);
+        user.addPost(this);
+    }
+
+    public void addComment(String text, int userID) {
+        int commentID = generateInteractionID();
+        Comment comment = new Comment(text, commentID, postID, userID);
+        interactions.add(comment);
+		this.commentCount++;
+    }
+
+    public void addReaction(int react, int userID) {
+        int reactionID = generateInteractionID();
+        Reaction reaction = new Reaction(react, reactionID, postID, userID);
+        interactions.add(reaction);
+        if (react == 1)
+            this.totalReaction += 1;
+        else if (react == -1)
+            this.totalReaction -= 1;
+    }
+
+    private int generateInteractionID() {
+        return interactions.size() + 1;
+    }
+
+    public void displayInteractions() {
+        for (Interaction interaction : interactions) {
+            interaction.getInteraction();
+        }
+    }
+	public String getCreationTime() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+        return creationTime.format(formatter);
+    }
+
+    public String getPostContent() {
+        return postContent;
+    }
+
+    public int getPostID() {
+        return postID;
+    }
+
+    public int getTotalReaction() {
+        return totalReaction;
+    }
+
+    public int getUserID() {
+        return userID;
+    }
+
+	public void setCreationTime(LocalDateTime localDateTime) {
+		this.creationTime = localDateTime;
 	}
-
-	public int getReaction(User user) {
-		int ret = 0;
-		int n = reactions.size();
-		for (int i = 0; i < n; i++) {
-			if (reactions.get(i).user == user) {
-				ret = reactions.get(i).react;
-				break;
-			}
-		}
-		return ret;
-	}
-
-	public void addComment(String text, User user) {
-		Comment comment = new Comment(text, this, user);
-		commentList.add(comment);
-	}
-
-	public void addReaction(int react, User user) {
-		Reaction reaction = new Reaction(react, user, this);
-		int n = reactions.size();
-		for (int i = 0; i < n; i++) { // searchig for existing reaction.
-																	// If same reaction exists by same user then skip else add/change.
-			if (reactions.get(i).user == user) {
-				reactions.get(i).react = react;
-				return;
-			}
-		}
-		this.reactions.add(reaction);
-		if (react == 1)
-			this.totalReaction += 1;
-		else if (react == -1)
-			this.totalReaction -= 1;
+	public int getCommentCount() {
+		return commentCount;
 	}
 }

@@ -2,6 +2,8 @@ package view;
 
 import main.*;
 import model.*;
+import database.Database;
+import database.DatabaseInsert;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -56,11 +58,12 @@ public class SignUpController {
       errorMessage.setText("Password does not match.");
       errorMessage.setVisible(true);
     }
-    else if(Main.users.containsKey(username)){
+    else if(MainStorage.getUsersSMap().containsKey(username)){
       errorMessage.setText("Username already exists.");
       errorMessage.setVisible(true);
-    } else {
-      Main.users.put(username, new User(username, password, fullName, passwordClue, Main.users.size()));
+    } 
+    else {
+      DatabaseInsert.insertUser(new User(username, password, fullName, passwordClue));
       try {
         MainController.gotoHomepage();
       } catch (Exception e) {
