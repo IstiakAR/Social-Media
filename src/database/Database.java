@@ -62,7 +62,15 @@ public class Database {
             + "FOREIGN KEY (userID) REFERENCES users(userID),"
             + "FOREIGN KEY (postID) REFERENCES posts(postID)"
             + ");";
-
+            String friendshipsTable = "CREATE TABLE IF NOT EXISTS friendships ("
+            + "friendshipID INTEGER PRIMARY KEY,"
+            + "userID INTEGER NOT NULL,"
+            + "friendID INTEGER NOT NULL,"
+            + "status TEXT NOT NULL DEFAULT 'Pending'," // Possible values: Pending, Accepted, Blocked
+            + "createdAt TEXT DEFAULT CURRENT_TIMESTAMP,"
+            + "FOREIGN KEY (userID) REFERENCES users(userID),"
+            + "FOREIGN KEY (friendID) REFERENCES users(userID)"
+            + ");";
         try (Connection conn = connect();
         Statement stmt = conn.createStatement()) {
             stmt.execute(usersTable);

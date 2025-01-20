@@ -80,19 +80,12 @@
          </cursor>
       </ImageView>
 
-      <ScrollPane fx:id="homeScrollPane" layoutX="259.0" layoutY="96.0" prefHeight="626.0" prefWidth="984.0" style="-fx-background: #0e1113; -fx-border-color: #0e1113;" stylesheets="@../css/homePosts.css">
+      <ScrollPane fx:id="ScrollPane" layoutX="700.0" layoutY="70.0" prefHeight="652.0" prefWidth="543.0" style="-fx-background: #0e1113; -fx-border-color: #0e1113;" stylesheets="@../css/homePosts.css">
         <content>
-            <VBox fx:id="contentVBox" style="-fx-background-color: #000000;">
-               <children>
-                  <Label text="All Friends" textFill="WHITE">
-                     <font>
-                        <Font name="System Bold" size="22.0" />
-                     </font>
-                  </Label>
-               </children></VBox>
+            <VBox fx:id="contentVBox" style="-fx-background-color: #000000;" />
         </content>
     </ScrollPane>
-      <ScrollBar fx:id="homeScrollBar" layoutX="1271.0" layoutY="96.0" orientation="VERTICAL" prefHeight="618.0" prefWidth="1.0" stylesheets="@../css/scrollMain.css" />
+      <ScrollBar fx:id="ScrollBar" layoutX="1248.0" layoutY="97.0" orientation="VERTICAL" prefHeight="1015.0" prefWidth="30.0" stylesheets="@../css/scrollMain.css" />
       <VBox layoutX="14.0" layoutY="69.0" prefHeight="444.0" prefWidth="222.0">
          <children>
             <HBox alignment="CENTER_LEFT" prefHeight="43.0" prefWidth="282.0">
@@ -165,5 +158,11 @@
             </HBox>
          </children>
       </VBox>
+      <Text fill="WHITE" layoutX="260.0" layoutY="94.0" strokeType="OUTSIDE" strokeWidth="0.0" text="All Friends" wrappingWidth="138.39999999999998">
+         <font>
+            <Font name="System Bold" size="22.0" />
+         </font>
+      </Text>
+      <VBox fx:id="friendListContainer" layoutX="236.0" layoutY="106.0" prefHeight="596.0" prefWidth="520.0" />
    </children>
 </AnchorPane>
