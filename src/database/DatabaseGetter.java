@@ -163,5 +163,32 @@ public class DatabaseGetter {
         
         return posts;
     }
+    public static boolean isFriend(int userId, int friendId) {
+        String query = "SELECT * FROM friendships WHERE userID = ? AND friendID = ?";
+        try (Connection conn = Database.connect();
+             PreparedStatement stmt = conn.prepareStatement(query)) {
+            stmt.setInt(1, userId);
+            stmt.setInt(2, friendId);
+            ResultSet rs = stmt.executeQuery();
+            return rs.next(); // Returns true if a friendship record exists
+        } catch (SQLException e) {
+            System.out.println("Error checking friendship: " + e.getMessage());
+            return false;
+        }
+    }
+    public static boolean updateFriendStatus(int userId, int friendId, String status) {
+        String query = "UPDATE friendships SET status = ? WHERE userID = ? AND friendID = ?";
+        try (Connection conn = Database.connect();
+             PreparedStatement stmt = conn.prepareStatement(query)) {
+            stmt.setString(1, status); // New status (e.g., "Accepted", "Rejected")
+            stmt.setInt(2, userId);   // ID of the user who sent the request
+            stmt.setInt(3, friendId); // ID of the user receiving the request
+            int rowsAffected = stmt.executeUpdate();
+            return rowsAffected > 0; // Return true if the update was successful
+        } catch (SQLException e) {
+            System.out.println("Error updating friend status: " + e.getMessage());
+            return false;
+        }
+    }
     
-}
+} 

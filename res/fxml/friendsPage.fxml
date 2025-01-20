@@ -78,20 +78,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </ImageView>
-
-      <ScrollPane fx:id="homeScrollPane" layoutX="259.0" layoutY="96.0" prefHeight="626.0" prefWidth="984.0" style="-fx-background: #0e1113; -fx-border-color: #0e1113;" stylesheets="@../css/homePosts.css">
-        <content>
-            <VBox fx:id="contentVBox" style="-fx-background-color: #000000;">
-               <children>
-                  <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="People you may know" wrappingWidth="365.9640254974365">
-                     <font>
-                        <Font size="25.0" />
-                     </font>
-                  </Text>
-               </children></VBox>
-        </content>
-    </ScrollPane>
-      <ScrollBar fx:id="homeScrollBar" layoutX="1271.0" layoutY="96.0" orientation="VERTICAL" prefHeight="618.0" prefWidth="1.0" stylesheets="@../css/scrollMain.css" />
+      <ScrollBar fx:id="ScrollBar" layoutX="1271.0" layoutY="96.0" orientation="VERTICAL" prefHeight="618.0" prefWidth="1.0" stylesheets="@../css/scrollMain.css" />
       <VBox layoutX="14.0" layoutY="69.0" prefHeight="444.0" prefWidth="222.0">
          <children>
             <HBox alignment="CENTER_LEFT" prefHeight="43.0" prefWidth="282.0">
@@ -164,5 +151,17 @@
             </HBox>
          </children>
       </VBox>
+      <ScrollPane fx:id="ScrollPane" layoutX="1022.0" layoutY="110.0" prefHeight="644.0" prefWidth="239.0" style="-fx-background: #0e1113; -fx-border-color: #0e1113;" stylesheets="@../css/homePosts.css">
+         <content>
+            <VBox fx:id="postsContainer" style="-fx-background-color: #000000;" />
+         </content>
+      </ScrollPane>
+      <ScrollBar fx:id="ScrollBar" layoutX="1289.0" layoutY="207.0" orientation="VERTICAL" prefHeight="646.0" prefWidth="30.0" stylesheets="@../css/scrollMain.css" />
+      <VBox fx:id="friendListContainer" layoutX="260.0" layoutY="155.0" prefHeight="589.0" prefWidth="566.0" />
+      <Text fill="WHITE" layoutX="316.0" layoutY="115.0" strokeType="OUTSIDE" strokeWidth="0.0" text="People may you know">
+         <font>
+            <Font name="System Bold" size="25.0" />
+         </font>
+      </Text>
    </children>
 </AnchorPane>

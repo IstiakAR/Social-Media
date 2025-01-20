@@ -1,5 +1,6 @@
 package view;
 
+import database.DatabaseGetter;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -8,7 +9,9 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import main.MainStorage;
+
 import model.Post;
+import model.User;
 
 public abstract class BaseController {
     @FXML
@@ -17,6 +20,8 @@ public abstract class BaseController {
     protected ScrollPane ScrollPane;
     @FXML
     protected VBox postsContainer;
+
+
 
     @SuppressWarnings("unused")
     @FXML
@@ -28,8 +33,9 @@ public abstract class BaseController {
         postsContainer.heightProperty().addListener((obs, oldVal, newVal) -> updateScrollBarVisibility());
         ScrollPane.heightProperty().addListener((obs, oldVal, newVal) -> updateScrollBarVisibility());
         updateScrollBarVisibility();
-
+         
         displayPostsLatest();
+     
     }
 
     protected abstract void displayPostsLatest();
@@ -103,4 +109,6 @@ public abstract class BaseController {
 
         return postBox;
     }
+
+
 }
