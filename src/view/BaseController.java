@@ -7,6 +7,7 @@ import javafx.scene.control.ScrollBar;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import main.MainController;
 import main.MainStorage;
 import model.Post;
 
@@ -52,7 +53,6 @@ public abstract class BaseController {
 
         postBox.prefWidthProperty().bind(ScrollPane.widthProperty().subtract(20));
 
-
         String buttonStyle = "-fx-background-color: #0e1113; -fx-text-fill: #ffffff; -fx-padding: 5; -fx-border-color: #0e1113; -fx-border-width: 1; -fx-border-radius: 5;";
         String buttonHoverStyle = "-fx-background-color: #181c1f; -fx-text-fill: #ffffff; -fx-padding: 5; -fx-border-color: #181c1f; -fx-border-width: 1; -fx-border-radius: 5;";
 
@@ -81,6 +81,22 @@ public abstract class BaseController {
             commentButton.setStyle(buttonStyle);
         });
 
+        postBox.setOnMouseClicked(event -> {
+            try {
+                MainController.gotoPost(post);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
+
+        commentButton.setOnAction(event -> {
+            try {
+                MainController.gotoPost(post);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
+  
         VBox contentBox = new VBox();
         Label postTitle = new Label("Post Title");
         postTitle.setStyle("-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #ffffff;");

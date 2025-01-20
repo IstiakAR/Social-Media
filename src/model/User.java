@@ -12,24 +12,25 @@ public class User {
   private String name;
   private String clue;
   private String bio;
-  private String picturePath;
+  private byte[] profilePicture;
   private int userID;
   private ArrayList<Post> posts = new ArrayList<>();
   private ArrayList<User> friends = new ArrayList<>();
 
-  public User(String username, String password, String name,String clue, int uid) {
+  public User(String username, String password, String name,String clue, int uid, byte[] profilePicture) {
     this.username = username;
     this.password = password;
     this.name = name;
     this.clue = clue;
     this.userID = uid;
+    this.profilePicture = profilePicture;
   }
   public User(String u, String p, String n, String c) {
     this.username = u;
     this.password = p;
     this.name = n;
     this.clue = c;
-    this.userID = genRandom();
+    this.userID = generateUserID();
   }
   public String getUsername() {
     return username;
@@ -46,16 +47,20 @@ public class User {
   public String getBio() {
     return bio;
   }
-  public String getPicturePath() {
-    return picturePath;
+  public byte[] getProfilePicture() {
+    return profilePicture;
+  }
+  public void setProfilePicture(byte[] profilePicture) {
+    this.profilePicture = profilePicture;
   }
   public int getUserID() {
     return userID;
   }
-  public int genRandom(){
+
+  public int generateUserID(){
     while(true){
       Random rnd = new Random();
-      int n = 10000000 + rnd.nextInt(90000000);
+      int n = 100000 + rnd.nextInt(900000);
       if(!MainStorage.getUsersIMap().containsKey(n)){
         return n;
       }

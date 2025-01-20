@@ -25,9 +25,8 @@ public class Database {
             + "username TEXT NOT NULL,"
             + "password TEXT NOT NULL,"
             + "name TEXT NOT NULL,"
-            + "clue TEXT NOT NULL"
-            // + "bio TEXT"
-            // + "picturePath TEXT"
+            + "clue TEXT NOT NULL,"
+            + "profilePicture BLOB"
             + ");";
 
         String postsTable = "CREATE TABLE IF NOT EXISTS posts ("
@@ -38,25 +37,8 @@ public class Database {
             + "FOREIGN KEY (userID) REFERENCES users(userID)"
             + ");";
 
-        String commentsTable = "CREATE TABLE IF NOT EXISTS comments ("
-            + "commentID INTEGER PRIMARY KEY,"
-            + "commentText TEXT NOT NULL,"
-            + "postID INTEGER,"
-            + "userID INTEGER,"
-            + "FOREIGN KEY (postID) REFERENCES posts(postID),"
-            + "FOREIGN KEY (userID) REFERENCES users(userID)"
-            + ");";
-
-        String reactionsTable = "CREATE TABLE IF NOT EXISTS reactions ("
-            + "reactionID INTEGER PRIMARY KEY,"
-            + "reactionType INTEGER NOT NULL,"
-            + "postID INTEGER,"
-            + "userID INTEGER,"
-            + "FOREIGN KEY (postID) REFERENCES posts(postID),"
-            + "FOREIGN KEY (userID) REFERENCES users(userID)"
-            + ");";
-
-            String savedPostsTable = "CREATE TABLE IF NOT EXISTS saved_posts ("
+        String savedPostsTable = "CREATE TABLE IF NOT EXISTS saved_posts ("
+            + "id INTEGER PRIMARY KEY AUTOINCREMENT,"
             + "userID INTEGER,"
             + "postID INTEGER,"
             + "FOREIGN KEY (userID) REFERENCES users(userID),"
@@ -64,7 +46,7 @@ public class Database {
             + ");";
 
         try (Connection conn = connect();
-        Statement stmt = conn.createStatement()) {
+             Statement stmt = conn.createStatement()) {
             stmt.execute(usersTable);
             stmt.execute(postsTable);
             stmt.execute(savedPostsTable);

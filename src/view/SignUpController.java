@@ -26,7 +26,9 @@ public class SignUpController {
   private Label errorMessage;
   @FXML
   private AnchorPane rootPane;
+
   public static String name;
+
   @FXML
   public void initialize() {
     errorMessage.setVisible(false);
@@ -62,7 +64,12 @@ public class SignUpController {
       errorMessage.setVisible(true);
     } 
     else {
-      DatabaseInsert.insertUser(new User(username, password, fullName, passwordClue));
+      User user = new User(username, password, fullName, passwordClue);
+      int userID = user.getUserID();
+      LoginController.userID = userID;
+      DatabaseInsert.insertUser(user);
+      MainStorage.getUsersSMap().put(username, user);
+      MainStorage.getUsersIMap().put(userID, user);
       try {
         MainController.gotoHomepage();
       } catch (Exception e) {
