@@ -176,6 +176,19 @@ public class DatabaseGetter {
             return false;
         }
     }
+    public static boolean isConfirm(int userId, int friendId) {
+        String query = "SELECT * FROM allfriend WHERE userID = ? AND friendID = ?";
+        try (Connection conn = Database.connect();
+             PreparedStatement stmt = conn.prepareStatement(query)) {
+            stmt.setInt(1, userId);
+            stmt.setInt(2, friendId);
+            ResultSet rs = stmt.executeQuery();
+            return rs.next(); // Returns true if a friendship record exists
+        } catch (SQLException e) {
+            System.out.println("Error checking allfriend: " + e.getMessage());
+            return false;
+        }
+    }
     public static boolean updateFriendStatus(int userId, int friendId, String status) {
         String query = "UPDATE friendships SET status = ? WHERE userID = ? AND friendID = ?";
         try (Connection conn = Database.connect();
@@ -189,6 +202,53 @@ public class DatabaseGetter {
             System.out.println("Error updating friend status: " + e.getMessage());
             return false;
         }
+    }
+    public static List<User> getIncomingRequests(int userId) {
+        List<User> requests = new ArrayList<>();
+        String query = "SELECT users.* FROM friendships " +
+                       "JOIN users ON friendships.userID = users.userID " +
+                       "WHERE friendships.friendID = ? AND friendships.status = 'Pending'";
+        try (Connection conn = Database.connect(); PreparedStatement pstmt = conn.prepareStatement(query)) {
+            pstmt.setInt(1, userId);
+            ResultSet rs = pstmt.executeQuery();
+            while (rs.next()) {
+                User user = new User(
+                    rs.getString("username"),
+                    rs.getString("password"),
+                    rs.getString("name"),
+                    rs.getString("clue"),
+                    rs.getInt("userID")
+                );
+                requests.add(user);
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return requests;
+    }
+    public static List<User> getAllfriend(int userId) {
+        List<User> requests = new ArrayList<>();
+        String query = "SELECT users.* FROM allfriend " +
+                       "JOIN users ON allfriend.userID = users.userID " +
+                       "WHERE allfriend.friendID = ? AND allfriend.status = 'Pending'";
+        try (Connection conn = Database.connect(); PreparedStatement pstmt = conn.prepareStatement(query)) {
+            pstmt.setInt(1, userId);
+            System.out.println("Executing query: " + query + " with userId: " + userId);
+            ResultSet rs = pstmt.executeQuery();
+            while (rs.next()) {
+                User user = new User(
+                    rs.getString("username"),
+                    rs.getString("password"),
+                    rs.getString("name"),
+                    rs.getString("clue"),
+                    rs.getInt("userID")
+                );
+                requests.add(user);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return requests;
     }
     
 } 

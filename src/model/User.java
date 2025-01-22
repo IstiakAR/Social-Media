@@ -31,7 +31,10 @@ public class User {
     this.clue = c;
     this.userID = genRandom();
   }
-  public String getUsername() {
+  public User(int int1, String string) {
+    //TODO Auto-generated constructor stub
+}
+public String getUsername() {
     return username;
   }
   public String getPassword() {

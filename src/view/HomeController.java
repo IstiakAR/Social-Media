@@ -43,6 +43,7 @@ public class HomeController extends BaseController {
         System.out.println("Friends Button clicked!");
         try {
             MainController.gotoFriends();
+           
         } catch (Exception e) {
             e.printStackTrace();
         }
