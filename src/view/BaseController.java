@@ -1,6 +1,6 @@
 package view;
 
-import database.DatabaseGetter;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -11,7 +11,7 @@ import javafx.scene.layout.VBox;
 import main.MainStorage;
 
 import model.Post;
-import model.User;
+
 
 public abstract class BaseController {
     @FXML
@@ -34,6 +34,8 @@ public abstract class BaseController {
         ScrollPane.heightProperty().addListener((obs, oldVal, newVal) -> updateScrollBarVisibility());
         updateScrollBarVisibility();
          
+        
+     System.out.println("BaseController Initialize called");
         displayPostsLatest();
      
     }

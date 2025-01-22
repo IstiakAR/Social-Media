@@ -15,7 +15,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="759.0" prefWidth="1293.0" style="-fx-background-color: #0e1113;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.friendsController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="759.0" prefWidth="1293.0" style="-fx-background-color: #0e1113;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.RecommandFriends">
    <children>
       <HBox alignment="CENTER" layoutX="384.0" layoutY="12.0" prefHeight="47.0" prefWidth="529.0">
          <children>
@@ -78,7 +78,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </ImageView>
-      <ScrollBar fx:id="ScrollBar" layoutX="1271.0" layoutY="96.0" orientation="VERTICAL" prefHeight="618.0" prefWidth="1.0" stylesheets="@../css/scrollMain.css" />
+      <ScrollBar fx:id="ScrollBar" layoutX="1259.0" layoutY="76.0" orientation="VERTICAL" prefHeight="689.0" prefWidth="30.0" stylesheets="@../css/scrollMain.css" />
       <VBox layoutX="14.0" layoutY="69.0" prefHeight="444.0" prefWidth="222.0">
          <children>
             <HBox alignment="CENTER_LEFT" prefHeight="43.0" prefWidth="282.0">
@@ -151,17 +151,16 @@
             </HBox>
          </children>
       </VBox>
-      <ScrollPane fx:id="ScrollPane" layoutX="1022.0" layoutY="110.0" prefHeight="644.0" prefWidth="239.0" style="-fx-background: #0e1113; -fx-border-color: #0e1113;" stylesheets="@../css/homePosts.css">
+      <ScrollPane fx:id="ScrollPane" layoutX="251.0" layoutY="75.0" prefHeight="679.0" prefWidth="1010.0" style="-fx-background: #0e1113; -fx-border-color: #0e1113;" stylesheets="@../css/homePosts.css">
          <content>
             <VBox fx:id="postsContainer" style="-fx-background-color: #000000;" />
          </content>
       </ScrollPane>
-      <ScrollBar fx:id="ScrollBar" layoutX="1289.0" layoutY="207.0" orientation="VERTICAL" prefHeight="646.0" prefWidth="30.0" stylesheets="@../css/scrollMain.css" />
-      <VBox fx:id="friendListContainer" layoutX="260.0" layoutY="155.0" prefHeight="589.0" prefWidth="566.0" />
-      <Text fill="WHITE" layoutX="316.0" layoutY="115.0" strokeType="OUTSIDE" strokeWidth="0.0" text="People may you know">
+      <Text fill="WHITE" layoutX="273.0" layoutY="88.0" strokeType="OUTSIDE" strokeWidth="0.0" text="People may you know" wrappingWidth="302.172119140625">
          <font>
             <Font name="System Bold" size="25.0" />
          </font>
       </Text>
+      <VBox fx:id="friendListContainer" layoutX="252.0" layoutY="143.0" prefHeight="87.0" prefWidth="354.0" />
    </children>
 </AnchorPane>

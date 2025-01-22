@@ -58,12 +58,13 @@ public class DatabaseInsert {
         }
     }
     public static void addFriend(int userId, int friendId) {
-        String query = "INSERT INTO Friendships (user_id, friend_id, status) VALUES (?, ?, 'Pending')";
+        String sql = "INSERT INTO allfriend (userID, friendID, status) VALUES (?, ?, 'Pending')";
         try (Connection conn = Database.connect();
-             PreparedStatement stmt = conn.prepareStatement(query)) {
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setInt(1, userId);
             stmt.setInt(2, friendId);
             stmt.executeUpdate();
+            System.out.println("Friend from user " + userId + " to user " + friendId);
         } catch (SQLException e) {
             e.printStackTrace();
         }
