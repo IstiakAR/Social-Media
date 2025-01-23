@@ -166,7 +166,6 @@ public class DatabaseGetter {
         }
         return commentMap;
     }
-}
 
     public static boolean isFriend(int userId, int friendId) {
         String query = "SELECT * FROM friendships WHERE userID = ? AND friendID = ?";
@@ -255,5 +254,4 @@ public class DatabaseGetter {
         }
         return requests;
     }
-    
-} 
+}

@@ -25,6 +25,13 @@ public class User {
     this.userID = uid;
     this.profilePicture = profilePicture;
   }
+  public User(String username, String password, String name,String clue, int uid) {
+    this.username = username;
+    this.password = password;
+    this.name = name;
+    this.clue = clue;
+    this.userID = uid;
+  }
   public User(String u, String p, String n, String c) {
     this.username = u;
     this.password = p;
@@ -32,10 +39,7 @@ public class User {
     this.clue = c;
     this.userID = generateUserID();
   }
-  public User(int int1, String string) {
-    //TODO Auto-generated constructor stub
-}
-public String getUsername() {
+  public String getUsername() {
     return username;
   }
   public String getPassword() {
