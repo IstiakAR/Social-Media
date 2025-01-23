@@ -44,12 +44,34 @@ public class Database {
             + "FOREIGN KEY (userID) REFERENCES users(userID),"
             + "FOREIGN KEY (postID) REFERENCES posts(postID)"
             + ");";
+            
+            String friendshipsTable = "CREATE TABLE IF NOT EXISTS friendships ("
+            + "friendshipID INTEGER PRIMARY KEY," 
+            + "userID INTEGER NOT NULL,"        
+            + "friendID INTEGER NOT NULL,"       
+            + "status TEXT NOT NULL DEFAULT 'Pending'," 
+            + "createdAt TEXT DEFAULT CURRENT_TIMESTAMP," 
+            + "FOREIGN KEY (userID) REFERENCES users(userID)," 
+            + "FOREIGN KEY (friendID) REFERENCES users(userID)" 
+            + ");";
 
+            String allfriendTable = "CREATE TABLE IF NOT EXISTS allfriend ("
+            + "allfriendID INTEGER PRIMARY KEY, " 
+            + "userID INTEGER NOT NULL, "        
+            + "friendID INTEGER NOT NULL, "       
+            + "status TEXT NOT NULL DEFAULT 'Pending', " 
+            + "createdAt TEXT DEFAULT CURRENT_TIMESTAMP, " 
+            + "FOREIGN KEY (userID) REFERENCES users(userID), " 
+            + "FOREIGN KEY (friendID) REFERENCES users(userID)"
+            + ");";
+    
         try (Connection conn = connect();
              Statement stmt = conn.createStatement()) {
             stmt.execute(usersTable);
             stmt.execute(postsTable);
             stmt.execute(savedPostsTable);
+            stmt.execute(friendshipsTable);
+            stmt.execute(allfriendTable);
             System.out.println("Tables created.");
         } catch (SQLException e) {
             System.out.println(e.getMessage());
