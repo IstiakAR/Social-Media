@@ -13,4 +13,10 @@ public class Comment extends Interaction {
     public void getInteraction() {
         System.out.println("Comment by User " + userID + " on Post " + postID + ": " + commentText);
     }
+	public int getPostID() {
+        return postID;
+    }
+	public String getCommentText() {
+		return commentText;
+	}
 }

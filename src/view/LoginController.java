@@ -23,7 +23,7 @@ public class LoginController {
   private AnchorPane rootPane;
 
   public static String name;
-  public static int userID;
+  public static int userID=0;
   
   @FXML
   public void initialize() {

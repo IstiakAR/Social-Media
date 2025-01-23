@@ -262,7 +262,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </ImageView>
-      <ImageView accessibleRole="BUTTON" fitHeight="30.0" fitWidth="30.0" layoutX="1107.0" layoutY="22.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView accessibleRole="BUTTON" fitHeight="30.0" fitWidth="30.0" layoutX="1107.0" layoutY="22.0" onMouseClicked="#handleAddPost" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/add_white.png" />
          </image>
