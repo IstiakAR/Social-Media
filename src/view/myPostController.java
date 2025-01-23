@@ -46,7 +46,7 @@ public class myPostController extends BaseController {
                 .collect(Collectors.toList());
 
         for (Post post : listPosts) {
-            VBox postBox = createPostBox(post);
+            VBox postBox = createPostBox(post, post.getPostID());
             postsContainer.getChildren().add(postBox);
         }
     }

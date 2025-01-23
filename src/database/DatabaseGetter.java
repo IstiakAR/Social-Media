@@ -77,6 +77,7 @@ public class DatabaseGetter {
                 if (userID == givenUserID) {
                     Post post = new Post(
                         rs.getString("postContent"),
+                        rs.getInt("postID"),
                         userID
                     );
                     post.setCreationTime(LocalDateTime.parse(rs.getString("creationDate")));
@@ -101,6 +102,7 @@ public class DatabaseGetter {
             while (rs.next()) {
                     Post post = new Post(
                         rs.getString("postContent"),
+                        rs.getInt("postID"),
                         rs.getInt("userID")
                     );
                     post.setCreationTime(LocalDateTime.parse(rs.getString("creationDate")));
@@ -127,6 +129,7 @@ public class DatabaseGetter {
             while (rs.next()) {
                 Post post = new Post(
                     rs.getString("postContent"),
+                    rs.getInt("postID"),
                     rs.getInt("userID")
                 );
                 post.setCreationTime(LocalDateTime.parse(rs.getString("creationDate")));
@@ -153,6 +156,8 @@ public class DatabaseGetter {
                         rs.getInt("postID"),
                         rs.getInt("userID")
                     );
+                    // System.out.println("Comment"+' '+comment.getCommentText()+' '
+                    // +comment.getInteractionID()+' '+comment.getUserID()+' '+comment.getPostID());
                     commentMap.put(comment.getInteractionID(), comment); 
                 }
             }

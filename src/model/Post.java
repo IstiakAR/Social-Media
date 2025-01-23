@@ -16,11 +16,24 @@ public class Post {
     private int userID;
 	private LocalDateTime creationTime;
 
+    public Post(String content, int postID, int userID) {
+        this.postContent = content;
+		this.userID = userID;
+        this.postID = postID;
+		this.creationTime = LocalDateTime.now();
+        User user = MainStorage.getUsersIMap().get(userID);
+        if (user != null) {
+            user.addPost(this);
+        } else {
+            throw new IllegalArgumentException("User not found for userID: " + userID);
+        }
+    }
+
     public Post(String content, int userID) {
         this.postContent = content;
 		this.userID = userID;
-        this.postID = generatePostID();
-		this.creationTime = LocalDateTime.now();
+        generatePostID();
+        this.creationTime = LocalDateTime.now();
         User user = MainStorage.getUsersIMap().get(userID);
         if (user != null) {
             user.addPost(this);
@@ -45,13 +58,15 @@ public class Post {
             this.totalReaction -= 1;
     }
 
-    private int generatePostID() {
+    private void generatePostID() {
+        int n;
         while(true){
-            int n = 1000000 + (int)(Math.random() * 9000000);
+            n = 1000000 + (int)(Math.random() * 9000000);
             if(!MainStorage.getAllPosts().containsKey(n)){
-                return n;
+                break;
             }
         }
+        postID = n;
     }
 
     private int generateInteractionID() {
@@ -83,6 +98,9 @@ public class Post {
     public int getPostID() {
         return postID;
     }
+    public void setPostID(int postID) {
+        this.postID = postID;
+    }
 
     public int getTotalReaction() {
         return totalReaction;
@@ -100,8 +118,15 @@ public class Post {
         List<Comment> comments = new ArrayList<>();
         for (Map.Entry<Integer, Comment> entry : MainStorage.getCommentsMap().entrySet()) {
             Comment comment = entry.getValue();
+            System.out.println("Comment postID: " + comment.getPostID());
+            System.out.println("Comment"+' '+comment.getCommentText()+' '+comment.getInteractionID()+' '+
+            comment.getUserID()+' '+comment.getPostID());
+            System.out.println("This postID: " + this.postID);
             if (comment.getPostID() == this.postID) {
                 comments.add(comment);
+            }
+            if (!MainStorage.getAllPosts().containsKey(postID)) {
+                throw new IllegalArgumentException("Post ID " + postID + " does not exist.");
             }
         }
         return comments;

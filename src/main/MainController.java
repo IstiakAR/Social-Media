@@ -83,12 +83,12 @@ public class MainController extends Application {
     primaryStage.setScene(scene);
   }
 
-  public static void gotoPost(Post post) throws Exception {
+  public static void gotoPost(Post post, int postID) throws Exception {
     System.out.println("HII");
     FXMLLoader loader = new FXMLLoader(MainController.class.getResource("/fxml/postPage.fxml"));
     Parent root = loader.load();
     PostController controller = loader.getController();
-    controller.displayPost(post);
+    controller.displayPost(post, postID);
 
     Scene scene = new Scene(root);
     primaryStage.setScene(scene);

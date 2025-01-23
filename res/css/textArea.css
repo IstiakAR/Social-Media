@@ -1,0 +1,15 @@
+.text-area {
+    text-area-background:  #2a3236;
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
+    -fx-color: #ffffff;
+
+}
+
+.text-area .content {
+    -fx-background-color: #ffffff ;
+}
+.text-field {
+    -fx-background-color: #2a3236 ;
+    -fx-color: #ffffff;
+}

@@ -29,7 +29,7 @@ public class HomeController extends BaseController {
                 .collect(Collectors.toList());
 
         for (Post post : listPosts) {
-            VBox postBox = createPostBox(post);
+            VBox postBox = createPostBox(post, post.getPostID());
             postsContainer.getChildren().add(postBox);
         }
     }
@@ -42,6 +42,7 @@ public class HomeController extends BaseController {
             e.printStackTrace();
         }
     }
+
     public void handleFriends(ActionEvent event) {
         System.out.println("Friends Button clicked!");
         try {
@@ -50,7 +51,8 @@ public class HomeController extends BaseController {
             e.printStackTrace();
         }
     }
-        @FXML
+
+    @FXML
     public void handleAddPost(MouseEvent event) {
         try {
             MainController.showAddPostDialog(() -> {

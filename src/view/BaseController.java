@@ -41,7 +41,8 @@ public abstract class BaseController {
     }
     
     @SuppressWarnings("unused")
-    protected VBox createPostBox(Post post) {
+    protected VBox createPostBox(Post post, int postID) {
+        post.setPostID(postID);
         VBox postBox = new VBox();
         HBox voteBox = new HBox();
         HBox voteTempBox = new HBox();
@@ -83,7 +84,7 @@ public abstract class BaseController {
 
         postBox.setOnMouseClicked(event -> {
             try {
-                MainController.gotoPost(post);
+                MainController.gotoPost(post,postID);
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -91,7 +92,7 @@ public abstract class BaseController {
 
         commentButton.setOnAction(event -> {
             try {
-                MainController.gotoPost(post);
+                MainController.gotoPost(post, postID);
             } catch (Exception e) {
                 e.printStackTrace();
             }

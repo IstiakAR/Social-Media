@@ -13,8 +13,8 @@ public class MainStorage {
     private static Map<Integer, String> usersKeyMap = new HashMap<>();
     private static Map<String, User> usersSMap = new HashMap<>();
     private static Map<Integer, User> usersIMap = new HashMap<>();
-    private static Map<Integer, Comment> commentsMap = new HashMap<>();
     private static Map<Integer, Post> allPostsMap = new HashMap<>();
+    private static Map<Integer, Comment> commentsMap = new HashMap<>();
 
     public void loadUsers() {
         List<User> users = DatabaseGetter.getUsers();
