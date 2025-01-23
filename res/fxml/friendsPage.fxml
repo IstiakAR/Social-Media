@@ -151,9 +151,9 @@
             </HBox>
          </children>
       </VBox>
-      <ScrollPane fx:id="ScrollPane" layoutX="251.0" layoutY="75.0" prefHeight="679.0" prefWidth="1010.0" style="-fx-background: #0e1113; -fx-border-color: #0e1113;" stylesheets="@../css/homePosts.css">
+      <ScrollPane fx:id="ScrollPane" layoutX="249.0" layoutY="86.0" prefHeight="668.0" prefWidth="1012.0" style="-fx-background: #0e1113; -fx-border-color: #0e1113;" stylesheets="@../css/homePosts.css">
          <content>
-            <VBox fx:id="postsContainer" style="-fx-background-color: #000000;" />
+            <VBox fx:id="friendListContainer" prefHeight="87.0" prefWidth="354.0" />
          </content>
       </ScrollPane>
       <Text fill="WHITE" layoutX="273.0" layoutY="88.0" strokeType="OUTSIDE" strokeWidth="0.0" text="People may you know" wrappingWidth="302.172119140625">
@@ -161,6 +161,5 @@
             <Font name="System Bold" size="25.0" />
          </font>
       </Text>
-      <VBox fx:id="friendListContainer" layoutX="252.0" layoutY="143.0" prefHeight="87.0" prefWidth="354.0" />
    </children>
 </AnchorPane>
