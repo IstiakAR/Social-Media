@@ -28,7 +28,7 @@ public class DatabaseInsert {
     }
 
     public static void insertPost(Post post) {
-        String sql = "INSERT INTO posts(postID, postContent, userID, creationDate) VALUES(?, ?, ?, ?)";
+        String sql = "INSERT INTO posts(postID, postContent, userID, creationTime) VALUES(?, ?, ?, ?)";
         System.out.println("Attempting to insert post: " + post.getPostContent()); // Debug
     
         try (Connection conn = Database.connect();
@@ -46,7 +46,7 @@ public class DatabaseInsert {
     }
 
     public static void insertComment(Comment comment) {
-        String sql = "INSERT INTO comments(commentID, commentText, postID, userID) VALUES(?, ?, ?, ?)";
+        String sql = "INSERT INTO comments(commentID, commentText, postID, userID, creationTime) VALUES(?, ?, ?, ?, ?)";
 
         try (Connection conn = Database.connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -54,6 +54,7 @@ public class DatabaseInsert {
             pstmt.setString(2, comment.getCommentText());
             pstmt.setInt(3, comment.getPostID());
             pstmt.setInt(4, comment.getUserID());
+            pstmt.setString(5, comment.getCreationTime().toString());
             System.out.println(comment.getInteractionID() + ' ' + comment.getCommentText() + ' ' + comment.getPostID() + ' ' + comment.getUserID());
             pstmt.executeUpdate();
             System.out.println("Comment inserted.");
@@ -100,6 +101,7 @@ public class DatabaseInsert {
             e.printStackTrace();
         }
     }
+
     public static void sendFriendRequest(int userId, int friendId) {
         String query = "INSERT INTO friendships (userID, friendID, status) VALUES (?, ?, 'Pending')";
         try (Connection conn = Database.connect();
@@ -113,7 +115,6 @@ public class DatabaseInsert {
         }
     }
     
-    // Cancel a sent friend request
     public static void cancelFriendRequest(int userId, int friendId) {
         String query = "DELETE FROM friendships WHERE userID = ? AND friendID = ? AND status = 'Pending'";
         try (Connection conn = Database.connect();
@@ -130,8 +131,4 @@ public class DatabaseInsert {
             System.out.println("Error canceling friend request: " + e.getMessage());
         }
     }
-
-    // Update the status of a friendship (e.g., Accept/Reject request)
-   
-    
 }

@@ -29,18 +29,19 @@ public class MainStorage {
     public static Map<Integer, String> getUsersKeyMap() {
         return usersKeyMap;
     }
-
     public static Map<String, User> getUsersSMap() {
         return usersSMap;
     }
-
     public static Map<Integer, User> getUsersIMap() {
         return usersIMap;
+    }
+    public static Map<Integer, Post> getAllPosts() {
+        return allPostsMap;
     }
     public static Map<Integer, Comment> getCommentsMap() {
         return commentsMap;
     }
-    public static Map<Integer, Post> getAllPosts() {
-        return allPostsMap;
+    public static void addComment(Comment comment) {
+        commentsMap.put(comment.getInteractionID(), comment);
     }
 }

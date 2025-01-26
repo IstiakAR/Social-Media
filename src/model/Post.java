@@ -43,8 +43,7 @@ public class Post {
     }
 
     public Comment addComment(String text, int userID) {
-        int commentID = generateInteractionID();
-        Comment comment = new Comment(text, commentID, this.postID, userID);
+        Comment comment = new Comment(text, this.postID, userID);
 		// this.commentCount++;
         return comment;
     }
@@ -67,15 +66,6 @@ public class Post {
             }
         }
         postID = n;
-    }
-
-    private int generateInteractionID() {
-        while(true){
-            int n = 100000000 + (int)(Math.random() * 900000000);
-            if(!MainStorage.getCommentsMap().containsKey(n)){
-                return n;
-            }
-        }
     }
 
     public String getUnformattedCreationTime() {

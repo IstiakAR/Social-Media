@@ -80,7 +80,7 @@ public class DatabaseGetter {
                         rs.getInt("postID"),
                         userID
                     );
-                    post.setCreationTime(LocalDateTime.parse(rs.getString("creationDate")));
+                    post.setCreationTime(LocalDateTime.parse(rs.getString("creationTime")));
                     posts.put(post.getPostID(), post);
                 }
             }
@@ -105,7 +105,7 @@ public class DatabaseGetter {
                         rs.getInt("postID"),
                         rs.getInt("userID")
                     );
-                    post.setCreationTime(LocalDateTime.parse(rs.getString("creationDate")));
+                    post.setCreationTime(LocalDateTime.parse(rs.getString("creationTime")));
                     posts.put(post.getPostID(), post);
                 }
             }
@@ -132,7 +132,7 @@ public class DatabaseGetter {
                     rs.getInt("postID"),
                     rs.getInt("userID")
                 );
-                post.setCreationTime(LocalDateTime.parse(rs.getString("creationDate")));
+                post.setCreationTime(LocalDateTime.parse(rs.getString("creationTime")));
                 posts.add(post);
             }
         } catch (SQLException e) {
@@ -154,10 +154,9 @@ public class DatabaseGetter {
                         rs.getString("commentText"),
                         rs.getInt("commentID"),
                         rs.getInt("postID"),
-                        rs.getInt("userID")
+                        rs.getInt("userID"),
+                        LocalDateTime.parse(rs.getString("creationTime"))
                     );
-                    // System.out.println("Comment"+' '+comment.getCommentText()+' '
-                    // +comment.getInteractionID()+' '+comment.getUserID()+' '+comment.getPostID());
                     commentMap.put(comment.getInteractionID(), comment); 
                 }
             }

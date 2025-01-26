@@ -93,7 +93,7 @@
             </VBox>
          </content>
     </ScrollPane>
-      <ScrollBar fx:id="ScrollBar" layoutX="1255.0" layoutY="87.0" orientation="VERTICAL" prefHeight="585.0" prefWidth="30.0" stylesheets="@../css/scrollMain.css" />
+      <ScrollBar fx:id="ScrollBar" layoutX="1265.0" layoutY="70.0" orientation="VERTICAL" prefHeight="652.0" prefWidth="28.0" stylesheets="@../css/scrollMain.css" />
       <VBox layoutX="14.0" layoutY="69.0" prefHeight="444.0" prefWidth="222.0">
          <children>
             <HBox alignment="CENTER_LEFT" prefHeight="43.0" prefWidth="282.0">

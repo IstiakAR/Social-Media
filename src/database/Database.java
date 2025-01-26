@@ -33,7 +33,7 @@ public class Database {
             + "postID INTEGER PRIMARY KEY,"
             + "postContent TEXT NOT NULL,"
             + "userID INTEGER,"
-            + "creationDate TEXT,"
+            + "creationTime TEXT,"
             + "FOREIGN KEY (userID) REFERENCES users(userID)"
             + ");";
 
@@ -45,24 +45,34 @@ public class Database {
             + "FOREIGN KEY (postID) REFERENCES posts(postID)"
             + ");";
             
-            String friendshipsTable = "CREATE TABLE IF NOT EXISTS friendships ("
+        String friendshipsTable = "CREATE TABLE IF NOT EXISTS friendships ("
             + "friendshipID INTEGER PRIMARY KEY," 
             + "userID INTEGER NOT NULL,"        
             + "friendID INTEGER NOT NULL,"       
             + "status TEXT NOT NULL DEFAULT 'Pending'," 
-            + "createdAt TEXT DEFAULT CURRENT_TIMESTAMP," 
+            + "creationTime TEXT,"
             + "FOREIGN KEY (userID) REFERENCES users(userID)," 
             + "FOREIGN KEY (friendID) REFERENCES users(userID)" 
             + ");";
 
-            String allfriendTable = "CREATE TABLE IF NOT EXISTS allfriend ("
+        String allfriendTable = "CREATE TABLE IF NOT EXISTS allfriend ("
             + "allfriendID INTEGER PRIMARY KEY, " 
             + "userID INTEGER NOT NULL, "        
             + "friendID INTEGER NOT NULL, "       
             + "status TEXT NOT NULL DEFAULT 'Pending', " 
-            + "createdAt TEXT DEFAULT CURRENT_TIMESTAMP, " 
+            + "creationTime TEXT,"
             + "FOREIGN KEY (userID) REFERENCES users(userID), " 
             + "FOREIGN KEY (friendID) REFERENCES users(userID)"
+            + ");";
+
+        String commentTable = "CREATE TABLE IF NOT EXISTS comments ("
+            + "commentID INTEGER PRIMARY KEY,"
+            + "commentText TEXT NOT NULL,"
+            + "postID INTEGER NOT NULL,"
+            + "userID INTEGER NOT NULL,"
+            + "creationTime TEXT NOT NULL,"
+            + "FOREIGN KEY (postID) REFERENCES posts(postID),"
+            + "FOREIGN KEY (userID) REFERENCES users(userID)"
             + ");";
     
         try (Connection conn = connect();
@@ -72,6 +82,7 @@ public class Database {
             stmt.execute(savedPostsTable);
             stmt.execute(friendshipsTable);
             stmt.execute(allfriendTable);
+            stmt.execute(commentTable);
             System.out.println("Tables created.");
         } catch (SQLException e) {
             System.out.println(e.getMessage());
