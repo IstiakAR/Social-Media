@@ -35,6 +35,9 @@
                      <font>
                         <Font name="System Bold" size="17.0" />
                      </font>
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
                   </Hyperlink>
                </children>
                <opaqueInsets>
@@ -60,11 +63,14 @@
                         <Insets right="15.0" />
                      </HBox.margin>
                   </ImageView>
-                  <Text fill="#eceff1" strokeType="OUTSIDE" strokeWidth="0.0" text="About" wrappingWidth="133.18199920654297">
+                  <Hyperlink onAction="#handleAbout" text="About" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="17.0" />
                      </font>
-                  </Text>
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                  </Hyperlink>
                </children>
                <padding>
                   <Insets left="30.0" />

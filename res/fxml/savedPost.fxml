@@ -294,7 +294,7 @@
             </HBox>
          </children>
       </VBox>
-      <ScrollBar fx:id="ScrollBar" layoutX="1279.0" layoutY="197.0" orientation="VERTICAL" prefHeight="646.0" prefWidth="30.0" stylesheets="@../css/scrollMain.css" />
+      <ScrollBar fx:id="ScrollBar" layoutX="1273.0" layoutY="198.0" orientation="VERTICAL" prefHeight="646.0" prefWidth="30.0" stylesheets="@../css/scrollMain.css" />
       <ScrollPane fx:id="ScrollPane" layoutX="269.0" layoutY="100.0" prefHeight="644.0" prefWidth="982.0" style="-fx-background: #0e1113; -fx-border-color: #0e1113;" stylesheets="@../css/homePosts.css">
          <content>
             <VBox fx:id="postsContainer" style="-fx-background-color: #000000;" />

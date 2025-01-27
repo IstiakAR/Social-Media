@@ -4,6 +4,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.text.Text;
 import main.MainController;
+
 public class ProfileController {
     @FXML
     private Text profilename;
@@ -16,6 +17,7 @@ public class ProfileController {
         }
     }
 
+    @FXML
     public void handleHome(ActionEvent event) {
         System.out.println("Home clicked");
         try {
@@ -24,24 +26,34 @@ public class ProfileController {
             e.printStackTrace();
         }
     }
+
     @FXML
-    public void handleMyPost(ActionEvent event){
+    public void handleMyPost(ActionEvent event) {
         System.out.println("Posts clicked");
-        try{
+        try {
             MainController.gotoMyPost();
-            
-        }catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
+
     @FXML
-    public void handleSaved(ActionEvent event){
+    public void handleSaved(ActionEvent event) {
         System.out.println("Saved clicked");
-        try{
+        try {
             MainController.gotoSaved();
-        }catch(Exception e){
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    public void handleAbout(ActionEvent event) {
+        System.out.println("About clicked");
+        try {
+            MainController.gotoAbout();
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 }
-

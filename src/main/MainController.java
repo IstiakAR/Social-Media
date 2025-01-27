@@ -1,4 +1,3 @@
-
 package main;
 
 import javafx.application.Application;
@@ -41,7 +40,9 @@ public class MainController extends Application {
     Scene scene = new Scene(root);
     primaryStage.setScene(scene);
   }
+
   public static void gotoProfile() throws Exception {
+    System.out.println("go to profile called");
     FXMLLoader loader = new FXMLLoader(MainController.class.getResource("/fxml/profilePage.fxml"));
     Parent root = loader.load();
     Scene scene = new Scene(root);
@@ -53,9 +54,17 @@ public class MainController extends Application {
     Parent root = loader.load();
     Scene scene = new Scene(root);
     primaryStage.setScene(scene);
-  }  
+  }
+
   public static void gotoSaved() throws Exception {
     FXMLLoader loader = new FXMLLoader(MainController.class.getResource("/fxml/savedPost.fxml"));
+    Parent root = loader.load();
+    Scene scene = new Scene(root);
+    primaryStage.setScene(scene);
+  }
+
+  public static void gotoAbout() throws Exception {
+    FXMLLoader loader = new FXMLLoader(MainController.class.getResource("/fxml/aboutPage.fxml"));
     Parent root = loader.load();
     Scene scene = new Scene(root);
     primaryStage.setScene(scene);
