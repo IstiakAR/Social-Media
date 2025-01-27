@@ -6,6 +6,7 @@ import java.net.Socket;
 
 import database.DatabaseGetter;
 import javafx.application.Platform;
+import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -26,6 +27,8 @@ public class MessengerController extends FriendBaseController {
             friendListContainer.getChildren().add(requestBox);
         }
     }
+    @FXML
+    private VBox messengerContainer;  
 
     public VBox createFriendBox(User friend) {
         VBox friendBox = new VBox();
@@ -43,15 +46,18 @@ public class MessengerController extends FriendBaseController {
 
         messageButton.setOnAction(event -> {
     
-            Messenger messenger = new Messenger(friend.getUserID(), LoginController.userID);
-            Stage messengerStage = new Stage();
-            messengerStage.setTitle("Chat with " + friend.getName());
-            messengerStage.setScene(new Scene(messenger, 400, 600)); 
-            messageButton.setDisable(true);
+              messengerContainer.getChildren().clear();
 
-           
-            messengerStage.setOnCloseRequest(e -> messageButton.setDisable(false));
-            messengerStage.show();
+              Label senderNameLabel = new Label("Message to " + friend.getName());
+            senderNameLabel.setStyle("-fx-font-size: 18px; -fx-text-fill:rgb(234, 11, 11); -fx-padding: 10;");
+            // Add the sender name label at the top of the messengerContainer
+            messengerContainer.getChildren().add(senderNameLabel);
+
+            // Create a new Messenger instance for the selected friend
+            Messenger messenger = new Messenger(friend.getUserID(), LoginController.userID);
+
+            // Add the Messenger view to the container
+            messengerContainer.getChildren().add(messenger);
         });
 
         friendBox.getChildren().addAll(friendName, friendStatus, messageButton);
