@@ -51,6 +51,14 @@ public class HomeController extends BaseController {
             e.printStackTrace();
         }
     }
+    public void handleMassenger(ActionEvent event) {
+        System.out.println("Messenger Button clicked!");
+        try {
+            MainController.gotoMessenger();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
     @FXML
     public void handleAddPost(MouseEvent event) {
@@ -62,6 +70,14 @@ public class HomeController extends BaseController {
                     e.printStackTrace();
                 }
             });
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    public void handleProfile(MouseEvent event) {
+        System.out.println("Profile Button clicked!");
+        try {
+            MainController.gotoProfile();
         } catch (Exception e) {
             e.printStackTrace();
         }

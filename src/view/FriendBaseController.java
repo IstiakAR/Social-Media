@@ -72,5 +72,6 @@ public abstract class FriendBaseController {
             e.printStackTrace();
         }
     }
+ 
 }
  
