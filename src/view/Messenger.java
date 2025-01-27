@@ -9,6 +9,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
+import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import model.Message;
@@ -47,7 +49,7 @@ public class Messenger extends VBox {
         inputBox.setAlignment(Pos.CENTER);
         TextField messageInput = new TextField();
         messageInput.setPromptText("Type a message...");
-        messageInput.setPrefWidth(300);
+        messageInput.setPrefWidth(500);
         messageInput.setStyle("-fx-background-color: #ffffff; -fx-border-color: rgb(200, 200, 200); -fx-padding: 5;");
 
         Button sendButton = new Button("Send");
@@ -83,20 +85,29 @@ public class Messenger extends VBox {
             HBox messageBox = new HBox();
             messageBox.setPadding(new Insets(5));
             messageBox.setSpacing(10);
+            Text messageText = new Text(message.getContent());
+            // double textWidth = messageText.getLayoutBounds().getWidth() + 20; // Adding padding
+            // double textHeight = messageText.getLayoutBounds().getHeight();
+    
+            // // Adjust the message box width based on the text width
+            // messageBox.setMinWidth(textWidth);
+            // messageBox.setMaxWidth(textWidth);
 
             if (message.getSenderId() == userId && message.getReceiverId() == friendId) {
                 // Sent message
-                messageBox.setAlignment(Pos.CENTER_RIGHT);
-                messageBox.setStyle("-fx-background-color: #007BFF; -fx-border-radius: 10; -fx-background-radius: 10;");
+                messageBox.setAlignment(Pos.BOTTOM_RIGHT);
+                messageBox.setStyle("-fx-background-color:rgb(0, 123, 255); -fx-border-radius: 10; -fx-background-radius: 10;");
+                HBox.setHgrow(messageBox, Priority.ALWAYS);
             } else if (message.getSenderId() == friendId && message.getReceiverId() == userId) {
                 // Received message
                 messageBox.setAlignment(Pos.CENTER_LEFT);
-                messageBox.setStyle("-fx-background-color: #4CAF50; -fx-border-radius: 10; -fx-background-radius: 10;");
+                messageBox.setStyle("-fx-background-color:rgb(76, 175, 79); -fx-border-radius: 10; -fx-background-radius: 10;");
+                
             } else {
                 System.out.println("Message does not belong to this conversation");
             }
 
-            Text messageText = new Text(message.getContent());
+           
             messageText.setStyle("-fx-fill: white; -fx-padding: 10;");
             messageText.wrappingWidthProperty().set(250);
 
