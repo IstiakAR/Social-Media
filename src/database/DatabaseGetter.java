@@ -254,4 +254,39 @@ public class DatabaseGetter {
         }
         return requests;
     }
+    
+    public static List<Message> getSentMessages(int senderId, int friendId) {
+        List<Message> sentMessages = new ArrayList<>();
+        String query = "SELECT * FROM messages " +
+                   "WHERE (senderID = ? AND receiverID = ?) " +
+                   "   OR (senderID = ? AND receiverID = ?) " +
+                   "ORDER BY timestamp ASC";
+        try (Connection conn = Database.connect(); PreparedStatement pstmt = conn.prepareStatement(query)) {
+            pstmt.setInt(1, senderId);
+            pstmt.setInt(2, friendId);
+            pstmt.setInt(3, friendId);  
+            pstmt.setInt(4, senderId); 
+            System.out.println("Executing query: " + query + " with senderId: " + senderId + " and friendId: " + friendId);
+            ResultSet rs = pstmt.executeQuery();
+    
+            while (rs.next()) {
+                Message message = new Message(
+                    rs.getInt("senderID"),
+                    rs.getInt("receiverID"),
+                    rs.getString("content")
+                  
+                );
+                sentMessages.add(message);
+            }
+    
+            if (sentMessages.isEmpty()) {
+                System.out.println("No messages sent from user " + senderId + " to user " + friendId + ".");
+            }
+        } catch (SQLException e) {
+            System.out.println("Error retrieving sent messages: " + e.getMessage());
+        }
+        return sentMessages;
+    }
+    
+    
 }
