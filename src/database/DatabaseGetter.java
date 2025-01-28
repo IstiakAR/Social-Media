@@ -4,7 +4,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -18,9 +17,8 @@ public class DatabaseGetter {
         String sql = "SELECT * FROM users";
         List<User>users = new ArrayList<>();
 
-        try (Connection conn = Database.connect();
-            Statement stmt = conn.createStatement()) {
-            ResultSet rs = stmt.executeQuery(sql);
+        try (PreparedStatement pstmt = Database.connect().prepareStatement(sql)) {
+            ResultSet rs = pstmt.executeQuery();
 
             while (rs.next()) {
                 User user = new User(
@@ -43,9 +41,7 @@ public class DatabaseGetter {
         String sql = "SELECT * FROM users WHERE userID = ?";
         User user = null;
 
-        try (Connection conn = Database.connect();
-             PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.setInt(1, userID);
+        try (PreparedStatement pstmt = Database.connect().prepareStatement(sql)) {
             ResultSet rs = pstmt.executeQuery();
 
             if (rs.next()) {
@@ -68,9 +64,8 @@ public class DatabaseGetter {
         String sql = "SELECT * FROM posts";
         Map<Integer, Post> posts = new HashMap<>();
 
-        try (Connection conn = Database.connect();
-            Statement stmt = conn.createStatement();
-            ResultSet rs = stmt.executeQuery(sql)) {
+        try (PreparedStatement pstmt = Database.connect().prepareStatement(sql)) {
+            ResultSet rs = pstmt.executeQuery();
 
             while (rs.next()) {
                 int userID = rs.getInt("userID");
@@ -80,7 +75,7 @@ public class DatabaseGetter {
                         rs.getInt("postID"),
                         userID
                     );
-                    post.setCreationTime(LocalDateTime.parse(rs.getString("creationDate")));
+                    post.setCreationTime(LocalDateTime.parse(rs.getString("creationTime")));
                     posts.put(post.getPostID(), post);
                 }
             }
@@ -95,8 +90,7 @@ public class DatabaseGetter {
         String sql = "SELECT * FROM posts";
         Map<Integer, Post> posts = new HashMap<>();
     
-        try (Connection conn = Database.connect();
-            PreparedStatement pstmt = conn.prepareStatement(sql)) {
+        try (PreparedStatement pstmt = Database.connect().prepareStatement(sql)) {
             ResultSet rs = pstmt.executeQuery();
     
             while (rs.next()) {
@@ -105,7 +99,7 @@ public class DatabaseGetter {
                         rs.getInt("postID"),
                         rs.getInt("userID")
                     );
-                    post.setCreationTime(LocalDateTime.parse(rs.getString("creationDate")));
+                    post.setCreationTime(LocalDateTime.parse(rs.getString("creationTime")));
                     posts.put(post.getPostID(), post);
                 }
             }
@@ -121,8 +115,7 @@ public class DatabaseGetter {
                      "WHERE sp.userID = ?";
         List<Post> posts = new ArrayList<>();
     
-        try (Connection conn = Database.connect();
-             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+        try (PreparedStatement pstmt = Database.connect().prepareStatement(sql)) {
             pstmt.setInt(1, userID);
             ResultSet rs = pstmt.executeQuery();
     
@@ -132,7 +125,7 @@ public class DatabaseGetter {
                     rs.getInt("postID"),
                     rs.getInt("userID")
                 );
-                post.setCreationTime(LocalDateTime.parse(rs.getString("creationDate")));
+                post.setCreationTime(LocalDateTime.parse(rs.getString("creationTime")));
                 posts.add(post);
             }
         } catch (SQLException e) {
@@ -146,18 +139,16 @@ public class DatabaseGetter {
         String sql = "SELECT * FROM comments";
         Map<Integer, Comment> commentMap = new HashMap<>();
     
-        try (Connection conn = Database.connect();
-            PreparedStatement pstmt = conn.prepareStatement(sql)) {
+        try (PreparedStatement pstmt = Database.connect().prepareStatement(sql)) {
             ResultSet rs = pstmt.executeQuery();
                 while (rs.next()) {
                     Comment comment = new Comment(
                         rs.getString("commentText"),
                         rs.getInt("commentID"),
                         rs.getInt("postID"),
-                        rs.getInt("userID")
+                        rs.getInt("userID"),
+                        LocalDateTime.parse(rs.getString("creationTime"))
                     );
-                    // System.out.println("Comment"+' '+comment.getCommentText()+' '
-                    // +comment.getInteractionID()+' '+comment.getUserID()+' '+comment.getPostID());
                     commentMap.put(comment.getInteractionID(), comment); 
                 }
             }
@@ -168,40 +159,38 @@ public class DatabaseGetter {
     }
 
     public static boolean isFriend(int userId, int friendId) {
-        String query = "SELECT * FROM friendships WHERE userID = ? AND friendID = ?";
-        try (Connection conn = Database.connect();
-             PreparedStatement stmt = conn.prepareStatement(query)) {
-            stmt.setInt(1, userId);
-            stmt.setInt(2, friendId);
-            ResultSet rs = stmt.executeQuery();
-            return rs.next(); // Returns true if a friendship record exists
+        String sql = "SELECT * FROM friendships WHERE userID = ? AND friendID = ?";
+        try (PreparedStatement pstmt = Database.connect().prepareStatement(sql)) {
+            pstmt.setInt(1, userId);
+            pstmt.setInt(2, friendId);
+            ResultSet rs = pstmt.executeQuery();
+            return rs.next();
         } catch (SQLException e) {
             System.out.println("Error checking friendship: " + e.getMessage());
             return false;
         }
     }
     public static boolean isConfirm(int userId, int friendId) {
-        String query = "SELECT * FROM allfriend WHERE userID = ? AND friendID = ?";
-        try (Connection conn = Database.connect();
-             PreparedStatement stmt = conn.prepareStatement(query)) {
-            stmt.setInt(1, userId);
-            stmt.setInt(2, friendId);
-            ResultSet rs = stmt.executeQuery();
-            return rs.next(); // Returns true if a friendship record exists
+        String sql = "SELECT * FROM allfriend WHERE userID = ? AND friendID = ?";
+        try (PreparedStatement pstmt = Database.connect().prepareStatement(sql)) {
+            pstmt.setInt(1, userId);
+            pstmt.setInt(2, friendId);
+            ResultSet rs = pstmt.executeQuery();
+            return rs.next();
         } catch (SQLException e) {
             System.out.println("Error checking allfriend: " + e.getMessage());
             return false;
         }
     }
     public static boolean updateFriendStatus(int userId, int friendId, String status) {
-        String query = "UPDATE friendships SET status = ? WHERE userID = ? AND friendID = ?";
-        try (Connection conn = Database.connect();
-             PreparedStatement stmt = conn.prepareStatement(query)) {
-            stmt.setString(1, status); // New status (e.g., "Accepted", "Rejected")
-            stmt.setInt(2, userId);   // ID of the user who sent the request
-            stmt.setInt(3, friendId); // ID of the user receiving the request
-            int rowsAffected = stmt.executeUpdate();
-            return rowsAffected > 0; // Return true if the update was successful
+        String sql = "UPDATE friendships SET status = ? WHERE userID = ? AND friendID = ?";
+        try (PreparedStatement pstmt = Database.connect().prepareStatement(sql)) {
+
+            pstmt.setString(1, status);
+            pstmt.setInt(2, userId);
+            pstmt.setInt(3, friendId);
+            int rowsAffected = pstmt.executeUpdate();
+            return rowsAffected > 0;
         } catch (SQLException e) {
             System.out.println("Error updating friend status: " + e.getMessage());
             return false;
@@ -209,10 +198,11 @@ public class DatabaseGetter {
     }
     public static List<User> getIncomingRequests(int userId) {
         List<User> requests = new ArrayList<>();
-        String query = "SELECT users.* FROM friendships " +
+        String sql = "SELECT users.* FROM friendships " +
                        "JOIN users ON friendships.userID = users.userID " +
                        "WHERE friendships.friendID = ? AND friendships.status = 'Pending'";
-        try (Connection conn = Database.connect(); PreparedStatement pstmt = conn.prepareStatement(query)) {
+
+            try (PreparedStatement pstmt = Database.connect().prepareStatement(sql)) {
             pstmt.setInt(1, userId);
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
@@ -232,12 +222,13 @@ public class DatabaseGetter {
     }
     public static List<User> getAllfriend(int userId) {
         List<User> requests = new ArrayList<>();
-        String query = "SELECT users.* FROM allfriend " +
-                       "JOIN users ON allfriend.userID = users.userID " +
-                       "WHERE allfriend.friendID = ? AND allfriend.status = 'Pending'";
-        try (Connection conn = Database.connect(); PreparedStatement pstmt = conn.prepareStatement(query)) {
+        String sql = "SELECT users.* FROM allfriend " +
+                     "JOIN users ON allfriend.userID = users.userID " +
+                     "WHERE allfriend.friendID = ? AND allfriend.status = 'Pending'";
+
+            try (PreparedStatement pstmt = Database.connect().prepareStatement(sql)) {
             pstmt.setInt(1, userId);
-            System.out.println("Executing query: " + query + " with userId: " + userId);
+            System.out.println("Executing query: " + sql + " with userId: " + userId);
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
                 User user = new User(
@@ -253,6 +244,41 @@ public class DatabaseGetter {
             e.printStackTrace();
         }
         return requests;
+    }
+    public static Map<Integer, Reaction> getReactionsMap() {
+        String sql = "SELECT * FROM votes";
+        Map<Integer, Reaction> reactions = new HashMap<>();
+    
+        try (PreparedStatement pstmt = Database.connect().prepareStatement(sql)) {
+            ResultSet rs = pstmt.executeQuery();
+    
+            while (rs.next()) {
+                int userID = rs.getInt("userID");
+                Reaction reaction = new Reaction(
+                    rs.getInt("vote"),
+                    rs.getInt("postID"),
+                    userID
+                );
+                reactions.put(userID, reaction);
+                System.out.println("Fetched data from database: vote=" + rs.getInt("vote") + ", postID=" + rs.getInt("postID") + ", userID=" + userID);
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return reactions;
+    }
+    public static int getTotalVotes(int postID) {
+        String sql = "SELECT totalVote FROM totalVotes WHERE postID = ?";
+        try (PreparedStatement pstmt = Database.connect().prepareStatement(sql)) {
+            pstmt.setInt(1, postID);
+            ResultSet rs = pstmt.executeQuery();
+            if (rs.next()) {
+                return rs.getInt("totalVote");
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return 0;
     }
     
     public static List<Message> getSentMessages(int senderId, int friendId) {
@@ -287,6 +313,4 @@ public class DatabaseGetter {
         }
         return sentMessages;
     }
-    
-    
 }

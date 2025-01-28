@@ -1,5 +1,7 @@
 package model;
 
+import main.MainStorage;
+
 public abstract class Interaction {
     protected int interactionID;
     protected int userID;
@@ -9,6 +11,10 @@ public abstract class Interaction {
         this.interactionID = interactionID;
         this.userID = userID;
         this.postID = postID;
+    }    
+    public Interaction(int postID, int userID) {
+        this.postID = postID;
+        this.userID = userID;
     }
 
     public int getInteractionID() {
@@ -23,5 +29,13 @@ public abstract class Interaction {
         return postID;
     }
 
-    public abstract void getInteraction();
+    public static int generateInteractionID() {
+        while(true){
+            int n = 100000000 + (int)(Math.random() * 900000000);
+            if(!MainStorage.getCommentsMap().containsKey(n)){
+                return n;
+            }
+        }
+    }
+    // public abstract void getInteraction();
 }

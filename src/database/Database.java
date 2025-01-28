@@ -6,19 +6,30 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class Database {
+    private static Connection connection;
     private static final String URL = "jdbc:sqlite:res/database/social_media.db";
 
     public static Connection connect() {
-        Connection conn = null;
+        connection = null;
         try {
-            conn = DriverManager.getConnection(URL);
+            connection = DriverManager.getConnection(URL);
             System.out.println("Connection to SQLite has been established.");
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
-        return conn;
+        return connection;
     }
-
+    public static void close() {
+        if (connection != null) {
+            try {
+                connection.close();
+                System.out.println("Connection to SQLite has been closed.");
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());
+            }
+        }
+    }
+    
     public static void createTables() {
         String usersTable = "CREATE TABLE IF NOT EXISTS users ("
             + "userID INTEGER PRIMARY KEY,"
@@ -33,7 +44,7 @@ public class Database {
             + "postID INTEGER PRIMARY KEY,"
             + "postContent TEXT NOT NULL,"
             + "userID INTEGER,"
-            + "creationDate TEXT,"
+            + "creationTime TEXT,"
             + "FOREIGN KEY (userID) REFERENCES users(userID)"
             + ");";
 
@@ -45,25 +56,49 @@ public class Database {
             + "FOREIGN KEY (postID) REFERENCES posts(postID)"
             + ");";
             
-            String friendshipsTable = "CREATE TABLE IF NOT EXISTS friendships ("
+        String friendshipsTable = "CREATE TABLE IF NOT EXISTS friendships ("
             + "friendshipID INTEGER PRIMARY KEY," 
             + "userID INTEGER NOT NULL,"        
             + "friendID INTEGER NOT NULL,"       
             + "status TEXT NOT NULL DEFAULT 'Pending'," 
-            + "createdAt TEXT DEFAULT CURRENT_TIMESTAMP," 
+            + "creationTime TEXT,"
             + "FOREIGN KEY (userID) REFERENCES users(userID)," 
             + "FOREIGN KEY (friendID) REFERENCES users(userID)" 
             + ");";
 
-            String allfriendTable = "CREATE TABLE IF NOT EXISTS allfriend ("
+        String allfriendTable = "CREATE TABLE IF NOT EXISTS allfriend ("
             + "allfriendID INTEGER PRIMARY KEY, " 
             + "userID INTEGER NOT NULL, "        
             + "friendID INTEGER NOT NULL, "       
             + "status TEXT NOT NULL DEFAULT 'Pending', " 
-            + "createdAt TEXT DEFAULT CURRENT_TIMESTAMP, " 
+            + "creationTime TEXT,"
             + "FOREIGN KEY (userID) REFERENCES users(userID), " 
             + "FOREIGN KEY (friendID) REFERENCES users(userID)"
             + ");";
+
+        String commentTable = "CREATE TABLE IF NOT EXISTS comments ("
+            + "commentID INTEGER PRIMARY KEY,"
+            + "commentText TEXT NOT NULL,"
+            + "postID INTEGER NOT NULL,"
+            + "userID INTEGER NOT NULL,"
+            + "creationTime TEXT NOT NULL,"
+            + "FOREIGN KEY (postID) REFERENCES posts(postID),"
+            + "FOREIGN KEY (userID) REFERENCES users(userID)"
+            + ");";
+        String voteTable = "CREATE TABLE IF NOT EXISTS votes ("
+            + "vote INTEGER NOT NULL,"
+            + "postID INTEGER NOT NULL,"
+            + "userID INTEGER NOT NULL,"
+            // + "UNIQUE(postID, userID),"
+            + "FOREIGN KEY (postID) REFERENCES posts(postID),"
+            + "FOREIGN KEY (userID) REFERENCES users(userID)"
+            + ");";
+        String totalVoteTable = "CREATE TABLE IF NOT EXISTS totalVotes ("
+            + "postID INTEGER PRIMARY KEY,"
+            + "totalVote INTEGER NOT NULL,"
+            + "FOREIGN KEY (postID) REFERENCES posts(postID)"
+            + ");";
+
             String messagesTable = "CREATE TABLE IF NOT EXISTS messages (" 
             + "messageID INTEGER PRIMARY KEY AUTOINCREMENT," 
             + "senderID INTEGER NOT NULL," 
@@ -83,6 +118,9 @@ public class Database {
             stmt.execute(savedPostsTable);
             stmt.execute(friendshipsTable);
             stmt.execute(allfriendTable);
+            stmt.execute(commentTable);
+            stmt.execute(voteTable);
+            stmt.execute(totalVoteTable);
             stmt.execute(messagesTable);
             System.out.println("Tables created.");
         } catch (SQLException e) {
