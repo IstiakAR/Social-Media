@@ -130,34 +130,34 @@ public class DatabaseInsert {
         }
     }
 
-
     public static void addProfilePicture(int userId, File imageFile) {
         System.out.println("Add Profile Picture called");
         String sql = "UPDATE users SET profilePicture = ? WHERE userId = ?";
-
+    
         try (Connection conn = Database.connect();
-            PreparedStatement pstmt = conn.prepareStatement(sql);
-            FileInputStream fis = new FileInputStream(imageFile)) {
-
+             PreparedStatement pstmt = conn.prepareStatement(sql);
+             FileInputStream fis = new FileInputStream(imageFile)) {
+    
             // Set the parameters for the query
-            pstmt.setBinaryStream(6, fis, (int) imageFile.length()); // Set the binary stream for profilePicture
-            pstmt.setInt(2, userId); // Set the userId
-
+            pstmt.setInt(1, userId); // userId is the second parameter
+            pstmt.setBinaryStream(6, fis, imageFile.length()); // Corrected parameter index
+    
             // Execute the update
             int rowsUpdated = pstmt.executeUpdate();
-
+    
             if (rowsUpdated > 0) {
                 System.out.println("Profile picture updated successfully for user ID: " + userId);
             } else {
                 System.out.println("User ID not found. No update made.");
             }
-
+    
         } catch (SQLException e) {
             System.out.println("SQL Error: " + e.getMessage());
         } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
         }
     }
+    
 
     public static void addVote(int vote, int postId, int userId) {
         String sql = "INSERT INTO votes(vote, postID, userID) VALUES(?, ?, ?)";

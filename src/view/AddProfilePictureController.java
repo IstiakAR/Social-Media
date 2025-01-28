@@ -31,17 +31,18 @@ public class AddProfilePictureController {
         fileChooser.getExtensionFilters().addAll(
             new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.jpeg")
             );
-            selectedFile = fileChooser.showOpenDialog(profilepic.getScene().getWindow());
-            
-            if (selectedFile != null) {
-                System.out.println("File selected: " + selectedFile.getAbsolutePath());
-                Image image = new Image(selectedFile.toURI().toString());
-                profilepic.setImage(image);
-            } else {
-                System.out.println("No file selected.");
-            }
+        selectedFile = fileChooser.showOpenDialog(profilepic.getScene().getWindow());
+        
+        if (selectedFile != null) {
+            System.out.println("File selected: " + selectedFile.getAbsolutePath());
+            Image image = new Image(selectedFile.toURI().toString());
+            profilepic.setImage(image);
+        } else {
+            System.out.println("No file selected.");
+        }
     }
-    
+
+    @FXML
     public void handlesetprofilepic(ActionEvent e){
         DatabaseInsert.addProfilePicture(LoginController.userID, selectedFile);
     }
