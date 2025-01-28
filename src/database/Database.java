@@ -6,19 +6,30 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class Database {
+    private static Connection connection;
     private static final String URL = "jdbc:sqlite:res/database/social_media.db";
 
     public static Connection connect() {
-        Connection conn = null;
+        connection = null;
         try {
-            conn = DriverManager.getConnection(URL);
+            connection = DriverManager.getConnection(URL);
             System.out.println("Connection to SQLite has been established.");
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
-        return conn;
+        return connection;
     }
-
+    public static void close() {
+        if (connection != null) {
+            try {
+                connection.close();
+                System.out.println("Connection to SQLite has been closed.");
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());
+            }
+        }
+    }
+    
     public static void createTables() {
         String usersTable = "CREATE TABLE IF NOT EXISTS users ("
             + "userID INTEGER PRIMARY KEY,"
@@ -74,7 +85,20 @@ public class Database {
             + "FOREIGN KEY (postID) REFERENCES posts(postID),"
             + "FOREIGN KEY (userID) REFERENCES users(userID)"
             + ");";
-    
+        String voteTable = "CREATE TABLE IF NOT EXISTS votes ("
+            + "vote INTEGER NOT NULL,"
+            + "postID INTEGER NOT NULL,"
+            + "userID INTEGER NOT NULL,"
+            // + "UNIQUE(postID, userID),"
+            + "FOREIGN KEY (postID) REFERENCES posts(postID),"
+            + "FOREIGN KEY (userID) REFERENCES users(userID)"
+            + ");";
+        String totalVoteTable = "CREATE TABLE IF NOT EXISTS totalVotes ("
+            + "postID INTEGER PRIMARY KEY,"
+            + "totalVote INTEGER NOT NULL,"
+            + "FOREIGN KEY (postID) REFERENCES posts(postID)"
+            + ");";
+
         try (Connection conn = connect();
              Statement stmt = conn.createStatement()) {
             stmt.execute(usersTable);
@@ -83,6 +107,8 @@ public class Database {
             stmt.execute(friendshipsTable);
             stmt.execute(allfriendTable);
             stmt.execute(commentTable);
+            stmt.execute(voteTable);
+            stmt.execute(totalVoteTable);
             System.out.println("Tables created.");
         } catch (SQLException e) {
             System.out.println(e.getMessage());

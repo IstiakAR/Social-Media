@@ -11,6 +11,10 @@ public abstract class Interaction {
         this.interactionID = interactionID;
         this.userID = userID;
         this.postID = postID;
+    }    
+    public Interaction(int postID, int userID) {
+        this.postID = postID;
+        this.userID = userID;
     }
 
     public int getInteractionID() {
@@ -33,6 +37,5 @@ public abstract class Interaction {
             }
         }
     }
-
     // public abstract void getInteraction();
 }

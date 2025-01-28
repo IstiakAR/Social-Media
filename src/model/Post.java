@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import database.DatabaseUpdate;
 import main.MainStorage;
 
 public class Post {
@@ -21,12 +22,6 @@ public class Post {
 		this.userID = userID;
         this.postID = postID;
 		this.creationTime = LocalDateTime.now();
-        User user = MainStorage.getUsersIMap().get(userID);
-        if (user != null) {
-            user.addPost(this);
-        } else {
-            throw new IllegalArgumentException("User not found for userID: " + userID);
-        }
     }
 
     public Post(String content, int userID) {
@@ -34,12 +29,6 @@ public class Post {
 		this.userID = userID;
         generatePostID();
         this.creationTime = LocalDateTime.now();
-        User user = MainStorage.getUsersIMap().get(userID);
-        if (user != null) {
-            user.addPost(this);
-        } else {
-            throw new IllegalArgumentException("User not found for userID: " + userID);
-        }
     }
 
     public Comment addComment(String text, int userID) {
@@ -48,14 +37,13 @@ public class Post {
         return comment;
     }
 
-    public void addReaction(int react, int userID) {
-        // int reactionID = generateInteractionID();
-        // Reaction reaction = new Reaction(react, reactionID, postID, userID);
-        if (react == 1)
-            this.totalReaction += 1;
-        else if (react == -1)
-            this.totalReaction -= 1;
-    }
+    // public void addReaction(int reactionID, int react, int userID) {
+    //     // Reaction reaction = new Reaction(react, postID, userID);
+    //     if (react == 1)
+    //         this.totalReaction += 1;
+    //     else if (react == -1)
+    //         this.totalReaction -= 1;
+    // }
 
     private void generatePostID() {
         int n;
@@ -92,9 +80,7 @@ public class Post {
         this.postID = postID;
     }
 
-    public int getTotalReaction() {
-        return totalReaction;
-    }
+
 
     public int getUserID() {
         return userID;
@@ -120,5 +106,22 @@ public class Post {
             }
         }
         return comments;
+    }
+
+    //vote
+
+    public int getReaction(int userID) {
+        Reaction reaction = MainStorage.getReactions().get(userID);
+        if (reaction == null) {
+            return 0;
+        }
+        return reaction.getReact();
+    }
+    public int getTotalReaction() {
+        return totalReaction;
+    }
+    public void setTotalReaction(int totalReaction) {
+        this.totalReaction = totalReaction;
+        DatabaseUpdate.updateTotalVotes(this.getPostID(), totalReaction);
     }
 }
