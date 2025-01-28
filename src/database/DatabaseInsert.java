@@ -131,61 +131,129 @@ public class DatabaseInsert {
     }
 
 
-//   public static void addProfilePicture(int userId, File imageFile) {
-//     System.out.println("Add Profile picture called");
-//     String sql = "UPDATE users SET profilePicture = ? WHERE userId = ?";
+    public static void addProfilePicture(int userId, File imageFile) {
+        System.out.println("Add Profile Picture called");
+        String sql = "UPDATE users SET profilePicture = ? WHERE userId = ?";
 
-//     try (Connection conn = Database.connect();
-//          PreparedStatement pstmt = conn.prepareStatement(sql);
-//          FileInputStream fis = new FileInputStream(imageFile)) {
-        
-//         // Set the parameters for the query
-//         pstmt.setBinaryStream(6, fis, (int) imageFile.length());
-//         pstmt.setInt(1, userId);
+        try (Connection conn = Database.connect();
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            FileInputStream fis = new FileInputStream(imageFile)) {
 
-//         // Execute the update
-//         int rowsUpdated = pstmt.executeUpdate();
+            // Set the parameters for the query
+            pstmt.setBinaryStream(6, fis, (int) imageFile.length()); // Set the binary stream for profilePicture
+            pstmt.setInt(2, userId); // Set the userId
 
-//         if (rowsUpdated > 0) {
-//             System.out.println("Profile picture updated successfully for user ID: " + userId);
-//         } else {
-//             System.out.println("User ID not found. No update made.");
-//         }
+            // Execute the update
+            int rowsUpdated = pstmt.executeUpdate();
 
-//     } catch (SQLException e) {
-//         System.out.println("SQL Error: " + e.getMessage());
-//     } catch (Exception e) {
-//         System.out.println("Error: " + e.getMessage());
-//     }
-// }
+            if (rowsUpdated > 0) {
+                System.out.println("Profile picture updated successfully for user ID: " + userId);
+            } else {
+                System.out.println("User ID not found. No update made.");
+            }
 
-public static void addProfilePicture(int userId, File imageFile) {
-    System.out.println("Add Profile Picture called");
-    String sql = "UPDATE users SET profilePicture = ? WHERE userId = ?";
+        } catch (SQLException e) {
+            System.out.println("SQL Error: " + e.getMessage());
+        } catch (Exception e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+    }
+
+    public static void addVote(int vote, int postId, int userId) {
+        String sql = "INSERT INTO votes(vote, postID, userID) VALUES(?, ?, ?)";
+        try (PreparedStatement pstmt = Database.connect().prepareStatement(sql)) {
+            pstmt.setInt(1, vote);
+            pstmt.setInt(2, postId);
+            pstmt.setInt(3, userId);
+            pstmt.executeUpdate();
+            System.out.println("Vote inserted.");
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public static void addTotalVote(int postId, int totalVote) {
+        String sql = "INSERT INTO totalvotes(postID, totalVote) VALUES(?, ?)";
+        try (PreparedStatement pstmt = Database.connect().prepareStatement(sql)) {
+            pstmt.setInt(1, postId);
+            pstmt.setInt(2, totalVote);
+            pstmt.executeUpdate();
+            System.out.println("Total vote inserted.");
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+   public static void sendMessage(int senderId, int receiverId, String content) {
+    if (content == null || content.trim().isEmpty()) {
+        System.out.println("Message content cannot be empty.");
+        return;
+    }
+
+    String userCheckQuery = "SELECT COUNT(*) FROM users WHERE userID = ?";
+    String insertMessageQuery = "INSERT INTO messages (senderID, receiverID, content) VALUES (?, ?, ?)";
 
     try (Connection conn = Database.connect();
-         PreparedStatement pstmt = conn.prepareStatement(sql);
-         FileInputStream fis = new FileInputStream(imageFile)) {
+         PreparedStatement userCheckStmt = conn.prepareStatement(userCheckQuery);
+         PreparedStatement insertStmt = conn.prepareStatement(insertMessageQuery)) {
 
-        // Set the parameters for the query
-        pstmt.setBinaryStream(6, fis, (int) imageFile.length()); // Set the binary stream for profilePicture
-        pstmt.setInt(2, userId); // Set the userId
+            // Check if sender exists
+            userCheckStmt.setInt(1, senderId);
+            try (ResultSet senderResult = userCheckStmt.executeQuery()) {
+                if (!senderResult.next() || senderResult.getInt(1) == 0) {
+                    System.out.println("Sender does not exist.");
+                    return;
+                }
+            }
 
-        // Execute the update
-        int rowsUpdated = pstmt.executeUpdate();
+            // Check if receiver exists
+            userCheckStmt.setInt(1, receiverId);
+            try (ResultSet receiverResult = userCheckStmt.executeQuery()) {
+                if (!receiverResult.next() || receiverResult.getInt(1) == 0) {
+                    System.out.println("Receiver does not exist.");
+                    return;
+                }
+            }
 
-        if (rowsUpdated > 0) {
-            System.out.println("Profile picture updated successfully for user ID: " + userId);
-        } else {
-            System.out.println("User ID not found. No update made.");
+            // Insert the message into the database
+            insertStmt.setInt(1, senderId);
+            insertStmt.setInt(2, receiverId);
+            insertStmt.setString(3, content);
+
+            int rowsInserted = insertStmt.executeUpdate();
+            if (rowsInserted > 0) {
+                System.out.println("Message sent successfully.");
+            } else {
+                System.out.println("Failed to send the message.");
+            }
+
+        } catch (SQLException e) {
+            System.out.println("Error sending message: " + e.getMessage());
         }
-
-    } catch (SQLException e) {
-        System.out.println("SQL Error: " + e.getMessage());
-    } catch (Exception e) {
-        System.out.println("Error: " + e.getMessage());
     }
-}
 
+    public static void saveMessage(Message message) {
+        String sql = "INSERT INTO messages (senderID, receiverID, content) VALUES (?, ?, ?)";
+
+        try (Connection conn = Database.connect();
+            PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            // Set parameters for the message
+            pstmt.setInt(1, message.getSenderId()); // Sender ID
+            pstmt.setInt(2, message.getReceiverId()); // Receiver ID
+            pstmt.setString(3, message.getContent()); // Message content
+
+            // Execute the insert query
+            int rowsInserted = pstmt.executeUpdate();
+            if (rowsInserted > 0) {
+                System.out.println("Message saved successfully.");
+            } else {
+                System.out.println("Failed to save the message.");
+            }
+
+        } catch (SQLException e) {
+            System.out.println("Error saving message: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
 
 }
