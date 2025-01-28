@@ -80,17 +80,9 @@
          </cursor>
       </ImageView>
 
-      <ScrollPane fx:id="ScrollPane" layoutX="231.0" layoutY="70.0" prefHeight="652.0" prefWidth="1012.0" style="-fx-background: #0e1113; -fx-border-color: #0e1113;" stylesheets="@../css/homePosts.css">
+      <ScrollPane fx:id="ScrollPane" layoutX="240.0" layoutY="107.0" prefHeight="616.0" prefWidth="1003.0" style="-fx-background: #0e1113; -fx-border-color: #0e1113;" stylesheets="@../css/homePosts.css">
          <content>
-            <VBox fx:id="friendListContainer" prefHeight="596.0" prefWidth="520.0">
-               <children>
-                  <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="All Friends" wrappingWidth="138.39999999999998">
-                     <font>
-                        <Font name="System Bold" size="22.0" />
-                     </font>
-                  </Text>
-               </children>
-            </VBox>
+            <VBox fx:id="friendListContainer" prefHeight="598.0" prefWidth="506.0" />
          </content>
     </ScrollPane>
       <ScrollBar fx:id="ScrollBar" layoutX="1265.0" layoutY="70.0" orientation="VERTICAL" prefHeight="652.0" prefWidth="28.0" stylesheets="@../css/scrollMain.css" />
@@ -157,14 +149,24 @@
                         <Insets />
                      </HBox.margin>
                   </ImageView>
-                  <Label text="All Friends" textFill="WHITE">
+                  <Label textFill="WHITE">
                      <font>
                         <Font name="Arial Bold" size="17.0" />
                      </font>
                   </Label>
+                  <Hyperlink text="All Friends" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="17.0" />
+                     </font>
+                  </Hyperlink>
                </children>
             </HBox>
          </children>
       </VBox>
+      <Text fill="WHITE" layoutX="240.0" layoutY="96.0" strokeType="OUTSIDE" strokeWidth="0.0" text="All Friends" wrappingWidth="172.38201141357422">
+         <font>
+            <Font name="System Bold" size="22.0" />
+         </font>
+      </Text>
    </children>
 </AnchorPane>

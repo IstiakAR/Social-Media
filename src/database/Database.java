@@ -99,6 +99,18 @@ public class Database {
             + "FOREIGN KEY (postID) REFERENCES posts(postID)"
             + ");";
 
+            String messagesTable = "CREATE TABLE IF NOT EXISTS messages (" 
+            + "messageID INTEGER PRIMARY KEY AUTOINCREMENT," 
+            + "senderID INTEGER NOT NULL," 
+            + "receiverID INTEGER NOT NULL," 
+            + "content TEXT NOT NULL," 
+            + "timestamp TEXT DEFAULT CURRENT_TIMESTAMP," 
+            + "status TEXT DEFAULT 'Sent', "  // Status: 'Sent', 'Received', 'Read', etc.
+            + "messageType TEXT DEFAULT 'Text', "  // Could be 'Text', 'Image', 'File', etc.
+            + "FOREIGN KEY (senderID) REFERENCES users(userID), " 
+            + "FOREIGN KEY (receiverID) REFERENCES users(userID), " 
+            + "CHECK (LENGTH(content) > 0)" 
+            + ");";
         try (Connection conn = connect();
              Statement stmt = conn.createStatement()) {
             stmt.execute(usersTable);
@@ -109,6 +121,7 @@ public class Database {
             stmt.execute(commentTable);
             stmt.execute(voteTable);
             stmt.execute(totalVoteTable);
+            stmt.execute(messagesTable);
             System.out.println("Tables created.");
         } catch (SQLException e) {
             System.out.println(e.getMessage());

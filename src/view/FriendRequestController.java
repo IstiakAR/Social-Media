@@ -44,11 +44,11 @@ public class FriendRequestController extends FriendBaseController  {
         }
 
         acceptButton.setOnAction(event -> {
-            //DatabaseGetter.updateFriendStatus(friend.getUserID(), friend.getFriendCount(), "Accepted");
-           
+            
             try {
                 if (!DatabaseGetter.isConfirm( friendId,userId)){
                 DatabaseInsert.addFriend( friendId,userId);
+                DatabaseInsert.addFriend(userId,friendId);
                 friendStatus.setText("Friend");
                 acceptButton.setVisible(false);
                 rejectButton.setVisible(false);

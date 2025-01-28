@@ -5,7 +5,6 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-
 import database.DatabaseGetter;
 import database.DatabaseUpdate;
 import javafx.event.ActionEvent;
