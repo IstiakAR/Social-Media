@@ -151,14 +151,14 @@
             </HBox>
          </children>
       </VBox>
-      <ScrollPane fx:id="ScrollPane" layoutX="249.0" layoutY="86.0" prefHeight="668.0" prefWidth="1012.0" style="-fx-background: #0e1113; -fx-border-color: #0e1113;" stylesheets="@../css/homePosts.css">
+      <ScrollPane fx:id="ScrollPane" layoutX="243.0" layoutY="113.0" prefHeight="641.0" prefWidth="1018.0" style="-fx-background: #0e1113; -fx-border-color: #0e1113;" stylesheets="@../css/homePosts.css">
          <content>
             <VBox fx:id="friendListContainer" prefHeight="87.0" prefWidth="354.0" />
          </content>
       </ScrollPane>
-      <Text fill="WHITE" layoutX="273.0" layoutY="88.0" strokeType="OUTSIDE" strokeWidth="0.0" text="People may you know" wrappingWidth="302.172119140625">
+      <Text fill="WHITE" layoutX="243.0" layoutY="101.0" strokeType="OUTSIDE" strokeWidth="0.0" text="People may you know" wrappingWidth="290.97216796875">
          <font>
-            <Font name="System Bold" size="25.0" />
+            <Font name="System Bold" size="17.0" />
          </font>
       </Text>
    </children>

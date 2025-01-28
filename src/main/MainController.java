@@ -91,6 +91,13 @@ public class MainController extends Application {
     Scene scene = new Scene(root);
     primaryStage.setScene(scene);
   }
+  public static void gotoMessenger() throws Exception {
+    FXMLLoader loader = new FXMLLoader(MainController.class.getResource("/fxml/messengerPage.fxml"));
+    System.out.println("HII");
+    Parent root = loader.load();
+    Scene scene = new Scene(root);
+    primaryStage.setScene(scene);
+  }
   public static void gotoPost(Post post, int postID) throws Exception {
     System.out.println("HII");
     FXMLLoader loader = new FXMLLoader(MainController.class.getResource("/fxml/postPage.fxml"));
