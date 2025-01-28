@@ -61,11 +61,11 @@
                         <Insets right="5.0" />
                      </HBox.margin>
                   </ImageView>
-                  <Text fill="#eceff1" strokeType="OUTSIDE" strokeWidth="0.0" text="Friends" wrappingWidth="93.18199920654297">
+                  <Hyperlink onAction="#handleFriends" text="Friends" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="17.0" />
                      </font>
-                  </Text>
+                  </Hyperlink>
                </children>
                <padding>
                   <Insets left="30.0" />
@@ -241,7 +241,7 @@
          </children>
       </HBox>
       <Line endX="-36.0" endY="644.0" layoutX="275.0" layoutY="115.0" startX="-36.0" startY="-47.5" stroke="#2f3233" />
-      <ImageView fx:id="userImage" fitHeight="40.0" fitWidth="40.0" layoutX="1226.0" layoutY="16.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="userImage" fitHeight="40.0" fitWidth="40.0" layoutX="1226.0" layoutY="16.0" onMouseClicked="#handleProfile" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/profile_white.png" />
          </image>
@@ -262,7 +262,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </ImageView>
-      <ImageView accessibleRole="BUTTON" fitHeight="30.0" fitWidth="30.0" layoutX="1107.0" layoutY="22.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView accessibleRole="BUTTON" fitHeight="30.0" fitWidth="30.0" layoutX="1107.0" layoutY="22.0" onMouseClicked="#handleAddPost" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/add_white.png" />
          </image>
@@ -324,13 +324,20 @@
          </children>
       </VBox>
 
-      <ScrollPane fx:id="ScrollPane" layoutX="259.0" layoutY="96.0" prefHeight="625.0" prefWidth="1014.0" style="-fx-background: #0e1113; -fx-border-color: #0e1113;" stylesheets="@../css/homePosts.css">
+      <ScrollPane fx:id="ScrollPane" layoutX="259.0" layoutY="96.0" opacity="0.99" prefHeight="625.0" prefWidth="1014.0" style="-fx-background: #0e1113; -fx-border-color: #0e1113;" stylesheets="@../css/homePosts.css">
         <content>
             <VBox fx:id="postsContainer" style="-fx-background-color: #000000;">
             </VBox>
         </content>
     </ScrollPane>
       <ScrollBar fx:id="ScrollBar" layoutX="1273.0" layoutY="94.0" orientation="VERTICAL" prefHeight="625.0" prefWidth="28.0" stylesheets="@../css/scrollMain.css" />
+      <Hyperlink layoutX="1217.0" layoutY="24.0" opacity="0.06" />
+      <Hyperlink layoutX="1217.0" layoutY="24.0">
+         <font>
+            <Font size="1.0" />
+         </font>
+      </Hyperlink>
+      <Hyperlink layoutX="1217.0" layoutY="24.0" onAction="#handleProfile" />
    </children>
    <padding>
       <Insets bottom="10.0" right="10.0" />

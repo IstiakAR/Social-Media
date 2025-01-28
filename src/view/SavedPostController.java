@@ -24,7 +24,7 @@ public class SavedPostController extends BaseController {
 
         for (Post post : posts) {
             // if(post.getUserID() == LoginController.userID) {
-                VBox postBox = createPostBox(post);
+                VBox postBox = createPostBox(post, post.getPostID());
                 postsContainer.getChildren().add(postBox);
             // }
         }

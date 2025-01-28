@@ -1,6 +1,7 @@
 package view;
 
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import database.DatabaseGetter;
@@ -32,8 +33,8 @@ public class myPostController extends BaseController {
 
     @Override
     protected void displayPostsLatest() {
-        List<Post> posts = DatabaseGetter.getPosts();
-        posts = posts.stream()
+        Map<Integer, Post> posts = DatabaseGetter.getUserPosts(LoginController.userID);
+        List<Post> listPosts = posts.values().stream()
                 .sorted((p1, p2) -> {
                     int compareDate = p2.getCreationTime().compareTo(p1.getCreationTime());
                     if (compareDate != 0) {
@@ -44,11 +45,9 @@ public class myPostController extends BaseController {
                 })
                 .collect(Collectors.toList());
 
-        for (Post post : posts) {
-            if(post.getUserID()==LoginController.userID){   
-                VBox postBox = createPostBox(post);
-                postsContainer.getChildren().add(postBox);
-            }
+        for (Post post : listPosts) {
+            VBox postBox = createPostBox(post, post.getPostID());
+            postsContainer.getChildren().add(postBox);
         }
     }
 }

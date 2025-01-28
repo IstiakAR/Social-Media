@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox alignment="CENTER" prefHeight="448.0" prefWidth="439.0" spacing="10.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.AddProfilePictureController">
+    <children>
+        <Label text="Add profile picture" />
+      <ImageView fx:id="profilepic" fitHeight="199.0" fitWidth="263.0" pickOnBounds="true" preserveRatio="true" />
+        <Button fx:id="Addpicture" onAction="#handleAddPicture" text="AddPicture" />
+        <Button onAction="#handleCancel" text="Cancel" />
+      <Button onAction="#handlesetprofilepic" text="Set this as profile picture" />
+    </children>
+</VBox>

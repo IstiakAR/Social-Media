@@ -1,0 +1,7 @@
+#profileImage {
+    -fx-background-radius: 50%;
+    -fx-border-radius: 50%;
+    border-radius: 50%;
+    background-color: transparent;
+    -fx-background-color: transparent;
+}
