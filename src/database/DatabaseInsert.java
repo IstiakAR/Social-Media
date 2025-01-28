@@ -1,5 +1,6 @@
 package database;
 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -164,64 +165,64 @@ public class DatabaseInsert {
          PreparedStatement userCheckStmt = conn.prepareStatement(userCheckQuery);
          PreparedStatement insertStmt = conn.prepareStatement(insertMessageQuery)) {
 
-        // Check if sender exists
-        userCheckStmt.setInt(1, senderId);
-        try (ResultSet senderResult = userCheckStmt.executeQuery()) {
-            if (!senderResult.next() || senderResult.getInt(1) == 0) {
-                System.out.println("Sender does not exist.");
-                return;
+            // Check if sender exists
+            userCheckStmt.setInt(1, senderId);
+            try (ResultSet senderResult = userCheckStmt.executeQuery()) {
+                if (!senderResult.next() || senderResult.getInt(1) == 0) {
+                    System.out.println("Sender does not exist.");
+                    return;
+                }
             }
-        }
 
-        // Check if receiver exists
-        userCheckStmt.setInt(1, receiverId);
-        try (ResultSet receiverResult = userCheckStmt.executeQuery()) {
-            if (!receiverResult.next() || receiverResult.getInt(1) == 0) {
-                System.out.println("Receiver does not exist.");
-                return;
+            // Check if receiver exists
+            userCheckStmt.setInt(1, receiverId);
+            try (ResultSet receiverResult = userCheckStmt.executeQuery()) {
+                if (!receiverResult.next() || receiverResult.getInt(1) == 0) {
+                    System.out.println("Receiver does not exist.");
+                    return;
+                }
             }
+
+            // Insert the message into the database
+            insertStmt.setInt(1, senderId);
+            insertStmt.setInt(2, receiverId);
+            insertStmt.setString(3, content);
+
+            int rowsInserted = insertStmt.executeUpdate();
+            if (rowsInserted > 0) {
+                System.out.println("Message sent successfully.");
+            } else {
+                System.out.println("Failed to send the message.");
+            }
+
+        } catch (SQLException e) {
+            System.out.println("Error sending message: " + e.getMessage());
         }
-
-        // Insert the message into the database
-        insertStmt.setInt(1, senderId);
-        insertStmt.setInt(2, receiverId);
-        insertStmt.setString(3, content);
-
-        int rowsInserted = insertStmt.executeUpdate();
-        if (rowsInserted > 0) {
-            System.out.println("Message sent successfully.");
-        } else {
-            System.out.println("Failed to send the message.");
-        }
-
-    } catch (SQLException e) {
-        System.out.println("Error sending message: " + e.getMessage());
     }
-}
-    
-public static void saveMessage(Message message) {
-    String sql = "INSERT INTO messages (senderID, receiverID, content) VALUES (?, ?, ?)";
 
-    try (Connection conn = Database.connect();
-         PreparedStatement pstmt = conn.prepareStatement(sql)) {
+    public static void saveMessage(Message message) {
+        String sql = "INSERT INTO messages (senderID, receiverID, content) VALUES (?, ?, ?)";
 
-        // Set parameters for the message
-        pstmt.setInt(1, message.getSenderId()); // Sender ID
-        pstmt.setInt(2, message.getReceiverId()); // Receiver ID
-        pstmt.setString(3, message.getContent()); // Message content
+        try (Connection conn = Database.connect();
+            PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
-        // Execute the insert query
-        int rowsInserted = pstmt.executeUpdate();
-        if (rowsInserted > 0) {
-            System.out.println("Message saved successfully.");
-        } else {
-            System.out.println("Failed to save the message.");
+            // Set parameters for the message
+            pstmt.setInt(1, message.getSenderId()); // Sender ID
+            pstmt.setInt(2, message.getReceiverId()); // Receiver ID
+            pstmt.setString(3, message.getContent()); // Message content
+
+            // Execute the insert query
+            int rowsInserted = pstmt.executeUpdate();
+            if (rowsInserted > 0) {
+                System.out.println("Message saved successfully.");
+            } else {
+                System.out.println("Failed to save the message.");
+            }
+
+        } catch (SQLException e) {
+            System.out.println("Error saving message: " + e.getMessage());
+            e.printStackTrace();
         }
-
-    } catch (SQLException e) {
-        System.out.println("Error saving message: " + e.getMessage());
-        e.printStackTrace();
     }
-}
 
 }
