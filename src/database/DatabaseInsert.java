@@ -1,5 +1,8 @@
 package database;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -188,5 +191,31 @@ public class DatabaseInsert {
             e.printStackTrace();
         }
     }
-
+    public static void addProfilePicture(int userId, File imageFile) {
+        System.out.println("Add Profile Picture called");
+        String sql = "UPDATE users SET profilePicture = ? WHERE userId = ?";
+    
+        try (Connection conn = Database.connect();
+             PreparedStatement pstmt = conn.prepareStatement(sql);
+             FileInputStream fis = new FileInputStream(imageFile)) {
+    
+            // Set the parameters for the query
+            pstmt.setBinaryStream(1, fis, (int) imageFile.length()); // Set profile picture as the first parameter
+            pstmt.setInt(2, userId); // Set userId as the second parameter
+    
+            // Execute the update
+            int rowsUpdated = pstmt.executeUpdate();
+    
+            if (rowsUpdated > 0) {
+                System.out.println("Profile picture updated successfully for user ID: " + userId);
+            } else {
+                System.out.println("User ID not found. No update made.");
+            }
+    
+        } catch (SQLException e) {
+            System.out.println("SQL Error: " + e.getMessage());
+        } catch (Exception e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+    }
 }

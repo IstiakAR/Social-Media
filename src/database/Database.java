@@ -43,7 +43,6 @@ public class Database {
             + "Workplace TEXT,"
             + "Email TEXT,"
             + ");";
-    
 
         String postsTable = "CREATE TABLE IF NOT EXISTS posts ("
             + "postID INTEGER PRIMARY KEY,"

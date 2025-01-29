@@ -3,11 +3,9 @@ package view;
 import java.io.ByteArrayInputStream;
 
 import database.DatabaseGetter;
-import database.DatabaseInsert;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.layout.HBox;
@@ -35,7 +33,6 @@ public class AllFriendController extends FriendBaseController  {
             friendListContainer.getChildren().add(requestBox);
         }
     }
-    @SuppressWarnings("unused")
     @SuppressWarnings("unused")
     public VBox createFriendBox(User friend) {
         VBox friendBox = new VBox();
@@ -95,14 +92,24 @@ public class AllFriendController extends FriendBaseController  {
             }
         });
         
+        
         Label friendName = new Label(friend.getName());
-        friendName.setStyle("-fx-font-size: 22px; -fx-text-fill:rgb(169, 22, 22);");
+        friendName.setStyle("-fx-font-size: 22px; -fx-text-fill: rgb(153, 153, 153);");
 
-        Label friendStatus = new Label(friend.getName());
+        Label friendStatus = new Label(" ");
         friendStatus.setStyle("-fx-font-size: 18px; -fx-text-fill: #999999;");
 
-        
-        friendBox.getChildren().addAll(friendName, friendStatus);
+        int userId = LoginController.userID; 
+        int friendId = friend.getUserID();
+        if (DatabaseGetter.isConfirm(friendId, userId)) {
+            friendStatus.setText("Friend");
+        }
+
+        HBox profileBox = new HBox(profileImageView, friendName);
+        profileBox.setSpacing(10);
+        profileBox.setStyle("-fx-alignment: CENTER_LEFT;");
+
+        friendBox.getChildren().addAll(profileBox, friendStatus);
         friendBox.setOnMouseEntered(event -> friendBox.setStyle("-fx-background-color: #181c1f; -fx-padding: 10; -fx-border-color: #0e1113;"));
         friendBox.setOnMouseExited(event -> friendBox.setStyle("-fx-background-color: #0e1113; -fx-padding: 10; -fx-border-color: #0e1113;"));
 

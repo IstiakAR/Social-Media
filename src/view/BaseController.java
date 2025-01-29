@@ -10,6 +10,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ScrollBar;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -61,7 +62,7 @@ public abstract class BaseController {
         postBox.prefWidthProperty().bind(ScrollPane.widthProperty().subtract(20));
 
         String buttonStyle = "-fx-background-color: #0e1113; -fx-text-fill: #ffffff; -fx-padding: 5; -fx-border-color: #0e1113; -fx-border-width: 1; -fx-border-radius: 10; -fx-background-radius: 10;";
-        String buttonHoverStyle = "-fx-background-color: #181c1f; -fx-text-fill: #ffffff; -fx-padding: 5; -fx-border-color: #181c1f; -fx-border-width: 1; -fx-border-radius: 10; -fx-background-radius: 10;";
+        //String buttonHoverStyle = "-fx-background-color: #181c1f; -fx-text-fill: #ffffff; -fx-padding: 5; -fx-border-color: #181c1f; -fx-border-width: 1; -fx-border-radius: 10; -fx-background-radius: 10;";
         String buttonClickStyle = "-fx-background-color: blue; -fx-text-fill: white; -fx-padding: 5; -fx-border-color: #0e1113; -fx-border-width: 1; -fx-border-radius: 10; -fx-background-radius: 10;";
 
         Label voteCount = new Label(String.valueOf(DatabaseGetter.getTotalVotes(post.getPostID())));
@@ -123,11 +124,10 @@ public abstract class BaseController {
             profileImage = null;
         }
         
-        Circle postImage = new Circle(15); // Set radius to ensure the circle is visible
+        Circle postImage = new Circle(15);
         if (profileImage != null) {
             postImage.setFill(new ImagePattern(profileImage));
         } else {
-            // Fallback color (e.g., gray)
             postImage.setFill(Color.GRAY);
         }
         
