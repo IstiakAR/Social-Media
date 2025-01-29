@@ -10,6 +10,7 @@ import javafx.stage.Stage;
 import model.Post;
 import view.AddPostController;
 import view.PostController;
+import view.SearchController;
 
 public class MainController extends Application {
   private static Stage primaryStage;
@@ -41,6 +42,16 @@ public class MainController extends Application {
   public static void gotoSignup() throws Exception {
     FXMLLoader loader = new FXMLLoader(MainController.class.getResource("/fxml/signupPage.fxml"));
     Parent root = loader.load();
+
+    Scene scene = new Scene(root);
+    primaryStage.setScene(scene);
+  }
+  public static void gotoSearch(String search, boolean searchPosts) throws Exception {
+    FXMLLoader loader = new FXMLLoader(MainController.class.getResource("/fxml/searchPage.fxml"));
+    Parent root = loader.load();
+
+    SearchController controller = loader.getController();
+    controller.search(search);
 
     Scene scene = new Scene(root);
     primaryStage.setScene(scene);

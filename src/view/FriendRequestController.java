@@ -2,6 +2,7 @@ package view;
 
 import database.DatabaseGetter;
 import database.DatabaseInsert;
+import database.DatabaseUpdate;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
@@ -10,14 +11,14 @@ import model.User;
 
 public class FriendRequestController extends FriendBaseController  {
     
-    
     public void displayFriendList() {
         var requests = DatabaseGetter.getIncomingRequests(LoginController.userID);
     friendListContainer.getChildren().clear();
 
     for (var request : requests) {
         VBox requestBox = createFriendBox(request);
-        friendListContainer.getChildren().add(requestBox);
+        if(requestBox != null)
+            friendListContainer.getChildren().add(requestBox);
     }
     }
     @SuppressWarnings("unused")
@@ -38,20 +39,19 @@ public class FriendRequestController extends FriendBaseController  {
         int userId = LoginController.userID; 
         int friendId = friend.getUserID();
         if (DatabaseGetter.isConfirm( friendId,userId)){
-            friendStatus.setText("Friend");
-            acceptButton.setVisible(false);
-            rejectButton.setVisible(false);
+            return null;
         }
 
         acceptButton.setOnAction(event -> {
-            
             try {
                 if (!DatabaseGetter.isConfirm( friendId,userId)){
-                DatabaseInsert.addFriend( friendId,userId);
-                DatabaseInsert.addFriend(userId,friendId);
-                friendStatus.setText("Friend");
-                acceptButton.setVisible(false);
-                rejectButton.setVisible(false);
+                    DatabaseInsert.addFriend( friendId,userId);
+                    DatabaseInsert.addFriend(userId,friendId);
+                    friendStatus.setText("Friend");
+                    acceptButton.setVisible(false);
+                    rejectButton.setVisible(false);
+                    DatabaseUpdate.cancelFriendRequest(userId, friendId);
+                    friendListContainer.getChildren().remove(friendBox);
                 }
             } catch (Exception e) {
                 System.out.println("Error adding friend: " + e.getMessage());
@@ -60,10 +60,12 @@ public class FriendRequestController extends FriendBaseController  {
         });
         
         rejectButton.setOnAction(event -> {
-            DatabaseGetter.updateFriendStatus(friend.getUserID(), friend.getFriendCount(), "Rejected");
+            DatabaseUpdate.updateFriendStatus(friend.getUserID(), friend.getFriendCount(), "Rejected");
             friendStatus.setText("Request Rejected");
             acceptButton.setVisible(false);
             rejectButton.setVisible(false);
+            DatabaseUpdate.cancelFriendRequest(userId, friendId);
+            friendListContainer.getChildren().remove(friendBox);
         });
 
         HBox buttons = new HBox();

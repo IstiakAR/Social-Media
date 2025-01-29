@@ -1,12 +1,14 @@
 package view;
 
 import database.DatabaseGetter;
-import database.DatabaseUpdate;
+import database.DatabaseInsert;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollBar;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
@@ -20,6 +22,8 @@ public abstract class BaseController {
     protected ScrollPane ScrollPane;
     @FXML
     protected VBox postsContainer;
+    @FXML
+    protected TextField searchText;
 
     @SuppressWarnings("unused")
     @FXML
@@ -49,8 +53,6 @@ public abstract class BaseController {
         HBox voteBox = new HBox();
         HBox voteTempBox = new HBox();
         Button upvoteButton = new Button("▲");
-        Button downvoteButton = new Button("▼");
-        Button saveButton = new Button("Save");
         postBox.setStyle("-fx-background-color: #0e1113; -fx-padding: 10; -fx-border-color: #0e1113; -fx-border-width: 1; -fx-border-radius: 5; -fx-background-radius: 5;");
         postBox.prefWidthProperty().bind(ScrollPane.widthProperty().subtract(20));
 
@@ -62,68 +64,27 @@ public abstract class BaseController {
         voteCount.setStyle("-fx-font-size: 14px; -fx-text-fill: #ffffff;");
 
         upvoteButton.setStyle(buttonStyle);
-        downvoteButton.setStyle(buttonStyle);
         upvoteButton.setPrefWidth(30);
-        downvoteButton.setPrefWidth(30);
+
+        boolean hasVoted = DatabaseInsert.voteExists(post.getPostID(), LoginController.userID);
+        upvoteButton.setStyle(hasVoted ? buttonClickStyle : buttonStyle);
 
         upvoteButton.setOnMouseClicked(e -> {
-            int current = post.getReaction(LoginController.userID);
-            System.out.println("current" + ' ' + current);
-            System.out.println("postID" + ' ' + post.getPostID());
-            if (current == 1) {
-                upvoteButton.setStyle(buttonStyle);
-                DatabaseUpdate.updateVote(0, postID, LoginController.userID);
-                post.setTotalReaction(post.getTotalReaction() - 1);
-            } else {
-                upvoteButton.setStyle(buttonClickStyle);
-                downvoteButton.setStyle(buttonStyle);
-                DatabaseUpdate.updateVote(1, postID, LoginController.userID);
-                if (current == -1) {
-                    post.setTotalReaction(post.getTotalReaction() + 2);
-                } else {
-                    post.setTotalReaction(post.getTotalReaction() + 1);
-                }
-            }
+            boolean newState = DatabaseInsert.toggleVote(post.getPostID(), LoginController.userID);
+            upvoteButton.setStyle(newState ? buttonClickStyle : buttonStyle);
             voteCount.setText(String.valueOf(DatabaseGetter.getTotalVotes(post.getPostID())));
-            System.out.println("total" + ' ' + post.getTotalReaction());
         });
         
-        downvoteButton.setOnMouseClicked(e -> {
-            int current = post.getReaction(LoginController.userID);
-            System.out.println("current" + ' ' + current);
-            System.out.println("postID" + ' ' + post.getPostID());
-            if (current == -1) {
-                downvoteButton.setStyle(buttonStyle);
-                DatabaseUpdate.updateVote(0, postID, LoginController.userID);
-                post.setTotalReaction(post.getTotalReaction() + 1);
-            } else {
-                downvoteButton.setStyle(buttonClickStyle);
-                upvoteButton.setStyle(buttonStyle);
-                DatabaseUpdate.updateVote(-1, postID, LoginController.userID);
-                if (current == 1) {
-                    post.setTotalReaction(post.getTotalReaction() - 2);
-                } else {
-                    post.setTotalReaction(post.getTotalReaction() - 1);
-                }
-            }
-            voteCount.setText(String.valueOf(DatabaseGetter.getTotalVotes(post.getPostID())));
-            System.out.println("total" + ' ' + post.getTotalReaction());
-        });
-
-        voteTempBox.getChildren().addAll(upvoteButton, voteCount, downvoteButton);
+        voteTempBox.getChildren().addAll(upvoteButton, voteCount);
         voteTempBox.setStyle("-fx-background-color: #2a3236; -fx-background-radius: 10; -fx-alignment:CENTER;");
 
         voteBox.getChildren().add(voteTempBox);
 
         postBox.setOnMouseEntered(event -> {
             postBox.setStyle("-fx-background-color: #181c1f; -fx-padding: 10; -fx-border-color: #0e1113; -fx-border-width: 1; -fx-border-radius: 5; -fx-background-radius: 5;");
-            // upvoteButton.setStyle(buttonHoverStyle);
-            // downvoteButton.setStyle(buttonHoverStyle);
         });
         postBox.setOnMouseExited(event -> {
             postBox.setStyle("-fx-background-color: #0e1113; -fx-padding: 10; -fx-border-color: #0e1113; -fx-border-width: 1; -fx-border-radius: 5; -fx-background-radius: 5;");
-            // upvoteButton.setStyle(buttonStyle);
-            // downvoteButton.setStyle(buttonStyle);
         });
         
         postBox.setOnMouseClicked(event -> {
@@ -153,5 +114,23 @@ public abstract class BaseController {
         postBox.getChildren().add(contentBox);
 
         return postBox;
+    }
+
+    public void handleSearch(MouseEvent event) {
+        String query = searchText.getText().trim();
+        if (!query.isEmpty()) {
+            try {
+                MainController.gotoSearch(query, false);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+    public void handleLogOut(MouseEvent event) {
+        try {
+            MainController.gotoLoginPage();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

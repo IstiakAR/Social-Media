@@ -7,13 +7,9 @@ import java.net.Socket;
 import database.DatabaseGetter;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
-import main.MainController;
 import model.User;
 
 public class MessengerController extends FriendBaseController {
@@ -28,7 +24,7 @@ public class MessengerController extends FriendBaseController {
         }
     }
     @FXML
-    private VBox messengerContainer;  
+    private VBox messengerContainer;
 
     public VBox createFriendBox(User friend) {
         VBox friendBox = new VBox();
@@ -50,13 +46,10 @@ public class MessengerController extends FriendBaseController {
 
               Label senderNameLabel = new Label("Message to " + friend.getName());
             senderNameLabel.setStyle("-fx-font-size: 18px; -fx-text-fill:rgb(234, 11, 11); -fx-padding: 10;");
-            // Add the sender name label at the top of the messengerContainer
             messengerContainer.getChildren().add(senderNameLabel);
 
-            // Create a new Messenger instance for the selected friend
             Messenger messenger = new Messenger(friend.getUserID(), LoginController.userID);
 
-            // Add the Messenger view to the container
             messengerContainer.getChildren().add(messenger);
         });
 
@@ -65,15 +58,6 @@ public class MessengerController extends FriendBaseController {
         friendBox.setOnMouseExited(event -> friendBox.setStyle("-fx-background-color: #0e1113; -fx-padding: 10; -fx-border-color: #0e1113;"));
 
         return friendBox;
-    }
-
-    public void handleHome(MouseEvent event) {
-        System.out.println("Home Button clicked!");
-        try {
-            MainController.gotoHomepage();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
     
     public class MessageReceiver implements Runnable {

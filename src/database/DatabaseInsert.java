@@ -1,6 +1,5 @@
 package database;
 
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -62,18 +61,6 @@ public class DatabaseInsert {
         }
     }
 
-    public static void savePost(int userID, int postID) {
-        String sql = "INSERT INTO saved_posts(userID, postID) VALUES(?, ?)";
-
-        try (PreparedStatement pstmt = Database.connect().prepareStatement(sql)) {
-            pstmt.setInt(1, userID);
-            pstmt.setInt(2, postID);
-            pstmt.executeUpdate();
-            System.out.println("Post saved.");
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
-    }
     public static void addFriend(int userId, int friendId) {
         String sql = "INSERT INTO allfriend (userID, friendID, status) VALUES (?, ?, 'Pending')";
 
@@ -87,19 +74,6 @@ public class DatabaseInsert {
         }
     }
     
-    public static void updateFriendStatus(int userId, int friendId, String status) {
-        String sql = "UPDATE Friendships SET status = ? WHERE user_id = ? AND friend_id = ?";
-        
-        try (PreparedStatement pstmt = Database.connect().prepareStatement(sql)) {
-            pstmt.setString(1, status);
-            pstmt.setInt(2, userId);
-            pstmt.setInt(3, friendId);
-            pstmt.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
     public static void sendFriendRequest(int userId, int friendId) {
         String sql = "INSERT INTO friendships (userID, friendID, status) VALUES (?, ?, 'Pending')";
         try (PreparedStatement pstmt = Database.connect().prepareStatement(sql)) {
@@ -112,60 +86,52 @@ public class DatabaseInsert {
         }
     }
     
-    public static void cancelFriendRequest(int userId, int friendId) {
-        String sql = "DELETE FROM friendships WHERE userID = ? AND friendID = ? AND status = 'Pending'";
+    public static void addVote(int postId, int userId) {
+        String sql = "INSERT INTO votes(postID, userID) VALUES(?, ?)";
         try (PreparedStatement pstmt = Database.connect().prepareStatement(sql)) {
-            pstmt.setInt(1, userId);
-            pstmt.setInt(2, friendId);
-            int rowsAffected = pstmt.executeUpdate();
-            if (rowsAffected > 0) {
-                System.out.println("Friend request cancelled.");
-            } else {
-                System.out.println("No pending request found to cancel.");
-            }
-        } catch (SQLException e) {
-            System.out.println("Error canceling friend request: " + e.getMessage());
-        }
-    }
-
-    public static void addVote(int vote, int postId, int userId) {
-        String sql = "INSERT INTO votes(vote, postID, userID) VALUES(?, ?, ?)";
-        try (PreparedStatement pstmt = Database.connect().prepareStatement(sql)) {
-            pstmt.setInt(1, vote);
-            pstmt.setInt(2, postId);
-            pstmt.setInt(3, userId);
+            pstmt.setInt(1, postId);
+            pstmt.setInt(2, userId);
             pstmt.executeUpdate();
             System.out.println("Vote inserted.");
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
     }
+	public static boolean toggleVote(int postID, int userID) {
+		if (voteExists(postID, userID)) {
+			DatabaseUpdate.deleteVote(postID, userID);
+			return false;
+		} else {
+			addVote(postID, userID);
+			return true;
+		}
+	}
 
-    public static void addTotalVote(int postId, int totalVote) {
-        String sql = "INSERT INTO totalvotes(postID, totalVote) VALUES(?, ?)";
-        try (PreparedStatement pstmt = Database.connect().prepareStatement(sql)) {
-            pstmt.setInt(1, postId);
-            pstmt.setInt(2, totalVote);
-            pstmt.executeUpdate();
-            System.out.println("Total vote inserted.");
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
+	public static boolean voteExists(int postID, int userID) {
+		String sql = "SELECT 1 FROM votes WHERE postID = ? AND userID = ?";
+		try (PreparedStatement pstmt = Database.connect().prepareStatement(sql)) {
+			pstmt.setInt(1, postID);
+			pstmt.setInt(2, userID);
+			ResultSet rs = pstmt.executeQuery();
+			return rs.next();
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+			return false;
+		}
+	}
+
+    public static void sendMessage(int senderId, int receiverId, String content) {
+        if (content == null || content.trim().isEmpty()) {
+            System.out.println("Message content cannot be empty.");
+            return;
         }
-    }
-   public static void sendMessage(int senderId, int receiverId, String content) {
-    if (content == null || content.trim().isEmpty()) {
-        System.out.println("Message content cannot be empty.");
-        return;
-    }
 
-    String userCheckQuery = "SELECT COUNT(*) FROM users WHERE userID = ?";
-    String insertMessageQuery = "INSERT INTO messages (senderID, receiverID, content) VALUES (?, ?, ?)";
+        String userCheckQuery = "SELECT COUNT(*) FROM users WHERE userID = ?";
+        String insertMessageQuery = "INSERT INTO messages (senderID, receiverID, content) VALUES (?, ?, ?)";
 
-    try (Connection conn = Database.connect();
-         PreparedStatement userCheckStmt = conn.prepareStatement(userCheckQuery);
-         PreparedStatement insertStmt = conn.prepareStatement(insertMessageQuery)) {
+        try (PreparedStatement userCheckStmt = Database.connect().prepareStatement(userCheckQuery);
+            PreparedStatement insertStmt = Database.connect().prepareStatement(insertMessageQuery)) {
 
-            // Check if sender exists
             userCheckStmt.setInt(1, senderId);
             try (ResultSet senderResult = userCheckStmt.executeQuery()) {
                 if (!senderResult.next() || senderResult.getInt(1) == 0) {
@@ -174,7 +140,6 @@ public class DatabaseInsert {
                 }
             }
 
-            // Check if receiver exists
             userCheckStmt.setInt(1, receiverId);
             try (ResultSet receiverResult = userCheckStmt.executeQuery()) {
                 if (!receiverResult.next() || receiverResult.getInt(1) == 0) {
@@ -183,7 +148,6 @@ public class DatabaseInsert {
                 }
             }
 
-            // Insert the message into the database
             insertStmt.setInt(1, senderId);
             insertStmt.setInt(2, receiverId);
             insertStmt.setString(3, content);
@@ -203,15 +167,11 @@ public class DatabaseInsert {
     public static void saveMessage(Message message) {
         String sql = "INSERT INTO messages (senderID, receiverID, content) VALUES (?, ?, ?)";
 
-        try (Connection conn = Database.connect();
-            PreparedStatement pstmt = conn.prepareStatement(sql)) {
+        try (PreparedStatement pstmt = Database.connect().prepareStatement(sql)) {
+            pstmt.setInt(1, message.getSenderId());
+            pstmt.setInt(2, message.getReceiverId());
+            pstmt.setString(3, message.getContent());
 
-            // Set parameters for the message
-            pstmt.setInt(1, message.getSenderId()); // Sender ID
-            pstmt.setInt(2, message.getReceiverId()); // Receiver ID
-            pstmt.setString(3, message.getContent()); // Message content
-
-            // Execute the insert query
             int rowsInserted = pstmt.executeUpdate();
             if (rowsInserted > 0) {
                 System.out.println("Message saved successfully.");

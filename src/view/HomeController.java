@@ -13,7 +13,6 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 public class HomeController extends BaseController {
-
     @Override
     protected void displayPostsLatest() {
         Map<Integer, Post> posts = DatabaseGetter.getAllPosts();

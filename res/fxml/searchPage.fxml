@@ -2,6 +2,7 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.ScrollBar?>
 <?import javafx.scene.control.ScrollPane?>
@@ -15,9 +16,9 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="759.0" prefWidth="1293.0" style="-fx-background-color: #0e1113;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.HomeController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="759.0" prefWidth="1293.0" style="-fx-background-color: #0e1113;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.SearchController">
    <children>
-      <VBox layoutX="4.0" layoutY="85.0" prefHeight="393.0" prefWidth="235.0">
+      <VBox layoutX="4.0" layoutY="83.0" prefHeight="395.0" prefWidth="235.0">
          <children>
             <HBox alignment="CENTER_LEFT" prefHeight="40.0" prefWidth="267.0" style="-fx-background-radius: 100;">
                <children>
@@ -58,7 +59,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                      <HBox.margin>
-                        <Insets />
+                        <Insets right="5.0" />
                      </HBox.margin>
                   </ImageView>
                   <Hyperlink onAction="#handleFriends" text="Friends" textFill="WHITE">
@@ -66,6 +67,32 @@
                         <Font name="System Bold" size="17.0" />
                      </font>
                   </Hyperlink>
+               </children>
+               <padding>
+                  <Insets left="30.0" />
+               </padding>
+               <VBox.margin>
+                  <Insets bottom="5.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" prefHeight="40.0" prefWidth="267.0" style="-fx-background-radius: 100;">
+               <children>
+                  <ImageView accessibleRole="BUTTON" fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/todo_white.png" />
+                     </image>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                     <HBox.margin>
+                        <Insets right="10.0" />
+                     </HBox.margin>
+                  </ImageView>
+                  <Text fill="#eceff1" strokeType="OUTSIDE" strokeWidth="0.0" text="ToDo" wrappingWidth="80.18199920654297">
+                     <font>
+                        <Font name="System Bold" size="17.0" />
+                     </font>
+                  </Text>
                </children>
                <padding>
                   <Insets left="30.0" />
@@ -104,30 +131,36 @@
                <children>
                   <ImageView accessibleRole="BUTTON" fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../images/message_white.png" />
+                        <Image url="@../images/saved_white.png" />
                      </image>
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
                      <HBox.margin>
-                        <Insets right="10.0" />
+                        <Insets right="15.0" />
                      </HBox.margin>
                   </ImageView>
-                  <Hyperlink onAction="#handleMassenger" prefHeight="34.0" prefWidth="168.0" text="Messenger" textFill="#f2f0f0">
+                  <Hyperlink text="Saved" textFill="WHITE">
                      <font>
-                        <Font name="System Bold" size="16.0" />
+                        <Font name="System Bold" size="17.0" />
                      </font>
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
                   </Hyperlink>
                </children>
                <padding>
                   <Insets left="30.0" />
                </padding>
+               <VBox.margin>
+                  <Insets bottom="5.0" />
+               </VBox.margin>
             </HBox>
             <HBox alignment="CENTER_LEFT" prefHeight="40.0" prefWidth="267.0" style="-fx-background-radius: 100;">
                <children>
                   <ImageView accessibleRole="BUTTON" fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../images/todo_white.png" />
+                        <Image url="@../images/birthday_white.png" />
                      </image>
                      <cursor>
                         <Cursor fx:constant="HAND" />
@@ -136,7 +169,7 @@
                         <Insets right="10.0" />
                      </HBox.margin>
                   </ImageView>
-                  <Text fill="#eceff1" strokeType="OUTSIDE" strokeWidth="0.0" text="ToDo" wrappingWidth="80.18199920654297">
+                  <Text fill="#eceff1" strokeType="OUTSIDE" strokeWidth="0.0" text="Birthdays" wrappingWidth="100.18199920654297">
                      <font>
                         <Font name="System Bold" size="17.0" />
                      </font>
@@ -177,9 +210,9 @@
             </HBox>
             <HBox alignment="CENTER_LEFT" prefHeight="40.0" prefWidth="267.0" style="-fx-background-radius: 100;">
                <children>
-                  <ImageView accessibleRole="BUTTON" fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView accessibleRole="BUTTON" fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../images/birthday_white.png" />
+                        <Image url="@../images/message_white.png" />
                      </image>
                      <cursor>
                         <Cursor fx:constant="HAND" />
@@ -188,18 +221,15 @@
                         <Insets right="10.0" />
                      </HBox.margin>
                   </ImageView>
-                  <Text fill="#eceff1" strokeType="OUTSIDE" strokeWidth="0.0" text="Birthdays" wrappingWidth="100.18199920654297">
+                  <Hyperlink onAction="#handleMassenger" prefHeight="34.0" prefWidth="168.0" text="Messenger" textFill="#f2f0f0">
                      <font>
-                        <Font name="System Bold" size="17.0" />
+                        <Font name="System Bold" size="16.0" />
                      </font>
-                  </Text>
+                  </Hyperlink>
                </children>
                <padding>
                   <Insets left="30.0" />
                </padding>
-               <VBox.margin>
-                  <Insets bottom="5.0" />
-               </VBox.margin>
             </HBox>
          </children>
       </VBox>
@@ -248,13 +278,13 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </ImageView>
-      <VBox layoutX="4.0" layoutY="582.0" prefHeight="175.0" prefWidth="235.0">
+      <VBox layoutX="4.0" layoutY="657.0" prefHeight="88.0" prefWidth="235.0">
          <children>
             <HBox alignment="CENTER_LEFT" prefHeight="40.0" prefWidth="267.0" style="-fx-background-radius: 100;">
                <children>
                   <ImageView accessibleRole="BUTTON" fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../images/settings_white.png" />
+                        <Image url="@../images/help_white.png" />
                      </image>
                      <cursor>
                         <Cursor fx:constant="HAND" />
@@ -263,7 +293,7 @@
                         <Insets right="15.0" />
                      </HBox.margin>
                   </ImageView>
-                  <Text fill="#eceff1" strokeType="OUTSIDE" strokeWidth="0.0" text="Settings" wrappingWidth="91.18199920654297">
+                  <Text fill="#eceff1" strokeType="OUTSIDE" strokeWidth="0.0" text="Help" wrappingWidth="58.18199920654297">
                      <font>
                         <Font name="System Bold" size="17.0" />
                      </font>
@@ -275,29 +305,6 @@
                <VBox.margin>
                   <Insets bottom="5.0" />
                </VBox.margin>
-            </HBox>
-            <HBox alignment="CENTER_LEFT" prefHeight="40.0" prefWidth="267.0" style="-fx-background-radius: 100;">
-               <children>
-                  <ImageView accessibleRole="BUTTON" fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../images/logout_white.png" />
-                     </image>
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                     <HBox.margin>
-                        <Insets right="15.0" />
-                     </HBox.margin>
-                  </ImageView>
-                  <Text fill="#eceff1" onMouseClicked="#handleLogOut" strokeType="OUTSIDE" strokeWidth="0.0" text="Log Out" wrappingWidth="91.18199920654297">
-                     <font>
-                        <Font name="System Bold" size="17.0" />
-                     </font>
-                  </Text>
-               </children>
-               <padding>
-                  <Insets left="30.0" />
-               </padding>
             </HBox>
             <HBox alignment="CENTER_LEFT" prefHeight="40.0" prefWidth="267.0" style="-fx-background-radius: 100;">
                <children>
@@ -322,33 +329,10 @@
                   <Insets left="30.0" />
                </padding>
             </HBox>
-            <HBox alignment="CENTER_LEFT" prefHeight="40.0" prefWidth="267.0" style="-fx-background-radius: 100;">
-               <children>
-                  <ImageView accessibleRole="BUTTON" fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../images/help_white.png" />
-                     </image>
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                     <HBox.margin>
-                        <Insets right="15.0" />
-                     </HBox.margin>
-                  </ImageView>
-                  <Text fill="#eceff1" strokeType="OUTSIDE" strokeWidth="0.0" text="Help" wrappingWidth="58.18199920654297">
-                     <font>
-                        <Font name="System Bold" size="17.0" />
-                     </font>
-                  </Text>
-               </children>
-               <padding>
-                  <Insets left="30.0" />
-               </padding>
-            </HBox>
          </children>
       </VBox>
 
-      <ScrollPane fx:id="ScrollPane" layoutX="259.0" layoutY="96.0" opacity="0.99" prefHeight="625.0" prefWidth="1014.0" style="-fx-background: #0e1113; -fx-border-color: #0e1113;" stylesheets="@../css/homePosts.css">
+      <ScrollPane fx:id="ScrollPane" layoutX="259.0" layoutY="120.0" opacity="0.99" prefHeight="601.0" prefWidth="1014.0" style="-fx-background: #0e1113; -fx-border-color: #0e1113;" stylesheets="@../css/homePosts.css">
         <content>
             <VBox fx:id="postsContainer" style="-fx-background-color: #000000;">
             </VBox>
@@ -362,6 +346,8 @@
          </font>
       </Hyperlink>
       <Hyperlink layoutX="1217.0" layoutY="24.0" onAction="#handleProfile" />
+      <Button fx:id="showPeople" layoutX="259.0" layoutY="81.0" mnemonicParsing="false" onAction="#handleShowPeople" style="-fx-background-radius: 10; -fx-background-color: #2a3236;" text="People" textFill="WHITE" />
+      <Button fx:id="showPosts" layoutX="328.0" layoutY="81.0" mnemonicParsing="false" onAction="#handleShowPosts" style="-fx-background-radius: 10; -fx-background-color: #2a3236;" text="Post" textFill="WHITE" />
    </children>
    <padding>
       <Insets bottom="10.0" right="10.0" />
