@@ -12,13 +12,19 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import javafx.scene.image.Image;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
+import main.MainController;
 import model.User;
 
 public class MessengerController extends FriendBaseController {
+
+    public void initialize() {
+    	displayFriendList();
+    }
 
     public void displayFriendList() {
         var requests = DatabaseGetter.getAllfriend(LoginController.userID);
@@ -41,8 +47,6 @@ public class MessengerController extends FriendBaseController {
         User user = DatabaseGetter.getUserByID(LoginController.userID);
         Image profileImage = null;
         if (user != null) {
-            // Set the profile name        
-            // Get the profile picture byte array
             byte[] profilePicture = user.getProfilePicture();
             
             if (profilePicture != null && profilePicture.length > 0) {
@@ -62,18 +66,15 @@ public class MessengerController extends FriendBaseController {
             System.out.println("User not found!");
         }
 
-        Circle profileImageView = new Circle(25); // Circle for profile image, radius 25
+        Circle profileImageView = new Circle(18);
         if (profileImage != null) {
             profileImageView.setFill(new ImagePattern(profileImage));
         } else {
-            profileImageView.setFill(Color.GRAY); // Fallback color
+            profileImageView.setFill(Color.GRAY);
         }
 
         Label friendName = new Label(friend.getName());
         friendName.setStyle("-fx-font-size: 22px; -fx-text-fill:rgb(153, 153, 153);");
-
-        // Label friendStatus = new Label(friend.getName());
-        // friendStatus.setStyle("-fx-font-size: 18px; -fx-text-fill: #999999;");
 
         Button messageButton = new Button("Message");
         messageButton.setStyle("-fx-background-color: #007BFF; -fx-text-fill: white;");
@@ -90,7 +91,9 @@ public class MessengerController extends FriendBaseController {
         });
 
         HBox friendInfo = new HBox(10, profileImageView, new VBox(friendName));
-        friendBox.getChildren().addAll(friendInfo, messageButton);
+        VBox friendContainer = new VBox(10); 
+        friendContainer.getChildren().addAll(friendInfo, messageButton);
+        friendBox.getChildren().add(friendContainer);
 
         friendBox.setOnMouseEntered(event -> friendBox.setStyle("-fx-background-color: #181c1f; -fx-padding: 10; -fx-border-color: #0e1113;"));
         friendBox.setOnMouseExited(event -> friendBox.setStyle("-fx-background-color: #0e1113; -fx-padding: 10; -fx-border-color: #0e1113;"));
@@ -117,6 +120,13 @@ public class MessengerController extends FriendBaseController {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+        }
+    }
+     public void handleHome(MouseEvent event) { 
+        try {
+            MainController.gotoHomepage();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 }

@@ -10,22 +10,29 @@ import javafx.fxml.FXML;
 import javafx.scene.control.ScrollBar;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.shape.Circle;
 import main.MainController;
 import model.Post;
 
 
-public class myPostController extends BaseController {
+public class myPostController extends BaseController{
     @FXML
     private ScrollBar ScrollBar;
     @FXML
     private ScrollPane ScrollPane;
     @FXML
     private VBox postsContainer;
+    @FXML
+    private Circle userImage;
 
-    public void handleHome(ActionEvent event) {
-        System.out.println("Home clicked");
+    public void initialize() {
+        super.initialize();
+        displayPostsLatest();
+    }
+
+    public void handleBack(ActionEvent event) {
         try {
-            MainController.gotoHomepage();
+            MainController.gotoProfile();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -49,6 +56,6 @@ public class myPostController extends BaseController {
             VBox postBox = createPostBox(post, post.getPostID());
             postsContainer.getChildren().add(postBox);
         }
+        postsContainer.setSpacing(5);
     }
 }
-

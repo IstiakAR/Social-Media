@@ -2,7 +2,6 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ScrollBar?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -31,29 +30,17 @@
          </children>
       </HBox>
       <Line endX="-36.0" endY="644.0" layoutX="275.0" layoutY="115.0" startX="-36.0" startY="-47.5" stroke="#2f3233" />
-      <VBox fx:id="friendListContainer" layoutX="4.0" layoutY="164.0" prefHeight="581.0" prefWidth="235.0">
+      <VBox fx:id="friendListContainer" layoutX="4.0" layoutY="136.0" prefHeight="609.0" prefWidth="235.0">
          <children>
-            <HBox alignment="CENTER_LEFT" prefHeight="40.0" prefWidth="267.0" style="-fx-background-radius: 100;">
-               <padding>
-                  <Insets left="30.0" />
-               </padding>
-               <VBox.margin>
-                  <Insets bottom="5.0" />
-               </VBox.margin>
-            </HBox>
-            <ScrollPane fx:id="ScrollPane" prefHeight="443.0" prefWidth="235.0" style="-fx-background: #0e1113; -fx-border-color: #0e1113;" stylesheets="@../css/homePosts.css">
-               <content>
-                  <VBox fx:id="friendListContainer1" prefHeight="87.0" prefWidth="230.0" />
-               </content>
-            </ScrollPane>
+            <ScrollPane fx:id="ScrollPane" prefHeight="611.0" prefWidth="235.0" style="-fx-background: #0e1113; -fx-border-color: #0e1113;" stylesheets="@../css/homePosts.css" />
          </children>
       </VBox>
-      <Label layoutX="78.0" layoutY="93.0" prefHeight="43.0" prefWidth="112.0" text="Messenger" textFill="WHITE">
+      <Label layoutX="81.0" layoutY="82.0" prefHeight="43.0" prefWidth="112.0" text="Messenger" textFill="WHITE">
          <font>
             <Font name="System Bold" size="17.0" />
          </font>
       </Label>
-      <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="38.0" layoutY="103.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="34.0" layoutY="91.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/messenger_white.png" />
          </image>
@@ -63,8 +50,7 @@
             <Image url="@../images/home_white.png" />
          </image>
       </ImageView>
-      <ScrollBar fx:id="ScrollBar" layoutX="246.0" layoutY="90.0" orientation="VERTICAL" prefHeight="689.0" prefWidth="30.0" stylesheets="@../css/scrollMain.css" />
-      <VBox fx:id="messengerContainer" layoutX="352.0" layoutY="103.0" prefHeight="650.0" prefWidth="668.0" />
+      <VBox fx:id="messengerContainer" layoutX="269.0" layoutY="103.0" prefHeight="650.0" prefWidth="1007.0" />
    </children>
    <padding>
       <Insets bottom="10.0" right="10.0" />

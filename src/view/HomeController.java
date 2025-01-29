@@ -13,6 +13,10 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 public class HomeController extends BaseController {
+    public void initialize(){
+        super.initialize();
+        displayPostsLatest();
+    }
     @Override
     protected void displayPostsLatest() {
         Map<Integer, Post> posts = DatabaseGetter.getAllPosts();
@@ -33,6 +37,14 @@ public class HomeController extends BaseController {
         }
     }
     
+    public void handleHome(MouseEvent event) {
+        System.out.println("Home clicked");
+        try {
+            MainController.gotoHomepage();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    } 
     public void handleProfile(ActionEvent event) {
         System.out.println("Profile clicked");
         try {
@@ -73,10 +85,10 @@ public class HomeController extends BaseController {
             e.printStackTrace();
         }
     }
-    public void handleProfile2(MouseEvent event) {
-        System.out.println("Profile Button clicked!");
+    public void handleSettings(MouseEvent event) {
+        System.out.println("Settings Button clicked!");
         try {
-            MainController.gotoProfile();
+            MainController.gotoSettings();
         } catch (Exception e) {
             e.printStackTrace();
         }

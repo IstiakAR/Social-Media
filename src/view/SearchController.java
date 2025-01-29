@@ -3,9 +3,11 @@ package view;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.ImagePattern;
+import javafx.scene.shape.Circle;
 import main.MainStorage;
 import model.Post;
 import model.User;
@@ -21,12 +23,16 @@ public class SearchController extends HomeController {
     private Button showPosts;
     @FXML
     protected TextField searchText;
+    @FXML
+    private Circle userImage;
 
     private boolean searchPosts = false;
     private String search;
     public void initialize(){
         super.initialize();
         searchText.setText(search);
+        Image im = loadProfilePicture(MainStorage.getUsersIMap().get(LoginController.userID).getProfilePicture(), LoginController.userID);
+        userImage.setFill(new ImagePattern(im));
     }
     @FXML
     public void handleShowPosts(ActionEvent e){
@@ -67,26 +73,13 @@ public class SearchController extends HomeController {
                     .sorted((u1, u2) -> u1.getName().compareToIgnoreCase(u2.getName()))
                     .toList();
             for (User user : users) {
-                VBox userBox = createUserBox(user);
+                RecommandFriends recommandFriends = new RecommandFriends();
+                VBox userBox = recommandFriends.createFriendBox(user);
                 postsContainer.getChildren().add(userBox);
             }
         }
     }
 
-    public VBox createUserBox(User user) {
-        VBox userBox = new VBox();
-        userBox.setStyle("-fx-background-color: #0e1113; -fx-padding: 10; -fx-border-color: #0e1113; -fx-border-width: 1; -fx-border-radius: 5; -fx-background-radius: 5;");
-        userBox.setPrefWidth(400);
-
-        Label userName = new Label(user.getName());
-        userName.setStyle("-fx-font-size: 18px; -fx-text-fill:rgb(169, 22, 22);");
-
-        userBox.getChildren().addAll(userName);
-        userBox.setOnMouseEntered(event -> userBox.setStyle("-fx-background-color: #181c1f; -fx-padding: 10; -fx-border-color: #0e1113;"));
-        userBox.setOnMouseExited(event -> userBox.setStyle("-fx-background-color: #0e1113; -fx-padding: 10; -fx-border-color: #0e1113;"));
-        
-        return userBox;
-    }
     @Override
     protected void displayPostsLatest() {
         return;

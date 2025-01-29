@@ -37,6 +37,8 @@ public class ProfileController {
     private Text email;
     @FXML
     private Text bio;
+    @FXML
+    protected Circle userImage;
 
     private User user;
 
@@ -49,15 +51,8 @@ public class ProfileController {
     public void initialize() {
         user = MainStorage.getUsersIMap().get(LoginController.userID);
 
-        System.out.println(user.getBio() + ' ' + user.getEducation() + ' ' + user.getEmail() + ' ' + user.getWorkplace());
-
         if (user != null) {
-            // String Username = validator(user.getUsername());
-            // String Workplace = validator(user.getWorkplace());
-            // String Education = validator(user.getEducation());
-            // String Email = validator(user.getEmail());
-            // String Bio = validator(user.getBio());
-            String Username = user.getUsername();
+            String Username = user.getName();
             String Workplace = user.getWorkplace();
             String Education = user.getEducation();
             String Email = user.getEmail();
@@ -84,14 +79,22 @@ public class ProfileController {
                     circlepic.setFill(Color.GRAY);
                 }
             } else {
-                System.out.println("No profile picture found for user.");
                 circlepic.setRadius(50);
                 circlepic.setFill(Color.GRAY);
             }
         } else {
             System.out.println("User not found!");
         }
+        BaseController baseController = new BaseController() {
+            @Override
+            protected void displayPostsLatest() {
+                // TODO Auto-generated method stub
+            }
+        };
+        Image im = baseController.loadProfilePicture(MainStorage.getUsersIMap().get(LoginController.userID).getProfilePicture(), LoginController.userID);
+        userImage.setFill(new ImagePattern(im));
     }
+
 
     @FXML
     public void handleChangeProfilePicture(ActionEvent event) {

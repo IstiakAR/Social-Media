@@ -1,15 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox alignment="CENTER" spacing="10.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.AddPostController">
+<VBox fx:id="root" spacing="15.0" stylesheets="@../css/addPost.css" 
+      xmlns="http://javafx.com/javafx/23.0.1" 
+      xmlns:fx="http://javafx.com/fxml/1" 
+      fx:controller="view.AddPostController"
+      styleClass="dialog-container"
+      prefWidth="600.0" prefHeight="400.0"
+      alignment="TOP_LEFT">
+      
+    <padding>
+        <Insets top="15" right="20" bottom="15" left="20"/>
+    </padding>
+
     <children>
-        <Label text="Add New Post" />
-        <TextArea fx:id="postContent" promptText="Enter your post content here..." prefHeight="200.0" prefWidth="300.0" />
-        <Button text="Submit" onAction="#handleSubmit" />
-        <Button text="Cancel" onAction="#handleCancel" />
+        <!-- Header Section -->
+        <HBox styleClass="header" alignment="CENTER_LEFT">
+            <Label text="Add New Post" styleClass="header-label" />
+        </HBox>
+
+        <!-- Content Area -->
+        <TextArea fx:id="postContent" styleClass="text-area" 
+                  promptText="What's on your mind?"
+                  wrapText="true"
+                  maxWidth="1.7976931348623157E308"
+                  prefRowCount="10"/>
+
+        <!-- Button Row -->
+        <HBox spacing="10" alignment="BOTTOM_RIGHT">
+            <Button onAction="#handleCancel" text="Cancel" styleClass="cancel-button" />
+            <Button onAction="#handleSubmit" text="Post" styleClass="submit-button" />
+        </HBox>
     </children>
 </VBox>
