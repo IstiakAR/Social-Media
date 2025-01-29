@@ -38,6 +38,7 @@ public class PostController {
     private TextArea newCommentField;
     @FXML
     private ImageView addCommentButton;
+    @SuppressWarnings("unused")
     @FXML
     public void initialize() {
         ScrollPane.setContent(fullContainer);

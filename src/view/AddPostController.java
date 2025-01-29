@@ -29,7 +29,6 @@ public class AddPostController {
             if (user != null) {
                 Post newPost = new Post(content, user.getUserID());
                 DatabaseInsert.insertPost(newPost);
-                DatabaseInsert.addTotalVote(newPost.getPostID(), 0);
                 MainStorage.addPost(newPost);
                 closeDialog();
             }

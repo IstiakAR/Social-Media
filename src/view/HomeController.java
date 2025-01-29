@@ -13,7 +13,6 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 public class HomeController extends BaseController {
-
     @Override
     protected void displayPostsLatest() {
         Map<Integer, Post> posts = DatabaseGetter.getAllPosts();
@@ -74,7 +73,7 @@ public class HomeController extends BaseController {
             e.printStackTrace();
         }
     }
-    public void handleProfile(MouseEvent event) {
+    public void handleProfile2(MouseEvent event) {
         System.out.println("Profile Button clicked!");
         try {
             MainController.gotoProfile();

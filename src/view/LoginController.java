@@ -62,6 +62,7 @@ public class LoginController {
   }
   @FXML
   public void handleLogin(ActionEvent event) {
+    System.out.println("UserID assigned in LoginController: " + userID);
     passwordClue.setVisible(false);
     String u = loginUsername.getText();
     String p = loginPassword.getText();

@@ -14,6 +14,9 @@ public class User {
   private String bio;
   private byte[] profilePicture;
   private int userID;
+  private String workplace;
+  private String email;
+  private String education;
   private ArrayList<Post> posts = new ArrayList<>();
   private ArrayList<User> friends = new ArrayList<>();
 
@@ -24,6 +27,18 @@ public class User {
     this.clue = clue;
     this.userID = uid;
     this.profilePicture = profilePicture;
+  } 
+  public User(String username, String password, String name,String clue, int uid, byte[] profilePicture, String bio, String education, String workplace, String email) {
+    this.username = username;
+    this.password = password;
+    this.name = name;
+    this.clue = clue;
+    this.userID = uid;
+    this.profilePicture = profilePicture;
+    this.bio = bio;
+    this.education = education;
+    this.workplace = workplace;
+    this.email = email;
   }
   public User(String username, String password, String name,String clue, int uid) {
     this.username = username;
@@ -50,9 +65,6 @@ public class User {
   }
   public String getClue() {
     return clue;
-  }
-  public String getBio() {
-    return bio;
   }
   public byte[] getProfilePicture() {
     return profilePicture;
@@ -98,4 +110,36 @@ public class User {
   public int getPostCount() {
     return posts.size();
   }
+  
+  public String getBio() {
+    return bio;
+}
+
+public void setBio(String bio) {
+    this.bio = bio;
+}
+
+public String getWorkplace() {
+    return workplace;
+}
+
+public void setWorkplace(String workplace) {
+    this.workplace = workplace;
+}
+
+public String getEmail() {
+    return email;
+}
+
+public void setEmail(String email) {
+    this.email = email;
+}
+
+public String getEducation() {
+    return education;
+}
+
+public void setEducation(String education) {
+    this.education = education;
+}
 }

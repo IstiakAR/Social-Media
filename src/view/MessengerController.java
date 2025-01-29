@@ -1,5 +1,6 @@
 package view;
 
+import java.io.ByteArrayInputStream;
 import java.io.DataInputStream;
 import java.io.IOException;
 import java.net.Socket;
@@ -7,13 +8,14 @@ import java.net.Socket;
 import database.DatabaseGetter;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
-import main.MainController;
+import javafx.scene.image.Image;
+import javafx.scene.layout.HBox;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.ImagePattern;
+import javafx.scene.shape.Circle;
 import model.User;
 
 public class MessengerController extends FriendBaseController {
@@ -28,52 +30,72 @@ public class MessengerController extends FriendBaseController {
         }
     }
     @FXML
-    private VBox messengerContainer;  
+    private VBox messengerContainer;
 
+    @SuppressWarnings("unused")
     public VBox createFriendBox(User friend) {
         VBox friendBox = new VBox();
         friendBox.setStyle("-fx-background-color: #0e1113; -fx-padding: 10; -fx-border-color: #0e1113; -fx-border-width: 1; -fx-border-radius: 5; -fx-background-radius: 5;");
         friendBox.setPrefWidth(400);
 
-        Label friendName = new Label(friend.getName());
-        friendName.setStyle("-fx-font-size: 22px; -fx-text-fill:rgb(169, 22, 22);");
+        User user = DatabaseGetter.getUserByID(LoginController.userID);
+        Image profileImage = null;
+        if (user != null) {
+            // Set the profile name        
+            // Get the profile picture byte array
+            byte[] profilePicture = user.getProfilePicture();
+            
+            if (profilePicture != null && profilePicture.length > 0) {
+                try {
+                    
+                profileImage = new Image(new ByteArrayInputStream(profilePicture));
+                
+                } catch (Exception e) {
+                    System.out.println("Error loading profile picture: " + e.getMessage());
+                        profileImage = null;
+            }
+        }
+        else {
+            System.out.println("profilepicture = null");
+        }
+    } else {
+            System.out.println("User not found!");
+        }
 
-        Label friendStatus = new Label(friend.getName());
-        friendStatus.setStyle("-fx-font-size: 18px; -fx-text-fill: #999999;");
+        Circle profileImageView = new Circle(25); // Circle for profile image, radius 25
+        if (profileImage != null) {
+            profileImageView.setFill(new ImagePattern(profileImage));
+        } else {
+            profileImageView.setFill(Color.GRAY); // Fallback color
+        }
+
+        Label friendName = new Label(friend.getName());
+        friendName.setStyle("-fx-font-size: 22px; -fx-text-fill:rgb(153, 153, 153);");
+
+        // Label friendStatus = new Label(friend.getName());
+        // friendStatus.setStyle("-fx-font-size: 18px; -fx-text-fill: #999999;");
 
         Button messageButton = new Button("Message");
         messageButton.setStyle("-fx-background-color: #007BFF; -fx-text-fill: white;");
 
         messageButton.setOnAction(event -> {
-    
-              messengerContainer.getChildren().clear();
+            messengerContainer.getChildren().clear();
 
-              Label senderNameLabel = new Label("Message to " + friend.getName());
+            Label senderNameLabel = new Label("Message to " + friend.getName());
             senderNameLabel.setStyle("-fx-font-size: 18px; -fx-text-fill:rgb(234, 11, 11); -fx-padding: 10;");
-            // Add the sender name label at the top of the messengerContainer
             messengerContainer.getChildren().add(senderNameLabel);
 
-            // Create a new Messenger instance for the selected friend
             Messenger messenger = new Messenger(friend.getUserID(), LoginController.userID);
-
-            // Add the Messenger view to the container
             messengerContainer.getChildren().add(messenger);
         });
 
-        friendBox.getChildren().addAll(friendName, friendStatus, messageButton);
+        HBox friendInfo = new HBox(10, profileImageView, new VBox(friendName));
+        friendBox.getChildren().addAll(friendInfo, messageButton);
+
         friendBox.setOnMouseEntered(event -> friendBox.setStyle("-fx-background-color: #181c1f; -fx-padding: 10; -fx-border-color: #0e1113;"));
         friendBox.setOnMouseExited(event -> friendBox.setStyle("-fx-background-color: #0e1113; -fx-padding: 10; -fx-border-color: #0e1113;"));
 
         return friendBox;
-    }
-
-    public void handleHome(MouseEvent event) {
-        System.out.println("Home Button clicked!");
-        try {
-            MainController.gotoHomepage();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
     
     public class MessageReceiver implements Runnable {

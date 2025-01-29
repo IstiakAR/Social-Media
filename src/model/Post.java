@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import database.DatabaseUpdate;
 import main.MainStorage;
 
 public class Post {
@@ -33,17 +32,8 @@ public class Post {
 
     public Comment addComment(String text, int userID) {
         Comment comment = new Comment(text, this.postID, userID);
-		// this.commentCount++;
         return comment;
     }
-
-    // public void addReaction(int reactionID, int react, int userID) {
-    //     // Reaction reaction = new Reaction(react, postID, userID);
-    //     if (react == 1)
-    //         this.totalReaction += 1;
-    //     else if (react == -1)
-    //         this.totalReaction -= 1;
-    // }
 
     private void generatePostID() {
         int n;
@@ -80,8 +70,6 @@ public class Post {
         this.postID = postID;
     }
 
-
-
     public int getUserID() {
         return userID;
     }
@@ -108,20 +96,7 @@ public class Post {
         return comments;
     }
 
-    //vote
-
-    public int getReaction(int userID) {
-        Reaction reaction = MainStorage.getReactions().get(userID);
-        if (reaction == null) {
-            return 0;
-        }
-        return reaction.getReact();
-    }
     public int getTotalReaction() {
         return totalReaction;
-    }
-    public void setTotalReaction(int totalReaction) {
-        this.totalReaction = totalReaction;
-        DatabaseUpdate.updateTotalVotes(this.getPostID(), totalReaction);
     }
 }
