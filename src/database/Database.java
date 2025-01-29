@@ -39,9 +39,9 @@ public class Database {
             + "clue TEXT NOT NULL,"
             + "profilePicture BLOB,"
             + "Bio TEXT,"
-            + "Education TEXT"
+            + "Education TEXT,"
             + "Workplace TEXT,"
-            + "Email TEXT,"
+            + "Email TEXT"
             + ");";
 
         String postsTable = "CREATE TABLE IF NOT EXISTS posts ("
