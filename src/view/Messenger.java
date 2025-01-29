@@ -24,6 +24,7 @@ public class Messenger extends VBox {
     private final VBox messageContainer = new VBox();
     private final ScrollPane scrollPane = new ScrollPane();
 
+    @SuppressWarnings("unused")
     public Messenger(int userId, int friendId) {
         this.userId = userId;
         this.friendId = friendId;

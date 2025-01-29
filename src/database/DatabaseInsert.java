@@ -11,7 +11,7 @@ import model.User;
 
 public class DatabaseInsert {
     public static void insertUser(User user) {
-        String sql = "INSERT INTO users(userID, username, password, name, clue, profilePicture) VALUES(?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO users(userID, username, password, name, clue, profilePicture, bio, workplace, email, education) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         try (PreparedStatement pstmt = Database.connect().prepareStatement(sql)) {
             pstmt.setInt(1, user.getUserID());
@@ -20,6 +20,10 @@ public class DatabaseInsert {
             pstmt.setString(4, user.getName());
             pstmt.setString(5, user.getClue());
             pstmt.setBytes(6, user.getProfilePicture());
+            pstmt.setString(7, user.getBio());
+            pstmt.setString(8, user.getWorkplace());
+            pstmt.setString(9, user.getEmail());
+            pstmt.setString(10, user.getEducation());
             pstmt.executeUpdate();
             System.out.println("User inserted.");
         } catch (SQLException e) {

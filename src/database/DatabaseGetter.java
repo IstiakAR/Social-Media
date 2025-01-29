@@ -26,7 +26,11 @@ public class DatabaseGetter {
                     rs.getString("name"),
                     rs.getString("clue"),
                     rs.getInt("userID"),
-                    rs.getBytes("profilePicture")
+                    rs.getBytes("profilePicture"),
+                    rs.getString("Bio"),
+                    rs.getString("Education"),
+                    rs.getString("Workplace"),
+                    rs.getString("Email")
                 );
                 users.add(user);
             }
@@ -39,10 +43,10 @@ public class DatabaseGetter {
     public static User getUserByID(int userID) {
         String sql = "SELECT * FROM users WHERE userID = ?";
         User user = null;
-
+    
         try (PreparedStatement pstmt = Database.connect().prepareStatement(sql)) {
+            pstmt.setInt(1, userID);
             ResultSet rs = pstmt.executeQuery();
-
             if (rs.next()) {
                 user = new User(
                     rs.getString("username"),
@@ -52,9 +56,12 @@ public class DatabaseGetter {
                     rs.getInt("userID"),
                     rs.getBytes("profilePicture")
                 );
+                System.out.println("User fetched successfully: " + user.getUsername());
+            } else {
+                System.out.println("No user found with userID: " + userID);
             }
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            System.out.println("Error fetching user: " + e.getMessage());
         }
         return user;
     }
