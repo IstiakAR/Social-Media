@@ -74,7 +74,7 @@ public class HomeController extends BaseController {
             e.printStackTrace();
         }
     }
-    public void handleProfile(MouseEvent event) {
+    public void handleProfile2(MouseEvent event) {
         System.out.println("Profile Button clicked!");
         try {
             MainController.gotoProfile();

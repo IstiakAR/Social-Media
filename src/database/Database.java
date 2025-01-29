@@ -37,8 +37,13 @@ public class Database {
             + "password TEXT NOT NULL,"
             + "name TEXT NOT NULL,"
             + "clue TEXT NOT NULL,"
-            + "profilePicture BLOB"
+            + "profilePicture BLOB,"
+            + "Bio TEXT,"
+            + "Education TEXT"
+            + "Workplace TEXT,"
+            + "Email TEXT,"
             + ");";
+    
 
         String postsTable = "CREATE TABLE IF NOT EXISTS posts ("
             + "postID INTEGER PRIMARY KEY,"

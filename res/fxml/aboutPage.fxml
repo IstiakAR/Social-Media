@@ -18,13 +18,11 @@
 <AnchorPane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="759.0" prefWidth="1293.0" style="-fx-background-color: black;" AnchorPane.leftAnchor="64.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.AboutController">
    <children>
       <Line endX="13.0" endY="103.0" layoutX="477.0" layoutY="313.0" startX="13.0" startY="-181.0" stroke="#244855" />
-      <TextField fx:id="Livingplace" layoutX="521.0" layoutY="80.0" prefHeight="45.0" prefWidth="675.0" promptText="Add Living place" />
+      <TextField fx:id="Education" layoutX="521.0" layoutY="80.0" prefHeight="45.0" prefWidth="675.0" promptText="Add Education" />
       <TextField fx:id="Workplace" layoutX="522.0" layoutY="153.0" prefHeight="45.0" prefWidth="675.0" promptText="Add Workplace" />
-      <TextField fx:id="College" layoutX="526.0" layoutY="311.0" prefHeight="45.0" prefWidth="675.0" promptText="Add College name" />
-      <Button layoutX="671.0" layoutY="695.0" mnemonicParsing="false" onAction="#goback" prefHeight="16.0" prefWidth="109.0" text="Done" />
-      <TextField fx:id="University" layoutX="522.0" layoutY="229.0" prefHeight="45.0" prefWidth="675.0" promptText="Add University Name" />
-      <TextField fx:id="School" layoutX="526.0" layoutY="388.0" prefHeight="45.0" prefWidth="675.0" promptText="Add School Name" />
-      <TextArea fx:id="Bio" layoutX="529.0" layoutY="464.0" prefHeight="150.0" prefWidth="675.0" promptText="Describe yourself...." />
+      <Button layoutX="1088.0" layoutY="514.0" mnemonicParsing="false" onAction="#handleSave" prefHeight="16.0" prefWidth="109.0" text="Save" />
+      <TextField fx:id="Email" layoutX="522.0" layoutY="229.0" prefHeight="45.0" prefWidth="675.0" promptText="Add Email Adress" />
+      <TextArea fx:id="Bio" layoutX="522.0" layoutY="312.0" prefHeight="150.0" prefWidth="675.0" promptText="Describe yourself...." />
       <HBox alignment="CENTER_LEFT" layoutX="24.0" layoutY="22.0" prefHeight="45.0" prefWidth="245.0" style="-fx-background-radius: 100;">
          <children>
             <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
@@ -39,15 +37,7 @@
             </Text>
          </children>
       </HBox>
-      <HBox alignment="CENTER_LEFT" layoutY="80.0" prefHeight="40.0" prefWidth="267.0" style="-fx-background-radius: 100;">
-         <opaqueInsets>
-            <Insets />
-         </opaqueInsets>
-         <padding>
-            <Insets left="30.0" />
-         </padding>
-      </HBox>
-      <VBox layoutX="16.0" layoutY="132.0" prefHeight="382.0" prefWidth="235.0">
+      <VBox layoutX="24.0" layoutY="84.0" prefHeight="303.0" prefWidth="245.0">
          <children>
             <HBox alignment="CENTER_LEFT" prefHeight="40.0" prefWidth="267.0" style="-fx-background-radius: 100;">
                <children>
@@ -62,7 +52,7 @@
                         <Insets right="5.0" />
                      </HBox.margin>
                   </ImageView>
-                  <Hyperlink onAction="#handleHome" text="Back" textFill="WHITE">
+                  <Hyperlink onAction="#handleBack" text="Back" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="17.0" />
                      </font>
@@ -81,75 +71,7 @@
                   <Insets bottom="5.0" />
                </VBox.margin>
             </HBox>
-            <HBox alignment="CENTER_LEFT" prefHeight="40.0" prefWidth="267.0" style="-fx-background-radius: 100;">
-               <padding>
-                  <Insets left="30.0" />
-               </padding>
-            </HBox>
-            <HBox alignment="CENTER_LEFT" prefHeight="45.0" prefWidth="269.0" style="-fx-background-radius: 100;">
-               <padding>
-                  <Insets left="30.0" />
-               </padding>
-               <VBox.margin>
-                  <Insets bottom="5.0" />
-               </VBox.margin>
-            </HBox>
-            <HBox alignment="CENTER_LEFT" prefHeight="40.0" prefWidth="267.0" style="-fx-background-radius: 100;">
-               <padding>
-                  <Insets left="30.0" />
-               </padding>
-               <VBox.margin>
-                  <Insets bottom="5.0" />
-               </VBox.margin>
-            </HBox>
-            <HBox alignment="CENTER_LEFT" prefHeight="40.0" prefWidth="267.0" style="-fx-background-radius: 100;">
-               <padding>
-                  <Insets left="30.0" />
-               </padding>
-               <VBox.margin>
-                  <Insets bottom="5.0" />
-               </VBox.margin>
-            </HBox>
-            <HBox alignment="CENTER_LEFT" prefHeight="40.0" prefWidth="267.0" style="-fx-background-radius: 100;">
-               <padding>
-                  <Insets left="30.0" />
-               </padding>
-               <VBox.margin>
-                  <Insets bottom="5.0" />
-               </VBox.margin>
-            </HBox>
-            <HBox alignment="CENTER_LEFT" prefHeight="40.0" prefWidth="267.0" style="-fx-background-radius: 100;">
-               <padding>
-                  <Insets left="30.0" />
-               </padding>
-               <VBox.margin>
-                  <Insets bottom="5.0" />
-               </VBox.margin>
-            </HBox>
          </children>
       </VBox>
-      <HBox alignment="CENTER_LEFT" layoutX="13.0" layoutY="688.0" prefHeight="40.0" prefWidth="267.0" style="-fx-background-radius: 100;">
-         <children>
-            <ImageView accessibleRole="BUTTON" fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../images/help_white.png" />
-               </image>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-               <HBox.margin>
-                  <Insets right="15.0" />
-               </HBox.margin>
-            </ImageView>
-            <Text fill="#eceff1" strokeType="OUTSIDE" strokeWidth="0.0" text="Help" wrappingWidth="58.18199920654297">
-               <font>
-                  <Font name="System Bold" size="17.0" />
-               </font>
-            </Text>
-         </children>
-         <padding>
-            <Insets left="30.0" />
-         </padding>
-      </HBox>
    </children>
 </AnchorPane>

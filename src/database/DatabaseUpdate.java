@@ -8,6 +8,7 @@ import java.sql.SQLException;
 
 import main.MainStorage;
 import model.Reaction;
+import model.User;
 
 public class DatabaseUpdate {
     public static void updateUserProfilePicture(int userID, byte[] profilePicture) {
@@ -49,7 +50,7 @@ public class DatabaseUpdate {
             System.out.println("Error: " + e.getMessage());
         }
     }
-    
+  
     public static void updateVote(int vote, int postID, int userID) {
         String sql = "UPDATE votes SET vote = ? WHERE postID = ? AND userID = ?";
 
@@ -78,6 +79,26 @@ public class DatabaseUpdate {
             System.out.println("Total votes updated.");
         } catch (SQLException e) {
             System.out.println(e.getMessage());
+        }
+    }
+    public static void updateUserDetails(User user) {
+        System.out.println("Bio" + user.getBio() + ' ' + user.getEducation() + ' ' + user.getWorkplace() + ' ' + user.getEmail());
+        String sql = "UPDATE users SET Bio = ?, Education = ?, Workplace = ?, Email = ? WHERE userID = ?";
+        try (PreparedStatement pstmt = Database.connect().prepareStatement(sql)) {
+            pstmt.setString(1, user.getBio());
+            pstmt.setString(2, user.getEducation());
+            pstmt.setString(3, user.getWorkplace());
+            pstmt.setString(4, user.getEmail());
+            pstmt.setInt(5, user.getUserID());
+
+            int rowsAffected = pstmt.executeUpdate();
+            if (rowsAffected > 0) {
+                System.out.println("User details updated successfully.");
+            } else {
+                System.out.println("No user found with the given ID.");
+            }
+        } catch (SQLException e) {
+            System.out.println("Error updating user details: " + e.getMessage());
         }
     }
 }

@@ -1,5 +1,7 @@
 package view;
 
+import java.io.ByteArrayInputStream;
+
 import database.DatabaseGetter;
 import database.DatabaseUpdate;
 import javafx.fxml.FXML;
@@ -7,9 +9,12 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollBar;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.image.Image;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-
+import javafx.scene.paint.Color;
+import javafx.scene.paint.ImagePattern;
+import javafx.scene.shape.Circle;
 import main.*;
 import model.*;
 
@@ -138,13 +143,40 @@ public abstract class BaseController {
         Label postContent = new Label(post.getPostContent());
         postContent.setStyle("-fx-font-size: 14px; -fx-text-fill: #ffffff;");
         postContent.setWrapText(true);
-
+        User user = MainStorage.getUsersIMap().get(post.getUserID());
+        if (user == null) {
+            System.out.println("Error: User not found for ID: " + post.getUserID());
+        }
+        
+        byte[] profilePicture = user.getProfilePicture();
+        Image profileImage = null;
+        if (profilePicture != null && profilePicture.length > 0) {
+            try {
+                System.out.println("Profile picture found, size: " + profilePicture.length);
+                profileImage = new Image(new ByteArrayInputStream(profilePicture));
+            } catch (Exception e) {
+                System.out.println("Error loading profile picture: " + e.getMessage());
+                profileImage = null;
+            }
+        } else {
+            System.out.println("Error: Profile picture is null or empty for user ID: " + post.getUserID());
+            profileImage = null;
+        }
+        
+        Circle postImage = new Circle(15); // Set radius to ensure the circle is visible
+        if (profileImage != null) {
+            postImage.setFill(new ImagePattern(profileImage));
+        } else {
+            // Fallback color (e.g., gray)
+            postImage.setFill(Color.GRAY);
+        }
+        
         HBox authorDateBox = new HBox();
         Label postAuthor = new Label(MainStorage.getUsersIMap().get(post.getUserID()).getName());
-        postAuthor.setStyle("-fx-font-size: 12px; -fx-text-fill: #999999;");
+        postAuthor.setStyle("-fx-font-size: 18px; -fx-text-fill: #999999;");
         Label postDate = new Label(post.getCreationTime());
         postDate.setStyle("-fx-font-size: 12px; -fx-text-fill: #999999;");
-        authorDateBox.getChildren().addAll(postAuthor, new Label(" | "), postDate);
+        authorDateBox.getChildren().addAll(postImage, postAuthor, new Label(" | "), postDate);
         authorDateBox.setStyle("-fx-spacing: 5;");
 
         contentBox.getChildren().addAll(authorDateBox,postContent, voteBox);

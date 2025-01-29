@@ -13,8 +13,24 @@ import model.Post;
 import model.User;
 
 public class DatabaseInsert {
+    // public static void insertUser(User user) {
+    //     String sql = "INSERT INTO users(userID, username, password, name, clue, profilePicture) VALUES(?, ?, ?, ?, ?, ?)";
+
+    //     try (PreparedStatement pstmt = Database.connect().prepareStatement(sql)) {
+    //         pstmt.setInt(1, user.getUserID());
+    //         pstmt.setString(2, user.getUsername());
+    //         pstmt.setString(3, user.getPassword());
+    //         pstmt.setString(4, user.getName());
+    //         pstmt.setString(5, user.getClue());
+    //         pstmt.setBytes(6, user.getProfilePicture());
+    //         pstmt.executeUpdate();
+    //         System.out.println("User inserted.");
+    //     } catch (SQLException e) {
+    //         System.out.println(e.getMessage());
+    //     }
+    // }
     public static void insertUser(User user) {
-        String sql = "INSERT INTO users(userID, username, password, name, clue, profilePicture) VALUES(?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO users(userID, username, password, name, clue, profilePicture, bio, workplace, email, education) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         try (PreparedStatement pstmt = Database.connect().prepareStatement(sql)) {
             pstmt.setInt(1, user.getUserID());
@@ -23,12 +39,31 @@ public class DatabaseInsert {
             pstmt.setString(4, user.getName());
             pstmt.setString(5, user.getClue());
             pstmt.setBytes(6, user.getProfilePicture());
+            pstmt.setString(7, user.getBio());
+            pstmt.setString(8, user.getWorkplace());
+            pstmt.setString(9, user.getEmail());
+            pstmt.setString(10, user.getEducation());
             pstmt.executeUpdate();
             System.out.println("User inserted.");
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
     }
+
+    // public static void updateUserDetails(User user) {
+    //     String sql = "UPDATE users SET bio = ?, workplace = ?, education = ? WHERE userID = ?";
+
+    //     try (PreparedStatement pstmt = Database.connect().prepareStatement(sql)) {
+    //         pstmt.setString(1, user.getBio());
+    //         pstmt.setString(2, user.getWorkplace());
+    //         pstmt.setString(3, user.getEducation());
+    //         pstmt.setInt(4, user.getUserID());
+    //         pstmt.executeUpdate();
+    //         System.out.println("User details updated.");
+    //     } catch (SQLException e) {
+    //         System.out.println(e.getMessage());
+    //     }
+    // }
 
     public static void insertPost(Post post) {
         String sql = "INSERT INTO posts(postID, postContent, userID, creationTime) VALUES(?, ?, ?, ?)";
@@ -130,6 +165,33 @@ public class DatabaseInsert {
         }
     }
 
+    // public static void addProfilePicture(int userId, File imageFile) {
+    //     System.out.println("Add Profile Picture called");
+    //     String sql = "UPDATE users SET profilePicture = ? WHERE userId = ?";
+    
+    //     try (Connection conn = Database.connect();
+    //          PreparedStatement pstmt = conn.prepareStatement(sql);
+    //          FileInputStream fis = new FileInputStream(imageFile)) {
+    
+    //         // Set the parameters for the query
+    //         pstmt.setInt(1, userId); // userId is the second parameter
+    //         pstmt.setBinaryStream(6, fis, imageFile.length()); // Corrected parameter index
+    
+    //         // Execute the update
+    //         int rowsUpdated = pstmt.executeUpdate();
+    
+    //         if (rowsUpdated > 0) {
+    //             System.out.println("Profile picture updated successfully for user ID: " + userId);
+    //         } else {
+    //             System.out.println("User ID not found. No update made.");
+    //         }
+    
+    //     } catch (SQLException e) {
+    //         System.out.println("SQL Error: " + e.getMessage());
+    //     } catch (Exception e) {
+    //         System.out.println("Error: " + e.getMessage());
+    //     }
+    // }
     public static void addProfilePicture(int userId, File imageFile) {
         System.out.println("Add Profile Picture called");
         String sql = "UPDATE users SET profilePicture = ? WHERE userId = ?";
@@ -139,8 +201,8 @@ public class DatabaseInsert {
              FileInputStream fis = new FileInputStream(imageFile)) {
     
             // Set the parameters for the query
-            pstmt.setInt(1, userId); // userId is the second parameter
-            pstmt.setBinaryStream(6, fis, imageFile.length()); // Corrected parameter index
+            pstmt.setBinaryStream(1, fis, (int) imageFile.length()); // Set profile picture as the first parameter
+            pstmt.setInt(2, userId); // Set userId as the second parameter
     
             // Execute the update
             int rowsUpdated = pstmt.executeUpdate();
