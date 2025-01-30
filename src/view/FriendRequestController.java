@@ -44,8 +44,8 @@ public class FriendRequestController extends FriendBaseController {
         // Profile Image
         User user = DatabaseGetter.getUserByID(LoginController.userID);
         Image profileImage = null;
-        if (user != null) {
-            byte[] profilePicture = user.getProfilePicture();
+        if (friend != null) {
+            byte[] profilePicture = friend.getProfilePicture();
             if (profilePicture != null && profilePicture.length > 0) {
                 try {
                     profileImage = new Image(new ByteArrayInputStream(profilePicture));
@@ -55,11 +55,11 @@ public class FriendRequestController extends FriendBaseController {
             }
         }
 
-        Circle profileImageView = new Circle(25); // Circle for profile image, radius 25
+        Circle profileImageView = new Circle(25);
         if (profileImage != null) {
             profileImageView.setFill(new ImagePattern(profileImage));
         } else {
-            profileImageView.setFill(Color.GRAY); // Fallback color
+            profileImageView.setFill(Color.GRAY);
         }
 
         HBox profileBox = new HBox(profileImageView, friendName);

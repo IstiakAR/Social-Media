@@ -6,15 +6,18 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import main.MainStorage;
 
 import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
 import java.util.function.Consumer;
 
 import database.DatabaseInsert;
 
 public class AddProfilePictureController {
     
-    private Consumer<Void> onCloseCallback;
+    private Consumer<Image> profileUpdateCallback;
     private static File selectedFile;
 
     @FXML
@@ -43,19 +46,23 @@ public class AddProfilePictureController {
     }
 
     @FXML
-    public void handlesetprofilepic(ActionEvent e){
-        DatabaseInsert.addProfilePicture(LoginController.userID, selectedFile);
+    public void handlesetprofilepic(ActionEvent e) throws IOException{
+        if (selectedFile != null) {
+            byte[] fileContent = Files.readAllBytes(selectedFile.toPath());
+            DatabaseInsert.addProfilePicture(LoginController.userID, selectedFile);
+            MainStorage.getUsersIMap().get(LoginController.userID).setProfilePicture(fileContent);
+            closeDialog();
+        }
     }
-
-    public void setOnCloseCallback(Consumer<Void> onCloseCallback) {
-        this.onCloseCallback = onCloseCallback;
+    public void setProfileUpdateCallback(Consumer<Image> callback) {
+        this.profileUpdateCallback = callback;
     }
     
     private void closeDialog() {
         Stage stage = (Stage) profilepic.getScene().getWindow();
         stage.close();
-        if (onCloseCallback != null) {
-            onCloseCallback.accept(null);
+        if (profileUpdateCallback != null) {
+            profileUpdateCallback.accept(null);
         }
     }
 }

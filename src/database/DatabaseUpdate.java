@@ -9,6 +9,30 @@ import java.sql.SQLException;
 import model.User;
 
 public class DatabaseUpdate {
+	public static void updateName(int userID, String name) {
+		String sql = "UPDATE users SET name = ? WHERE userID = ?";
+
+		try (PreparedStatement pstmt = Database.connect().prepareStatement(sql)) {
+		pstmt.setString(1, name);
+		pstmt.setInt(2, userID);
+		pstmt.executeUpdate();
+		System.out.println("Name updated.");
+		} catch (SQLException e) {
+		System.out.println(e.getMessage());
+		}
+	}
+	public static void updatePassword(int userID, String p) {
+		String sql = "UPDATE users SET password = ? WHERE userID = ?";
+
+		try (PreparedStatement pstmt = Database.connect().prepareStatement(sql)) {
+		pstmt.setString(1, p);
+		pstmt.setInt(2, userID);
+		pstmt.executeUpdate();
+		System.out.println("Password updated.");
+		} catch (SQLException e) {
+		System.out.println(e.getMessage());
+		}
+	}
 	public static void updateUserProfilePicture(int userID, byte[] profilePicture) {
 		String sql = "UPDATE users SET profilePicture = ? WHERE userID = ?";
 

@@ -9,19 +9,21 @@ import javafx.scene.control.ScrollBar;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.ScrollPane.ScrollBarPolicy;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.ImagePattern;
+import javafx.scene.shape.Circle;
 import javafx.scene.layout.Region;
 
 import main.*;
 import model.*;
 
-public class PostController {
+public class PostController extends BaseController {
     Post post;
-    @FXML
-    private ImageView userAvatar;
     @FXML
     private HBox postInfo;
     @FXML
@@ -38,6 +40,9 @@ public class PostController {
     private TextArea newCommentField;
     @FXML
     private ImageView addCommentButton;
+    @FXML
+    private Circle userImage;
+
     @SuppressWarnings("unused")
     @FXML
     public void initialize() {
@@ -95,9 +100,46 @@ public class PostController {
     public void displayPost(Post post, int postID) {
         this.post = post;
         post.setPostID(postID);
-        System.out.println(post.getPostID());
-        String userName = MainStorage.getUsersIMap().get(post.getUserID()).getName();
-        postInfo.getChildren().addAll(new Label(userName), new Label(post.getCreationTime().toString()));
+
+        int userID = LoginController.userID;
+
+        BaseController baseController = new BaseController() {
+            @Override
+            protected void displayPostsLatest() {
+                
+            }
+        };
+
+        User user = MainStorage.getUsersIMap().get(userID);
+        byte[] profilePicture = user.getProfilePicture();
+        int userId = post.getUserID();
+        User postUser = MainStorage.getUsersIMap().get(userId);
+        byte[] postPicture = postUser.getProfilePicture();
+    
+        Image profileImage = baseController.loadProfilePicture(profilePicture, userId);
+        Image postImage = baseController.loadProfilePicture(postPicture, userId);
+    
+        Circle postCircle = new Circle(18);
+        if (profileImage != null) {
+            postCircle.setFill(new ImagePattern(postImage));
+            userImage.setFill(new ImagePattern(profileImage));
+        } else {
+            postCircle.setFill(Color.GRAY);
+            userImage.setFill(Color.GRAY);
+        }
+
+        HBox voteBox = baseController.getVoteBox(post);
+
+        String userName = postUser.getName();
+        Label userNameLabel = new Label(userName);
+        userNameLabel.setStyle("-fx-font-size: 16px; -fx-font-weight: bold;");
+        
+        Label postTimeLabel = new Label(post.getCreationTime().toString());
+        VBox postDetails = new VBox(userNameLabel, postTimeLabel);
+        postDetails.setSpacing(5);
+        
+        postInfo.getChildren().addAll(postCircle, postDetails, voteBox);
+        postInfo.setSpacing(10);
         postContent.setText(post.getPostContent());
 
         List<Comment> comments = post.getComments();
@@ -118,14 +160,12 @@ public class PostController {
             VBox commentBox = createCommentBox(comment);
             commentsContainer.getChildren().add(0, commentBox);
             newCommentField.clear();
-            // displayPost(post, post.getPostID());
         }
     }
-    public void handleHome(MouseEvent event) {
-        try {
-            MainController.gotoHomepage();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+
+    @Override
+    protected void displayPostsLatest() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'displayPostsLatest'");
     }
 }

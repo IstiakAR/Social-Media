@@ -4,17 +4,24 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.ScrollBar;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.image.Image;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.ImagePattern;
+import javafx.scene.shape.Circle;
 import main.MainController;
+import main.MainStorage;
 import model.User;
 
-public abstract class FriendBaseController {
+public abstract class FriendBaseController extends SearchController {
     @FXML
     protected ScrollBar ScrollBar;
     @FXML
     protected ScrollPane ScrollPane;
     @FXML
     protected VBox friendListContainer;
+    @FXML
+    protected Circle userImage;
+
 
     @SuppressWarnings("unused")
 
@@ -26,8 +33,10 @@ public abstract class FriendBaseController {
         friendListContainer.heightProperty().addListener((obs, oldVal, newVal) -> updateScrollBarVisibility());
         ScrollPane.heightProperty().addListener((obs, oldVal, newVal) -> updateScrollBarVisibility());
         updateScrollBarVisibility();
-        
-        System.out.println("initialize called");
+
+        Image im = loadProfilePicture(MainStorage.getUsersIMap().get(LoginController.userID).getProfilePicture(), LoginController.userID);
+        if(im!=null)
+            userImage.setFill(new ImagePattern(im));
     	displayFriendList();
     }
     public void updateScrollBarVisibility() {
@@ -37,7 +46,6 @@ public abstract class FriendBaseController {
 
     public abstract void displayFriendList();
     public abstract VBox createFriendBox(User friend);
-
 
     public void handleHome(ActionEvent event) {
         System.out.println("Home Button clicked!");

@@ -5,12 +5,17 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox alignment="CENTER" prefHeight="448.0" prefWidth="439.0" spacing="10.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.AddProfilePictureController">
+<VBox alignment="CENTER" prefHeight="448.0" prefWidth="439.0" spacing="20.0" style="-fx-background-color: #0e1113; -fx-padding: 30;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.AddProfilePictureController">
+    
     <children>
-        <Label text="Add profile picture" />
-      <ImageView fx:id="profilepic" fitHeight="199.0" fitWidth="263.0" pickOnBounds="true" preserveRatio="true" />
-        <Button fx:id="Addpicture" onAction="#handleAddPicture" text="AddPicture" />
-        <Button onAction="#handleCancel" text="Cancel" />
-      <Button onAction="#handlesetprofilepic" text="Set this as profile picture" />
+        <Label style="-fx-text-fill: white; -fx-font-size: 24; -fx-font-weight: bold;" text="Add Profile Picture" />
+        
+        <ImageView fx:id="profilepic" fitHeight="200.0" fitWidth="200.0" style="-fx-border-color: #2F3336; -fx-border-width: 2; -fx-border-radius: 100; -fx-background-radius: 100;" />
+        
+        <Button fx:id="Addpicture" onAction="#handleAddPicture" style="-fx-background-color: #ffffff; -fx-text-fill: black; -fx-font-weight: bold; -fx-background-radius: 20; -fx-padding: 10 30;" text="Add Picture" />
+        
+        <Button onAction="#handlesetprofilepic" style="-fx-background-color: #ffffff; -fx-text-fill: black; -fx-font-weight: bold; -fx-background-radius: 20; -fx-padding: 10 30;" text="Set as Profile Picture" />
+        
+        <Button onAction="#handleCancel" style="-fx-background-color: transparent; -fx-border-color: #2F3336; -fx-text-fill: white; -fx-border-radius: 20; -fx-background-radius: 20; -fx-padding: 10 30;" text="Cancel" />
     </children>
 </VBox>

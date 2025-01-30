@@ -14,13 +14,12 @@ import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import main.*;
 import model.*;
 
-public abstract class BaseController {
+public abstract class BaseController extends Handler {
     @FXML
     protected ScrollBar ScrollBar;
     @FXML
@@ -29,6 +28,8 @@ public abstract class BaseController {
     protected VBox postsContainer;
     @FXML
     protected TextField searchText;
+    @FXML
+    protected Circle userImage;
 
     @SuppressWarnings("unused")
     @FXML
@@ -41,7 +42,10 @@ public abstract class BaseController {
         ScrollPane.heightProperty().addListener((obs, oldVal, newVal) -> updateScrollBarVisibility());
         updateScrollBarVisibility();
         
-        displayPostsLatest();
+        Image profileImage = loadProfilePicture(MainStorage.getUsersIMap().get(LoginController.userID).getProfilePicture(), LoginController.userID);
+        if(profileImage!=null) userImage.setFill(new ImagePattern(profileImage));
+
+        // displayPostsLatest();
     }
 
     protected abstract void displayPostsLatest();
@@ -51,18 +55,24 @@ public abstract class BaseController {
         ScrollBar.setVisible(shouldShowScrollBar);
     }
 
-    @SuppressWarnings("unused")
-    protected VBox createPostBox(Post post, int postID) {
-        post.setPostID(postID);
-        VBox postBox = new VBox();
-        HBox voteBox = new HBox();
+    protected Image loadProfilePicture(byte[] pictureData, int userId) {
+        if (pictureData != null && pictureData.length > 0) {
+            try {
+                // System.out.println("Profile picture found for user ID " + userId + ", size: " + pictureData.length);
+                return new Image(new ByteArrayInputStream(pictureData));
+            } catch (Exception e) {
+                System.out.println("Error loading profile picture for user ID " + userId + ": " + e.getMessage());
+            }
+        } else {
+            System.out.println("Error: Profile picture is null " + userId);
+        }
+        return null;
+    }
+    protected HBox getVoteBox(Post post){
         HBox voteTempBox = new HBox();
         Button upvoteButton = new Button("▲");
-        postBox.setStyle("-fx-background-color: #0e1113; -fx-padding: 10; -fx-border-color: #0e1113; -fx-border-width: 1; -fx-border-radius: 5; -fx-background-radius: 5;");
-        postBox.prefWidthProperty().bind(ScrollPane.widthProperty().subtract(20));
 
         String buttonStyle = "-fx-background-color: #0e1113; -fx-text-fill: #ffffff; -fx-padding: 5; -fx-border-color: #0e1113; -fx-border-width: 1; -fx-border-radius: 10; -fx-background-radius: 10;";
-        //String buttonHoverStyle = "-fx-background-color: #181c1f; -fx-text-fill: #ffffff; -fx-padding: 5; -fx-border-color: #181c1f; -fx-border-width: 1; -fx-border-radius: 10; -fx-background-radius: 10;";
         String buttonClickStyle = "-fx-background-color: blue; -fx-text-fill: white; -fx-padding: 5; -fx-border-color: #0e1113; -fx-border-width: 1; -fx-border-radius: 10; -fx-background-radius: 10;";
 
         Label voteCount = new Label(String.valueOf(DatabaseGetter.getTotalVotes(post.getPostID())));
@@ -81,9 +91,43 @@ public abstract class BaseController {
         });
         
         voteTempBox.getChildren().addAll(upvoteButton, voteCount);
-        voteTempBox.setStyle("-fx-background-color: #2a3236; -fx-background-radius: 10; -fx-alignment:CENTER;");
+        voteTempBox.setStyle("-fx-background-color: #0e1113; -fx-background-radius: 10; -fx-alignment:CENTER;");
+
+        return voteTempBox;
+    }
+    @SuppressWarnings("unused")
+    protected VBox createPostBox(Post post, int postID) {
+        post.setPostID(postID);
+        VBox postBox = new VBox();
+        HBox voteBox = new HBox();
+        HBox voteTempBox = new HBox();
+        Button upvoteButton = new Button("▲");
+        postBox.setStyle("-fx-background-color: #0e1113; -fx-padding: 10; -fx-border-color: #0e1113; -fx-border-width: 1; -fx-border-radius: 5; -fx-background-radius: 5;");
+        postBox.prefWidthProperty().bind(ScrollPane.widthProperty().subtract(20));
+
+        String buttonStyle = "-fx-background-color: #0e1113; -fx-text-fill: #ffffff; -fx-padding: 5; -fx-border-color: #0e1113; -fx-border-width: 1; -fx-border-radius: 10; -fx-background-radius: 10;";
+        String buttonClickStyle = "-fx-background-color: blue; -fx-text-fill: white; -fx-padding: 5; -fx-border-color: #0e1113; -fx-border-width: 1; -fx-border-radius: 10; -fx-background-radius: 10;";
+
+        Label voteCount = new Label(String.valueOf(DatabaseGetter.getTotalVotes(post.getPostID())));
+        voteCount.setStyle("-fx-font-size: 14px; -fx-text-fill: #ffffff;");
+
+        upvoteButton.setStyle(buttonStyle);
+        upvoteButton.setPrefWidth(30);
+
+        boolean hasVoted = DatabaseInsert.voteExists(post.getPostID(), LoginController.userID);
+        upvoteButton.setStyle(hasVoted ? buttonClickStyle : buttonStyle);
+
+        upvoteButton.setOnMouseClicked(e -> {
+            boolean newState = DatabaseInsert.toggleVote(post.getPostID(), LoginController.userID);
+            upvoteButton.setStyle(newState ? buttonClickStyle : buttonStyle);
+            voteCount.setText(String.valueOf(DatabaseGetter.getTotalVotes(post.getPostID())));
+        });
+        
+        voteTempBox.getChildren().addAll(upvoteButton, voteCount);
+        voteTempBox.setStyle("-fx-background-color: #0e1113; -fx-background-radius: 10; -fx-alignment:CENTER;");
 
         voteBox.getChildren().add(voteTempBox);
+
 
         postBox.setOnMouseEntered(event -> {
             postBox.setStyle("-fx-background-color: #181c1f; -fx-padding: 10; -fx-border-color: #0e1113; -fx-border-width: 1; -fx-border-radius: 5; -fx-background-radius: 5;");
@@ -109,28 +153,11 @@ public abstract class BaseController {
             System.out.println("Error: User not found for ID: " + post.getUserID());
         }
         
-        byte[] profilePicture = user.getProfilePicture();
-        Image profileImage = null;
-        if (profilePicture != null && profilePicture.length > 0) {
-            try {
-                System.out.println("Profile picture found, size: " + profilePicture.length);
-                profileImage = new Image(new ByteArrayInputStream(profilePicture));
-            } catch (Exception e) {
-                System.out.println("Error loading profile picture: " + e.getMessage());
-                profileImage = null;
-            }
-        } else {
-            System.out.println("Error: Profile picture is null or empty for user ID: " + post.getUserID());
-            profileImage = null;
-        }
         
         Circle postImage = new Circle(15);
-        if (profileImage != null) {
-            postImage.setFill(new ImagePattern(profileImage));
-        } else {
-            postImage.setFill(Color.GRAY);
-        }
-        
+        Image postPicture = loadProfilePicture(MainStorage.getUsersIMap().get(post.getUserID()).getProfilePicture(), post.getUserID());
+        postImage.setFill(new ImagePattern(postPicture));
+
         HBox authorDateBox = new HBox();
         Label postAuthor = new Label(MainStorage.getUsersIMap().get(post.getUserID()).getName());
         postAuthor.setStyle("-fx-font-size: 18px; -fx-text-fill: #999999;");
@@ -146,7 +173,6 @@ public abstract class BaseController {
 
         return postBox;
     }
-
     public void handleSearch(MouseEvent event) {
         String query = searchText.getText().trim();
         if (!query.isEmpty()) {
@@ -155,13 +181,6 @@ public abstract class BaseController {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-        }
-    }
-    public void handleLogOut(MouseEvent event) {
-        try {
-            MainController.gotoLoginPage();
-        } catch (Exception e) {
-            e.printStackTrace();
         }
     }
 }
