@@ -86,21 +86,14 @@ public class Messenger extends VBox {
             messageBox.setPadding(new Insets(5));
             messageBox.setSpacing(10);
             Text messageText = new Text(message.getContent());
-            // double textWidth = messageText.getLayoutBounds().getWidth() + 20; // Adding padding
-            // double textHeight = messageText.getLayoutBounds().getHeight();
-    
-            // // Adjust the message box width based on the text width
-            // messageBox.setMinWidth(textWidth);
-            // messageBox.setMaxWidth(textWidth);
-
             if (message.getSenderId() == userId && message.getReceiverId() == friendId) {
                 // Sent message
-                messageBox.setAlignment(Pos.BOTTOM_RIGHT);
+                messageBox.setAlignment(Pos.CENTER_RIGHT);
                 messageBox.setStyle("-fx-background-color:rgb(0, 123, 255); -fx-border-radius: 10; -fx-background-radius: 10;");
                 HBox.setHgrow(messageBox, Priority.ALWAYS);
             } else if (message.getSenderId() == friendId && message.getReceiverId() == userId) {
                 // Received message
-                messageBox.setAlignment(Pos.CENTER_LEFT);
+                // messageBox.setAlignment(Pos.BOTTOM_LEFT);
                 messageBox.setStyle("-fx-background-color:rgb(76, 175, 79); -fx-border-radius: 10; -fx-background-radius: 10;");
                 
             } else {

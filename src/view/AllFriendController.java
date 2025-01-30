@@ -10,7 +10,6 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
-import main.MainStorage;
 import model.User;
 
 public class AllFriendController extends FriendBaseController  {
@@ -31,30 +30,20 @@ public class AllFriendController extends FriendBaseController  {
         friendBox.setStyle("-fx-background-color: #0e1113; -fx-padding: 10; -fx-border-color: #0e1113; -fx-border-width: 1; -fx-border-radius: 5; -fx-background-radius: 5;");
         friendBox.setPrefWidth(400);
 
-        int userID = LoginController.userID;
-        User user = MainStorage.getUsersIMap().get(userID);
-
+        byte[] profilePicture = friend.getProfilePicture();
         Image profileImage = null;
-        if (user != null) {
-            byte[] profilePicture = user.getProfilePicture();
-            
-            if (profilePicture != null && profilePicture.length > 0) {
-                try {
-                    profileImage = new Image(new ByteArrayInputStream(profilePicture));
-                } catch (Exception e) {
-                    System.out.println("Error loading profile picture: " + e.getMessage());
-                    profileImage = null;
-                }
+        if (profilePicture != null && profilePicture.length > 0) {
+            try {
+                profileImage = new Image(new ByteArrayInputStream(profilePicture));
+            } catch (Exception e) {
+                System.out.println("Error loading profile picture: " + e.getMessage());
             }
         }
 
         Circle profileImageView = new Circle(25);
-        if (profileImage != null) {
-            profileImageView.setFill(new ImagePattern(profileImage));
-        } else {
-            profileImageView.setFill(Color.GRAY);
-        }
-        
+        profileImageView.setFill(profileImage != null ? new ImagePattern(profileImage) : Color.GRAY);
+
+
         Label friendName = new Label(friend.getName());
         friendName.setStyle("-fx-font-size: 22px; -fx-text-fill: rgb(153, 153, 153);");
 
@@ -62,7 +51,7 @@ public class AllFriendController extends FriendBaseController  {
         friendStatus.setStyle("-fx-font-size: 18px; -fx-text-fill: #999999;");
 
         int friendId = friend.getUserID();
-        if (DatabaseGetter.isConfirm(friendId, userID)) {
+        if (DatabaseGetter.isConfirm(friendId, LoginController.userID)) {
             friendStatus.setText("Friend");
         }
 

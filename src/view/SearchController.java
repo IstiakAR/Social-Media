@@ -73,6 +73,7 @@ public class SearchController extends HomeController {
                     .sorted((u1, u2) -> u1.getName().compareToIgnoreCase(u2.getName()))
                     .toList();
             for (User user : users) {
+                if(user.getUserID() == LoginController.userID) return;
                 RecommandFriends recommandFriends = new RecommandFriends();
                 VBox userBox = recommandFriends.createFriendBox(user);
                 postsContainer.getChildren().add(userBox);

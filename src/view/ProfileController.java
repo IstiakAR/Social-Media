@@ -8,9 +8,11 @@ import java.io.InputStream;
 import database.DatabaseUpdate;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
@@ -20,7 +22,7 @@ import main.MainController;
 import main.MainStorage;
 import model.User;
 
-public class ProfileController {
+public class ProfileController extends Handler{
     @FXML
     private Text profilename;
     @FXML
@@ -64,15 +66,26 @@ public class ProfileController {
             education.setText(Education);
             email.setText(Email);
             bio.setText(Bio);
+                       
+            VBox.setMargin(profilename, new Insets(10, 0, 0, 0));
+            VBox.setMargin(workplace, new Insets(10, 0, 0, 0));
+            VBox.setMargin(education, new Insets(10, 0, 0, 0));
+            VBox.setMargin(email, new Insets(10, 0, 0, 0));
+            VBox.setMargin(bio, new Insets(40, 0, 0, 0));
             
+            profilename.setStyle("-fx-font-size: 24px;");
+            workplace.setStyle("-fx-font-size: 18px;");
+            education.setStyle("-fx-font-size: 18px;");
+            email.setStyle("-fx-font-size: 14px;");
+            bio.setStyle("-fx-font-size: 14px;");
+
             byte[] profilePicture = user.getProfilePicture();
             
             if (profilePicture != null && profilePicture.length > 0) {
                 try {
-                    System.out.println("Profile picture size: " + profilePicture.length);
                     Image profileImage = new Image(new ByteArrayInputStream(profilePicture));
                     circlepic.setRadius(50);
-                    circlepic.setFill(new ImagePattern(profileImage));
+                    if(profileImage != null) circlepic.setFill(new ImagePattern(profileImage));
                 } catch (Exception e) {
                     System.out.println("Error loading profile picture: " + e.getMessage());
                     circlepic.setRadius(50);
@@ -88,11 +101,12 @@ public class ProfileController {
         BaseController baseController = new BaseController() {
             @Override
             protected void displayPostsLatest() {
-                // TODO Auto-generated method stub
+
             }
         };
-        Image im = baseController.loadProfilePicture(MainStorage.getUsersIMap().get(LoginController.userID).getProfilePicture(), LoginController.userID);
-        userImage.setFill(new ImagePattern(im));
+        Image im = baseController.loadProfilePicture(user.getProfilePicture(), user.getUserID());
+        if(im!=null)
+            userImage.setFill(new ImagePattern(im));
     }
 
 
@@ -117,16 +131,6 @@ public class ProfileController {
             }
         }
     }
-
-    public void handleHome(ActionEvent event) {
-        System.out.println("Home clicked");
-        try {
-            MainController.gotoHomepage();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
     @FXML
     public void handleMyPost(ActionEvent event) {
         System.out.println("Posts clicked");

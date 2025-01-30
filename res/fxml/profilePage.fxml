@@ -30,7 +30,7 @@
                         <Insets right="5.0" />
                      </HBox.margin>
                   </ImageView>
-                  <Hyperlink onAction="#handleHome" text="Back" textFill="WHITE">
+                  <Hyperlink onMouseClicked="#handleHome" text="Back" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="17.0" />
                      </font>
@@ -144,7 +144,7 @@
          </children>
       </HBox>
       <Line endX="-36.0" endY="644.0" layoutX="275.0" layoutY="115.0" startX="-36.0" startY="-47.5" stroke="#2f3233" />
-      <ImageView accessibleRole="BUTTON" fitHeight="30.0" fitWidth="30.0" layoutX="1186.0" layoutY="21.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView accessibleRole="BUTTON" fitHeight="30.0" fitWidth="30.0" layoutX="1186.0" layoutY="21.0" onMouseClicked="#handleAddPost" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/add_white.png" />
          </image>

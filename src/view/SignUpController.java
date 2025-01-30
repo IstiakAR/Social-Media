@@ -36,7 +36,6 @@ public class SignUpController {
   }
   @FXML
   public void handleLogin(ActionEvent event) {
-    System.out.println("Sign In in sign up page clicked!");
     try {
       MainController.gotoLoginPage();
     } catch (Exception e) {
@@ -51,7 +50,6 @@ public class SignUpController {
     String fullName = signupFullName.getText();
     String retypePassword = signupRePassword.getText();
     String passwordClue = signupPasswordClue.getText();
-    System.out.println("Sign Up clicked!");
     if(username.isEmpty() || password.isEmpty() || fullName.isEmpty() || retypePassword.isEmpty() || passwordClue.isEmpty()) {
       errorMessage.setText("Please fill all fields.");
       errorMessage.setVisible(true);

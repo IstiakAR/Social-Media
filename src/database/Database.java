@@ -57,7 +57,6 @@ public class Database {
             + "userID INTEGER NOT NULL,"        
             + "friendID INTEGER NOT NULL,"       
             + "status TEXT NOT NULL DEFAULT 'Pending'," 
-            + "creationTime TEXT,"
             + "FOREIGN KEY (userID) REFERENCES users(userID)," 
             + "FOREIGN KEY (friendID) REFERENCES users(userID)" 
             + ");";
@@ -67,7 +66,6 @@ public class Database {
             + "userID INTEGER NOT NULL, "        
             + "friendID INTEGER NOT NULL, "       
             + "status TEXT NOT NULL DEFAULT 'Pending', " 
-            + "creationTime TEXT,"
             + "FOREIGN KEY (userID) REFERENCES users(userID), " 
             + "FOREIGN KEY (friendID) REFERENCES users(userID)"
             + ");";

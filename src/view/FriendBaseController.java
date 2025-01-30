@@ -35,7 +35,8 @@ public abstract class FriendBaseController extends SearchController {
         updateScrollBarVisibility();
 
         Image im = loadProfilePicture(MainStorage.getUsersIMap().get(LoginController.userID).getProfilePicture(), LoginController.userID);
-        userImage.setFill(new ImagePattern(im));
+        if(im!=null)
+            userImage.setFill(new ImagePattern(im));
     	displayFriendList();
     }
     public void updateScrollBarVisibility() {

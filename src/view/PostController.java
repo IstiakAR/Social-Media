@@ -22,7 +22,7 @@ import javafx.scene.layout.Region;
 import main.*;
 import model.*;
 
-public class PostController {
+public class PostController extends BaseController {
     Post post;
     @FXML
     private HBox postInfo;
@@ -162,24 +162,10 @@ public class PostController {
             newCommentField.clear();
         }
     }
-    public void handleHome(MouseEvent event) {
-        try {
-            MainController.gotoHomepage();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-    public void handleAddPost(MouseEvent event) {
-        try {
-            MainController.showAddPostDialog(() -> {
-                try {
-                    MainController.gotoHomepage();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            });
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+
+    @Override
+    protected void displayPostsLatest() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'displayPostsLatest'");
     }
 }

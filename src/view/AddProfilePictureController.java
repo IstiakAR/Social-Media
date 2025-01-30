@@ -6,7 +6,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import main.MainController;
 import main.MainStorage;
 
 import java.io.File;
@@ -27,12 +26,6 @@ public class AddProfilePictureController {
     @FXML
     public void handleCancel(ActionEvent event) {
         closeDialog();
-        try{
-            MainController.gotoProfile();
-        }
-        catch (Exception e){
-            e.printStackTrace();
-        }
     }
 
     @FXML

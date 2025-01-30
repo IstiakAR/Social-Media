@@ -115,7 +115,7 @@
                         <Insets right="10.0" />
                      </HBox.margin>
                   </ImageView>
-                  <Hyperlink onAction="#handleMassenger" prefHeight="34.0" prefWidth="168.0" text="Messenger" textFill="#f2f0f0">
+                  <Hyperlink onAction="#handleMessenger" prefHeight="34.0" prefWidth="168.0" text="Messenger" textFill="#f2f0f0">
                      <font>
                         <Font name="System Bold" size="16.0" />
                      </font>
@@ -181,7 +181,6 @@
             <Font size="1.0" />
          </font>
       </Hyperlink>
-      <Hyperlink layoutX="1217.0" layoutY="24.0" onAction="#handleProfile" />
       <Button fx:id="showPeople" layoutX="259.0" layoutY="81.0" mnemonicParsing="false" onAction="#handleShowPeople" style="-fx-background-radius: 10; -fx-background-color: #2a3236;" text="People" textFill="WHITE" />
       <Button fx:id="showPosts" layoutX="328.0" layoutY="81.0" mnemonicParsing="false" onAction="#handleShowPosts" style="-fx-background-radius: 10; -fx-background-color: #2a3236;" text="Post" textFill="WHITE" />
       <Circle fx:id="userImage" fill="DODGERBLUE" layoutX="1255.0" layoutY="36.0" radius="18.0" stroke="BLACK" strokeType="INSIDE" />

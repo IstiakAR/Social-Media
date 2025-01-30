@@ -177,7 +177,8 @@ public class DatabaseGetter {
                     rs.getString("password"),
                     rs.getString("name"),
                     rs.getString("clue"),
-                    rs.getInt("userID")
+                    rs.getInt("userID"),
+                    rs.getBytes("profilePicture")
                 );
                 requests.add(user);
             }
@@ -202,7 +203,8 @@ public class DatabaseGetter {
                     rs.getString("password"),
                     rs.getString("name"),
                     rs.getString("clue"),
-                    rs.getInt("userID")
+                    rs.getInt("userID"),
+                    rs.getBytes("profilePicture")
                 );
                 requests.add(user);
             }

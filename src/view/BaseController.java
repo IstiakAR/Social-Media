@@ -19,7 +19,7 @@ import javafx.scene.shape.Circle;
 import main.*;
 import model.*;
 
-public abstract class BaseController{
+public abstract class BaseController extends Handler {
     @FXML
     protected ScrollBar ScrollBar;
     @FXML
@@ -43,7 +43,7 @@ public abstract class BaseController{
         updateScrollBarVisibility();
         
         Image profileImage = loadProfilePicture(MainStorage.getUsersIMap().get(LoginController.userID).getProfilePicture(), LoginController.userID);
-        userImage.setFill(new ImagePattern(profileImage));
+        if(profileImage!=null) userImage.setFill(new ImagePattern(profileImage));
 
         // displayPostsLatest();
     }
@@ -58,13 +58,13 @@ public abstract class BaseController{
     protected Image loadProfilePicture(byte[] pictureData, int userId) {
         if (pictureData != null && pictureData.length > 0) {
             try {
-                System.out.println("Profile picture found for user ID " + userId + ", size: " + pictureData.length);
+                // System.out.println("Profile picture found for user ID " + userId + ", size: " + pictureData.length);
                 return new Image(new ByteArrayInputStream(pictureData));
             } catch (Exception e) {
                 System.out.println("Error loading profile picture for user ID " + userId + ": " + e.getMessage());
             }
         } else {
-            System.out.println("Error: Profile picture is null or empty for user ID: " + userId);
+            System.out.println("Error: Profile picture is null " + userId);
         }
         return null;
     }
@@ -173,7 +173,6 @@ public abstract class BaseController{
 
         return postBox;
     }
-
     public void handleSearch(MouseEvent event) {
         String query = searchText.getText().trim();
         if (!query.isEmpty()) {
@@ -182,13 +181,6 @@ public abstract class BaseController{
             } catch (Exception e) {
                 e.printStackTrace();
             }
-        }
-    }
-    public void handleLogOut(MouseEvent event) {
-        try {
-            MainController.gotoLoginPage();
-        } catch (Exception e) {
-            e.printStackTrace();
         }
     }
 }

@@ -114,7 +114,7 @@
                         <Insets right="10.0" />
                      </HBox.margin>
                   </ImageView>
-                  <Hyperlink onAction="#handleMassenger" prefHeight="34.0" prefWidth="137.0" text="Messenger" textFill="#f2f0f0">
+                  <Hyperlink onAction="#handleMessenger" prefHeight="34.0" prefWidth="137.0" text="Messenger" textFill="#f2f0f0">
                      <font>
                         <Font name="System Bold" size="16.0" />
                      </font>

@@ -46,23 +46,20 @@ public class MessengerController extends FriendBaseController {
 
         User user = DatabaseGetter.getUserByID(LoginController.userID);
         Image profileImage = null;
-        if (user != null) {
-            byte[] profilePicture = user.getProfilePicture();
-            
+        if (friend != null) {
+            byte[] profilePicture = friend.getProfilePicture();
             if (profilePicture != null && profilePicture.length > 0) {
                 try {
-                    
-                profileImage = new Image(new ByteArrayInputStream(profilePicture));
-                
+                    profileImage = new Image(new ByteArrayInputStream(profilePicture));
                 } catch (Exception e) {
                     System.out.println("Error loading profile picture: " + e.getMessage());
-                        profileImage = null;
+                    profileImage = null;
+                }
             }
-        }
-        else {
-            System.out.println("profilepicture = null");
-        }
-    } else {
+            else {
+                System.out.println("profilepicture = null");
+            }
+        }else {
             System.out.println("User not found!");
         }
 
