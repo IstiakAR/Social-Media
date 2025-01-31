@@ -27,8 +27,6 @@ public class SignUpController {
   @FXML
   private AnchorPane rootPane;
 
-  public static String name;
-
   @FXML
   public void initialize() {
     errorMessage.setVisible(false);
@@ -45,7 +43,6 @@ public class SignUpController {
   @FXML
   public void handleSignUp(ActionEvent event) {
     String username = signupUsername.getText();
-    name = username;
     String password = signupPassword.getText();
     String fullName = signupFullName.getText();
     String retypePassword = signupRePassword.getText();
@@ -64,7 +61,7 @@ public class SignUpController {
     else {
       User user = new User(username, password, fullName, passwordClue);
       int userID = user.getUserID();
-      LoginController.userID = userID;
+      LoginController.setUserID(userID);
       DatabaseInsert.insertUser(user);
       MainStorage.getUsersSMap().put(username, user);
       MainStorage.getUsersIMap().put(userID, user);

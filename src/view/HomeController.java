@@ -12,6 +12,7 @@ public class HomeController extends BaseController {
     public void initialize(){
         super.initialize();
         displayPostsLatest();
+        
     }
     @Override
     protected void displayPostsLatest() {
@@ -29,7 +30,7 @@ public class HomeController extends BaseController {
 
         for (Post post : listPosts) {
             VBox postBox = createPostBox(post, post.getPostID());
-            postsContainer.getChildren().add(postBox);
+            mainContainer.getChildren().add(postBox);
         }
     }
 }

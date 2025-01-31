@@ -14,14 +14,13 @@ import javafx.scene.shape.Circle;
 import main.MainController;
 import model.Post;
 
-
 public class myPostController extends BaseController{
     @FXML
     private ScrollBar ScrollBar;
     @FXML
     private ScrollPane ScrollPane;
     @FXML
-    private VBox postsContainer;
+    private VBox mainContainer;
     @FXML
     private Circle userImage;
 
@@ -40,7 +39,7 @@ public class myPostController extends BaseController{
 
     @Override
     protected void displayPostsLatest() {
-        Map<Integer, Post> posts = DatabaseGetter.getUserPosts(LoginController.userID);
+        Map<Integer, Post> posts = DatabaseGetter.getUserPosts(LoginController.getUserID());
         List<Post> listPosts = posts.values().stream()
                 .sorted((p1, p2) -> {
                     int compareDate = p2.getCreationTime().compareTo(p1.getCreationTime());
@@ -54,8 +53,8 @@ public class myPostController extends BaseController{
 
         for (Post post : listPosts) {
             VBox postBox = createPostBox(post, post.getPostID());
-            postsContainer.getChildren().add(postBox);
+            mainContainer.getChildren().add(postBox);
         }
-        postsContainer.setSpacing(5);
+        mainContainer.setSpacing(5);
     }
 }

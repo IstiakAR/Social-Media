@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.image.Image?>
@@ -30,27 +31,32 @@
          </children>
       </HBox>
       <Line endX="-36.0" endY="644.0" layoutX="275.0" layoutY="115.0" startX="-36.0" startY="-47.5" stroke="#2f3233" />
-      <VBox fx:id="friendListContainer" layoutX="4.0" layoutY="136.0" prefHeight="609.0" prefWidth="235.0">
+      <VBox fx:id="mainContainer" layoutX="4.0" layoutY="179.0" prefHeight="566.0" prefWidth="235.0">
          <children>
-            <ScrollPane fx:id="ScrollPane" prefHeight="611.0" prefWidth="235.0" style="-fx-background: #0e1113; -fx-border-color: #0e1113;" stylesheets="@../css/homePosts.css" />
+            <ScrollPane fx:id="ScrollPane" prefHeight="572.0" prefWidth="235.0" style="-fx-background: #0e1113; -fx-border-color: #0e1113;" stylesheets="@../css/homePosts.css" />
          </children>
       </VBox>
-      <Label layoutX="81.0" layoutY="82.0" prefHeight="43.0" prefWidth="112.0" text="Messenger" textFill="WHITE">
-         <font>
-            <Font name="System Bold" size="17.0" />
-         </font>
-      </Label>
-      <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="34.0" layoutY="91.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="46.0" layoutY="133.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../images/messenger_white.png" />
+            <Image url="@../images/message_white.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="1223.0" layoutY="34.0" onMouseClicked="#handleHome" pickOnBounds="true" preserveRatio="true">
+      <VBox fx:id="messengerContainer" layoutX="269.0" layoutY="103.0" prefHeight="650.0" prefWidth="1007.0" />
+      <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="46.0" layoutY="83.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/home_white.png" />
          </image>
       </ImageView>
-      <VBox fx:id="messengerContainer" layoutX="269.0" layoutY="103.0" prefHeight="650.0" prefWidth="1007.0" />
+      <Label layoutX="85.0" layoutY="128.0" prefHeight="35.0" prefWidth="139.0" text="Messenger" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="17.0" />
+         </font>
+      </Label>
+      <Hyperlink layoutX="82.0" layoutY="80.0" onMouseClicked="#handleHome" prefHeight="32.0" prefWidth="110.0" text="Home" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="17.0" />
+         </font>
+      </Hyperlink>
    </children>
    <padding>
       <Insets bottom="10.0" right="10.0" />

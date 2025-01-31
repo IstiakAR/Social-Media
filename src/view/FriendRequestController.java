@@ -18,13 +18,13 @@ import model.User;
 public class FriendRequestController extends FriendBaseController {
 
     public void displayFriendList() {
-        var requests = DatabaseGetter.getIncomingRequests(LoginController.userID);
-        friendListContainer.getChildren().clear();
+        var requests = DatabaseGetter.getIncomingRequests(LoginController.getUserID());
+        mainContainer.getChildren().clear();
 
         for (var request : requests) {
             VBox requestBox = createFriendBox(request);
             if (requestBox != null)
-                friendListContainer.getChildren().add(requestBox);
+            mainContainer.getChildren().add(requestBox);
         }
     }
 
@@ -42,7 +42,7 @@ public class FriendRequestController extends FriendBaseController {
         friendStatus.setStyle("-fx-font-size: 18px; -fx-text-fill: #999999;");
 
         // Profile Image
-        User user = DatabaseGetter.getUserByID(LoginController.userID);
+        User user = DatabaseGetter.getUserByID(LoginController.getUserID());
         Image profileImage = null;
         if (friend != null) {
             byte[] profilePicture = friend.getProfilePicture();
@@ -59,7 +59,7 @@ public class FriendRequestController extends FriendBaseController {
         if (profileImage != null) {
             profileImageView.setFill(new ImagePattern(profileImage));
         } else {
-            profileImageView.setFill(Color.GRAY);
+            profileImageView.setFill(Color.DODGERBLUE);
         }
 
         HBox profileBox = new HBox(profileImageView, friendName);
@@ -69,7 +69,7 @@ public class FriendRequestController extends FriendBaseController {
         Button rejectButton = new Button("Cancel");
         Button acceptButton = new Button("Confirm");
 
-        int userId = LoginController.userID;
+        int userId = LoginController.getUserID();
         int friendId = friend.getUserID();
         if (DatabaseGetter.isConfirm(friendId, userId)) {
             return null;
@@ -84,7 +84,7 @@ public class FriendRequestController extends FriendBaseController {
                     acceptButton.setVisible(false);
                     rejectButton.setVisible(false);
                     DatabaseUpdate.cancelFriendRequest(userId, friendId);
-                    friendListContainer.getChildren().remove(friendBox);
+                    mainContainer.getChildren().remove(friendBox);
                 }
             } catch (Exception e) {
                 System.out.println("Error adding friend: " + e.getMessage());
@@ -97,7 +97,7 @@ public class FriendRequestController extends FriendBaseController {
             acceptButton.setVisible(false);
             rejectButton.setVisible(false);
             DatabaseUpdate.cancelFriendRequest(userId, friendId);
-            friendListContainer.getChildren().remove(friendBox);
+            mainContainer.getChildren().remove(friendBox);
         });
 
         HBox buttons = new HBox();

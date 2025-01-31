@@ -11,19 +11,19 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
 <AnchorPane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="759.0" prefWidth="1293.0" style="-fx-background-color: black;" AnchorPane.leftAnchor="64.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.AboutController">
    <children>
-      <Line endX="13.0" endY="103.0" layoutX="477.0" layoutY="313.0" startX="13.0" startY="-181.0" stroke="#244855" />
-      <TextField fx:id="Education" layoutX="521.0" layoutY="80.0" prefHeight="45.0" prefWidth="675.0" promptText="Add Education" />
-      <TextField fx:id="Workplace" layoutX="522.0" layoutY="153.0" prefHeight="45.0" prefWidth="675.0" promptText="Add Workplace" />
-      <Button layoutX="1088.0" layoutY="514.0" mnemonicParsing="false" onAction="#handleSave" prefHeight="16.0" prefWidth="109.0" text="Save" />
-      <TextField fx:id="Email" layoutX="522.0" layoutY="229.0" prefHeight="45.0" prefWidth="675.0" promptText="Add Email Adress" />
-      <TextArea fx:id="Bio" layoutX="522.0" layoutY="312.0" prefHeight="150.0" prefWidth="675.0" promptText="Describe yourself...." />
-      <HBox alignment="CENTER_LEFT" layoutX="24.0" layoutY="22.0" prefHeight="45.0" prefWidth="245.0" style="-fx-background-radius: 100;">
+      <TextField fx:id="Education" layoutX="522.0" layoutY="132.0" prefHeight="45.0" prefWidth="675.0" promptText="Add Education" />
+      <TextField fx:id="Workplace" layoutX="521.0" layoutY="201.0" prefHeight="45.0" prefWidth="675.0" promptText="Add Workplace" />
+      <Button layoutX="1087.0" layoutY="523.0" mnemonicParsing="false" onAction="#handleSave" prefHeight="16.0" prefWidth="109.0" text="Save" />
+      <TextField fx:id="Email" layoutX="522.0" layoutY="274.0" prefHeight="45.0" prefWidth="675.0" promptText="Add Email Adress" />
+      <TextArea fx:id="Bio" layoutX="521.0" layoutY="342.0" prefHeight="150.0" prefWidth="675.0" promptText="Describe yourself...." />
+      <HBox alignment="CENTER_LEFT" layoutX="5.0" layoutY="7.0" prefHeight="45.0" prefWidth="245.0" style="-fx-background-radius: 100;">
          <children>
             <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -37,7 +37,7 @@
             </Text>
          </children>
       </HBox>
-      <VBox layoutX="24.0" layoutY="84.0" prefHeight="303.0" prefWidth="245.0">
+      <VBox layoutX="5.0" layoutY="101.0" prefHeight="303.0" prefWidth="245.0">
          <children>
             <HBox alignment="CENTER_LEFT" prefHeight="40.0" prefWidth="267.0" style="-fx-background-radius: 100;">
                <children>
@@ -73,5 +73,8 @@
             </HBox>
          </children>
       </VBox>
+      <Line endX="-36.0" endY="634.0" layoutX="285.0" layoutY="125.0" startX="-36.0" startY="-47.5" stroke="#2f3233" />
+      <Line endX="913.29296875" endY="9.0" layoutX="383.0" layoutY="69.0" startX="-383.0" startY="9.0" stroke="#2f3233" />
+      <Circle fx:id="userImage" fill="DODGERBLUE" layoutX="1222.0" layoutY="41.0" radius="18.0" stroke="BLACK" strokeType="INSIDE" />
    </children>
 </AnchorPane>

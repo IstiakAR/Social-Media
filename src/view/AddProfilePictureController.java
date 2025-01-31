@@ -49,8 +49,8 @@ public class AddProfilePictureController {
     public void handlesetprofilepic(ActionEvent e) throws IOException{
         if (selectedFile != null) {
             byte[] fileContent = Files.readAllBytes(selectedFile.toPath());
-            DatabaseInsert.addProfilePicture(LoginController.userID, selectedFile);
-            MainStorage.getUsersIMap().get(LoginController.userID).setProfilePicture(fileContent);
+            DatabaseInsert.addProfilePicture(LoginController.getUserID(), selectedFile);
+            MainStorage.getUsersIMap().get(LoginController.getUserID()).setProfilePicture(fileContent);
             closeDialog();
         }
     }

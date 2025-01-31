@@ -1,6 +1,5 @@
 package view;
 
-import java.io.ByteArrayInputStream;
 import java.io.DataInputStream;
 import java.io.IOException;
 import java.net.Socket;
@@ -12,12 +11,10 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import javafx.scene.image.Image;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
-import main.MainController;
 import model.User;
 
 public class MessengerController extends FriendBaseController {
@@ -27,12 +24,12 @@ public class MessengerController extends FriendBaseController {
     }
 
     public void displayFriendList() {
-        var requests = DatabaseGetter.getAllfriend(LoginController.userID);
-        friendListContainer.getChildren().clear();
+        var requests = DatabaseGetter.getAllfriend(LoginController.getUserID());
+        mainContainer.getChildren().clear();
 
         for (var request : requests) {
             VBox requestBox = createFriendBox(request);
-            friendListContainer.getChildren().add(requestBox);
+            mainContainer.getChildren().add(requestBox);
         }
     }
     @FXML
@@ -44,30 +41,14 @@ public class MessengerController extends FriendBaseController {
         friendBox.setStyle("-fx-background-color: #0e1113; -fx-padding: 10; -fx-border-color: #0e1113; -fx-border-width: 1; -fx-border-radius: 5; -fx-background-radius: 5;");
         friendBox.setPrefWidth(400);
 
-        User user = DatabaseGetter.getUserByID(LoginController.userID);
-        Image profileImage = null;
-        if (friend != null) {
-            byte[] profilePicture = friend.getProfilePicture();
-            if (profilePicture != null && profilePicture.length > 0) {
-                try {
-                    profileImage = new Image(new ByteArrayInputStream(profilePicture));
-                } catch (Exception e) {
-                    System.out.println("Error loading profile picture: " + e.getMessage());
-                    profileImage = null;
-                }
-            }
-            else {
-                System.out.println("profilepicture = null");
-            }
-        }else {
-            System.out.println("User not found!");
-        }
+        User user = DatabaseGetter.getUserByID(LoginController.getUserID());
+        Image profileImage = loadProfilePicture(friend.getProfilePicture(), friend.getUserID());
 
         Circle profileImageView = new Circle(18);
         if (profileImage != null) {
             profileImageView.setFill(new ImagePattern(profileImage));
         } else {
-            profileImageView.setFill(Color.GRAY);
+            profileImageView.setFill(Color.DODGERBLUE);
         }
 
         Label friendName = new Label(friend.getName());
@@ -83,7 +64,7 @@ public class MessengerController extends FriendBaseController {
             senderNameLabel.setStyle("-fx-font-size: 18px; -fx-text-fill:rgb(234, 11, 11); -fx-padding: 10;");
             messengerContainer.getChildren().add(senderNameLabel);
 
-            Messenger messenger = new Messenger(friend.getUserID(), LoginController.userID);
+            Messenger messenger = new Messenger(friend.getUserID(), LoginController.getUserID());
             messengerContainer.getChildren().add(messenger);
         });
 
@@ -117,13 +98,6 @@ public class MessengerController extends FriendBaseController {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-        }
-    }
-     public void handleHome(MouseEvent event) { 
-        try {
-            MainController.gotoHomepage();
-        } catch (Exception e) {
-            e.printStackTrace();
         }
     }
 }

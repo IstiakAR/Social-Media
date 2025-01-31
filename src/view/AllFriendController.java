@@ -15,13 +15,13 @@ import model.User;
 public class AllFriendController extends FriendBaseController  {
     
     public void displayFriendList() {
-        var requests = DatabaseGetter.getAllfriend(LoginController.userID);
-        friendListContainer.getChildren().clear();
-        friendListContainer.getChildren().clear();
+        var requests = DatabaseGetter.getAllfriend(LoginController.getUserID());
+        mainContainer.getChildren().clear();
+        mainContainer.getChildren().clear();
 
         for (var request : requests) {
             VBox requestBox = createFriendBox(request);
-            friendListContainer.getChildren().add(requestBox);
+            mainContainer.getChildren().add(requestBox);
         }
     }
     @SuppressWarnings("unused")
@@ -41,7 +41,7 @@ public class AllFriendController extends FriendBaseController  {
         }
 
         Circle profileImageView = new Circle(25);
-        profileImageView.setFill(profileImage != null ? new ImagePattern(profileImage) : Color.GRAY);
+        profileImageView.setFill(profileImage != null ? new ImagePattern(profileImage) : Color.DODGERBLUE);
 
 
         Label friendName = new Label(friend.getName());
@@ -51,7 +51,7 @@ public class AllFriendController extends FriendBaseController  {
         friendStatus.setStyle("-fx-font-size: 18px; -fx-text-fill: #999999;");
 
         int friendId = friend.getUserID();
-        if (DatabaseGetter.isConfirm(friendId, LoginController.userID)) {
+        if (DatabaseGetter.isConfirm(friendId, LoginController.getUserID())) {
             friendStatus.setText("Friend");
         }
 

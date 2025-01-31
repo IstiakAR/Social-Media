@@ -51,7 +51,7 @@ public class ProfileController extends Handler{
 
     @FXML
     public void initialize() {
-        user = MainStorage.getUsersIMap().get(LoginController.userID);
+        user = MainStorage.getUsersIMap().get(LoginController.getUserID());
 
         if (user != null) {
             String Username = user.getName();
@@ -89,24 +89,17 @@ public class ProfileController extends Handler{
                 } catch (Exception e) {
                     System.out.println("Error loading profile picture: " + e.getMessage());
                     circlepic.setRadius(50);
-                    circlepic.setFill(Color.GRAY);
+                    circlepic.setFill(Color.DODGERBLUE);
                 }
             } else {
                 circlepic.setRadius(50);
-                circlepic.setFill(Color.GRAY);
+                circlepic.setFill(Color.DODGERBLUE);
             }
         } else {
             System.out.println("User not found!");
         }
-        BaseController baseController = new BaseController() {
-            @Override
-            protected void displayPostsLatest() {
-
-            }
-        };
-        Image im = baseController.loadProfilePicture(user.getProfilePicture(), user.getUserID());
-        if(im!=null)
-            userImage.setFill(new ImagePattern(im));
+        Image im = BaseController.loadProfilePicture(user.getProfilePicture(), user.getUserID());
+        if(im!=null) userImage.setFill(new ImagePattern(im));
     }
 
 
