@@ -23,7 +23,7 @@ public class SettingsController {
     private Label errorLabel;
 
     public void initialize() {
-        user = MainStorage.getUsersIMap().get(LoginController.userID);
+        user = MainStorage.getUsersIMap().get(LoginController.getUserID());
         errorLabel.setText("");
         errorLabel.setVisible(false);
         errorLabel.setStyle("-fx-text-fill: red;");
@@ -65,7 +65,7 @@ public class SettingsController {
         if (user.getPassword().equals(currentPassword)) {
             if (newPassword.equals(confirmPassword)) {
                 try {
-                    DatabaseUpdate.updatePassword(LoginController.userID, newPassword);
+                    DatabaseUpdate.updatePassword(LoginController.getUserID(), newPassword);
                     user.setPassword(newPassword);
                 } catch (Exception e) {
                     errorLabel.setVisible(true);

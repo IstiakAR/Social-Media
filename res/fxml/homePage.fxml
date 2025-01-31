@@ -16,7 +16,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane focusTraversable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="759.0" prefWidth="1293.0" style="-fx-background-color: #0e1113;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.HomeController">
+<AnchorPane fx:id="root" focusTraversable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="759.0" prefWidth="1293.0" style="-fx-background-color: #0e1113;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.HomeController">
    <children>
       <VBox layoutX="4.0" layoutY="85.0" prefHeight="393.0" prefWidth="235.0">
          <children>
@@ -222,7 +222,7 @@
 
       <ScrollPane fx:id="ScrollPane" layoutX="259.0" layoutY="96.0" opacity="0.99" prefHeight="625.0" prefWidth="1014.0" style="-fx-background: #0e1113; -fx-border-color: #0e1113;" stylesheets="@../css/homePosts.css">
         <content>
-            <VBox fx:id="postsContainer" style="-fx-background-color: #000000;">
+            <VBox fx:id="mainContainer" style="-fx-background-color: #000000;">
             </VBox>
         </content>
     </ScrollPane>

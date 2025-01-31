@@ -27,12 +27,12 @@ public class MessengerController extends FriendBaseController {
     }
 
     public void displayFriendList() {
-        var requests = DatabaseGetter.getAllfriend(LoginController.userID);
-        friendListContainer.getChildren().clear();
+        var requests = DatabaseGetter.getAllfriend(LoginController.getUserID());
+        mainContainer.getChildren().clear();
 
         for (var request : requests) {
             VBox requestBox = createFriendBox(request);
-            friendListContainer.getChildren().add(requestBox);
+            mainContainer.getChildren().add(requestBox);
         }
     }
     @FXML
@@ -44,7 +44,7 @@ public class MessengerController extends FriendBaseController {
         friendBox.setStyle("-fx-background-color: #0e1113; -fx-padding: 10; -fx-border-color: #0e1113; -fx-border-width: 1; -fx-border-radius: 5; -fx-background-radius: 5;");
         friendBox.setPrefWidth(400);
 
-        User user = DatabaseGetter.getUserByID(LoginController.userID);
+        User user = DatabaseGetter.getUserByID(LoginController.getUserID());
         Image profileImage = null;
         if (friend != null) {
             byte[] profilePicture = friend.getProfilePicture();
@@ -67,7 +67,7 @@ public class MessengerController extends FriendBaseController {
         if (profileImage != null) {
             profileImageView.setFill(new ImagePattern(profileImage));
         } else {
-            profileImageView.setFill(Color.GRAY);
+            profileImageView.setFill(Color.DODGERBLUE);
         }
 
         Label friendName = new Label(friend.getName());
@@ -83,7 +83,7 @@ public class MessengerController extends FriendBaseController {
             senderNameLabel.setStyle("-fx-font-size: 18px; -fx-text-fill:rgb(234, 11, 11); -fx-padding: 10;");
             messengerContainer.getChildren().add(senderNameLabel);
 
-            Messenger messenger = new Messenger(friend.getUserID(), LoginController.userID);
+            Messenger messenger = new Messenger(friend.getUserID(), LoginController.getUserID());
             messengerContainer.getChildren().add(messenger);
         });
 

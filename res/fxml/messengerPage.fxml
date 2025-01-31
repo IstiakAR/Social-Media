@@ -30,7 +30,7 @@
          </children>
       </HBox>
       <Line endX="-36.0" endY="644.0" layoutX="275.0" layoutY="115.0" startX="-36.0" startY="-47.5" stroke="#2f3233" />
-      <VBox fx:id="friendListContainer" layoutX="4.0" layoutY="136.0" prefHeight="609.0" prefWidth="235.0">
+      <VBox fx:id="mainContainer" layoutX="4.0" layoutY="136.0" prefHeight="609.0" prefWidth="235.0">
          <children>
             <ScrollPane fx:id="ScrollPane" prefHeight="611.0" prefWidth="235.0" style="-fx-background: #0e1113; -fx-border-color: #0e1113;" stylesheets="@../css/homePosts.css" />
          </children>

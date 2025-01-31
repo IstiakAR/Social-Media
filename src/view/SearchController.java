@@ -16,7 +16,7 @@ import java.util.List;
 
 public class SearchController extends HomeController {
     @FXML
-    private VBox postsContainer;
+    private VBox mainContainer;
     @FXML
     private Button showPeople;
     @FXML
@@ -31,7 +31,7 @@ public class SearchController extends HomeController {
     public void initialize(){
         super.initialize();
         searchText.setText(search);
-        Image im = loadProfilePicture(MainStorage.getUsersIMap().get(LoginController.userID).getProfilePicture(), LoginController.userID);
+        Image im = loadProfilePicture(MainStorage.getUsersIMap().get(LoginController.getUserID()).getProfilePicture(), LoginController.getUserID());
         userImage.setFill(new ImagePattern(im));
     }
     @FXML
@@ -56,7 +56,7 @@ public class SearchController extends HomeController {
     public void search(String s) {
         this.search = s;
         searchText.setText(search);
-        postsContainer.getChildren().clear();
+        mainContainer.getChildren().clear();
         if (searchPosts) {
             List<Post> posts = MainStorage.getAllPosts().values().stream()
                     .filter(post -> post.getPostContent().contains(search))
@@ -65,7 +65,7 @@ public class SearchController extends HomeController {
 
             for (Post post : posts) {
                 VBox postBox = createPostBox(post, post.getPostID());
-                postsContainer.getChildren().add(postBox);
+                mainContainer.getChildren().add(postBox);
             }
         } else {
             List<User> users = MainStorage.getUsersSMap().values().stream()
@@ -73,10 +73,10 @@ public class SearchController extends HomeController {
                     .sorted((u1, u2) -> u1.getName().compareToIgnoreCase(u2.getName()))
                     .toList();
             for (User user : users) {
-                if(user.getUserID() == LoginController.userID) return;
+                if(user.getUserID() == LoginController.getUserID()) return;
                 RecommandFriends recommandFriends = new RecommandFriends();
                 VBox userBox = recommandFriends.createFriendBox(user);
-                postsContainer.getChildren().add(userBox);
+                mainContainer.getChildren().add(userBox);
             }
         }
     }

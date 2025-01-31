@@ -48,10 +48,10 @@ public class FriendsProfileController {
                     profileImageview.setFill(new ImagePattern(profileImage));
                 } catch (Exception e) {
                     System.out.println("Error loading profile picture: " + e.getMessage());
-                    profileImageview.setFill(Color.GRAY);
+                    profileImageview.setFill(Color.DODGERBLUE);
                 }
             } else {
-                profileImageview.setFill(Color.GRAY);
+                profileImageview.setFill(Color.DODGERBLUE);
             }
         });
     }

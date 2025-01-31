@@ -78,7 +78,7 @@
       <ScrollBar fx:id="ScrollBar" layoutX="1267.0" layoutY="98.0" orientation="VERTICAL" prefHeight="646.0" prefWidth="30.0" stylesheets="@../css/scrollMain.css" />
       <ScrollPane fx:id="ScrollPane" layoutX="269.0" layoutY="100.0" prefHeight="644.0" prefWidth="982.0" style="-fx-background: #0e1113; -fx-border-color: #0e1113;" stylesheets="@../css/homePosts.css">
          <content>
-            <VBox fx:id="postsContainer" style="-fx-background-color: #000000;" />
+            <VBox fx:id="mainContainer" style="-fx-background-color: #000000;" />
          </content>
       </ScrollPane>
       <Circle fx:id="userImage" fill="DODGERBLUE" layoutX="1251.0" layoutY="36.0" radius="18.0" stroke="BLACK" strokeType="INSIDE" />

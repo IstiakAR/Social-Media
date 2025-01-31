@@ -19,12 +19,12 @@ public class RecommandFriends extends FriendBaseController {
 
     public void displayFriendList() {
         var friends = DatabaseGetter.getUsers();
-        friendListContainer.getChildren().clear();
+        mainContainer.getChildren().clear();
         for (var friend : friends) {
-            if (friend.getUserID() != LoginController.userID) {
+            if (friend.getUserID() != LoginController.getUserID()) {
                 VBox friendBox = createFriendBox(friend);
                 if (friendBox != null) {
-                    friendListContainer.getChildren().add(friendBox);
+                    mainContainer.getChildren().add(friendBox);
                 }
             }
         }
@@ -46,7 +46,7 @@ public class RecommandFriends extends FriendBaseController {
         }
 
         Circle profileImageView = new Circle(25);
-        profileImageView.setFill(profileImage != null ? new ImagePattern(profileImage) : Color.GRAY);
+        profileImageView.setFill(profileImage != null ? new ImagePattern(profileImage) : Color.DODGERBLUE);
 
         Label friendName = new Label(friend.getName());
         friendName.setStyle("-fx-font-size: 22px; -fx-text-fill: #ffffff;");
@@ -60,7 +60,7 @@ public class RecommandFriends extends FriendBaseController {
         cancelButton.setStyle("-fx-background-color: #007BFF; -fx-text-fill: white;");
         cancelButton.setVisible(false);
 
-        int userId = LoginController.userID;
+        int userId = LoginController.getUserID();
         int friendId = friend.getUserID();
 
         if (DatabaseGetter.isFriend(userId, friendId)) {

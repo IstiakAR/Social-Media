@@ -66,7 +66,7 @@
 
       <ScrollPane fx:id="ScrollPane" layoutX="240.0" layoutY="107.0" prefHeight="616.0" prefWidth="1003.0" style="-fx-background: #0e1113; -fx-border-color: #0e1113;" stylesheets="@../css/homePosts.css">
          <content>
-            <VBox fx:id="friendListContainer" prefHeight="614.0" prefWidth="506.0" />
+            <VBox fx:id="mainContainer" prefHeight="614.0" prefWidth="506.0" />
          </content>
     </ScrollPane>
       <ScrollBar fx:id="ScrollBar" layoutX="1265.0" layoutY="70.0" orientation="VERTICAL" prefHeight="652.0" prefWidth="28.0" stylesheets="@../css/scrollMain.css" />
