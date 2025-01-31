@@ -132,20 +132,23 @@ public abstract class BaseController extends Handler {
             System.out.println("Error: User not found for ID: " + post.getUserID());
         }
         
-        Circle postImage = new Circle(15);
+        Circle postImage = new Circle(20);
         Image postPicture = loadProfilePicture(MainStorage.getUsersIMap().get(post.getUserID()).getProfilePicture(), post.getUserID());
         if(postPicture == null) postImage.setFill(Color.DODGERBLUE);
         else postImage.setFill(new ImagePattern(postPicture));
 
-        HBox authorDateBox = new HBox();
+        VBox authorDateBox = new VBox();
         Label postAuthor = new Label(MainStorage.getUsersIMap().get(post.getUserID()).getName());
         postAuthor.setStyle("-fx-font-size: 18px; -fx-text-fill: #999999;");
         Label postDate = new Label(post.getCreationTime());
         postDate.setStyle("-fx-font-size: 12px; -fx-text-fill: #999999;");
-        authorDateBox.getChildren().addAll(postImage, postAuthor, new Label(" | "), postDate);
-        authorDateBox.setStyle("-fx-spacing: 5;");
+        authorDateBox.getChildren().addAll(postAuthor, postDate);
+        // authorDateBox.setStyle("-fx-spacing: 5;");
 
-        contentBox.getChildren().addAll(authorDateBox,postContent, voteBox);
+        HBox authorBox = new HBox(postImage, authorDateBox);
+        authorBox.setSpacing(5);
+
+        contentBox.getChildren().addAll(authorBox,postContent, voteBox);
         contentBox.setStyle("-fx-padding: 5;");
 
         postBox.getChildren().add(contentBox);

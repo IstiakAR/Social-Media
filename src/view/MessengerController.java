@@ -1,6 +1,5 @@
 package view;
 
-import java.io.ByteArrayInputStream;
 import java.io.DataInputStream;
 import java.io.IOException;
 import java.net.Socket;
@@ -12,12 +11,10 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import javafx.scene.image.Image;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
-import main.MainController;
 import model.User;
 
 public class MessengerController extends FriendBaseController {
@@ -45,23 +42,7 @@ public class MessengerController extends FriendBaseController {
         friendBox.setPrefWidth(400);
 
         User user = DatabaseGetter.getUserByID(LoginController.getUserID());
-        Image profileImage = null;
-        if (friend != null) {
-            byte[] profilePicture = friend.getProfilePicture();
-            if (profilePicture != null && profilePicture.length > 0) {
-                try {
-                    profileImage = new Image(new ByteArrayInputStream(profilePicture));
-                } catch (Exception e) {
-                    System.out.println("Error loading profile picture: " + e.getMessage());
-                    profileImage = null;
-                }
-            }
-            else {
-                System.out.println("profilepicture = null");
-            }
-        }else {
-            System.out.println("User not found!");
-        }
+        Image profileImage = loadProfilePicture(friend.getProfilePicture(), friend.getUserID());
 
         Circle profileImageView = new Circle(18);
         if (profileImage != null) {
@@ -117,13 +98,6 @@ public class MessengerController extends FriendBaseController {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-        }
-    }
-     public void handleHome(MouseEvent event) { 
-        try {
-            MainController.gotoHomepage();
-        } catch (Exception e) {
-            e.printStackTrace();
         }
     }
 }

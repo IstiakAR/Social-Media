@@ -235,7 +235,7 @@ public class DatabaseGetter {
             pstmt.setInt(2, friendId);
             pstmt.setInt(3, friendId);  
             pstmt.setInt(4, senderId); 
-            System.out.println("Executing query: " + sql + " with senderId: " + senderId + " and friendId: " + friendId);
+            // System.out.println("Executing query: " + sql + " with senderId: " + senderId + " and friendId: " + friendId);
             ResultSet rs = pstmt.executeQuery();
     
             while (rs.next()) {
@@ -243,7 +243,6 @@ public class DatabaseGetter {
                     rs.getInt("senderID"),
                     rs.getInt("receiverID"),
                     rs.getString("content")
-                  
                 );
                 sentMessages.add(message);
             }

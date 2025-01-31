@@ -32,7 +32,7 @@ public class SearchController extends HomeController {
         super.initialize();
         searchText.setText(search);
         Image im = loadProfilePicture(MainStorage.getUsersIMap().get(LoginController.getUserID()).getProfilePicture(), LoginController.getUserID());
-        userImage.setFill(new ImagePattern(im));
+        if(im != null) userImage.setFill(new ImagePattern(im));
     }
     @FXML
     public void handleShowPosts(ActionEvent e){

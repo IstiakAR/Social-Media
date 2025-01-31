@@ -37,14 +37,6 @@ public class Handler {
         }
     }
 
-    public void handleFriends(ActionEvent event) {
-        System.out.println("Friends Button clicked!");
-        try {
-            MainController.gotoFriends();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
     public void handleMessenger(ActionEvent event) {
         System.out.println("Messenger Button clicked!");
         try {
@@ -92,6 +84,32 @@ public class Handler {
             } catch (Exception e) {
                 e.printStackTrace();
             }
+        }
+    }
+
+    public void handleFriends(ActionEvent event) {
+        System.out.println("Add Friends Button clicked!");
+        try {
+            MainController.gotoFriends();
+           
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    public void handleFriendRequest(ActionEvent event) {
+        System.out.println("Friend Request Button clicked!");
+        try {
+            MainController.gotoFriendRequest();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    public void handleAllFriend(ActionEvent event) {
+        System.out.println("All Friend Button clicked!");
+        try {
+            MainController.gotoAllFriends();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 }
