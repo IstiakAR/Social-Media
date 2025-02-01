@@ -7,15 +7,16 @@ import java.sql.Statement;
 
 public class Database {
     private static Connection connection;
-    private static final String URL = "jdbc:sqlite:res/database/social_media.db";
+    private static final String URL = "jdbc:sqlite:social_media.db";
 
     public static Connection connect() {
         connection = null;
         try {
             connection = DriverManager.getConnection(URL);
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
+        }catch (SQLException e) {
+            System.out.println("Database connection error: " + e.getMessage());
         }
+
         return connection;
     }
     public static void close() {
