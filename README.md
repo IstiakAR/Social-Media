@@ -3,14 +3,24 @@ Navigate to Social-Media Directory and ...
 ```
 javac -d bin -cp "lib/*" $(find src -name "*.java") && java --module-path lib --add-modules javafx.base,javafx.controls,javafx.fxml,javafx.graphics -cp "bin:res:lib/*" main/Main
 ```
+It command line should work on linux & mac. For windows, replace ':' with ';'. If you are still having trouble then, try with WSL. 
+
+Or, download the zip file containing jar from [here](), extracrt it and run it using...
+
+```
+java -jar SocialMediaApp.jar
+```
+
 #### Project Structure
 
 #### Social-Media
 
-├── bin
+├── bin/
 
-├── lib
+├── lib/
 
-├── res
+├── res/
 
-└── src
+├── src/
+
+└── social-media.db
