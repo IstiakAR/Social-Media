@@ -25,11 +25,11 @@ public class AddPostController {
     public void handleSubmit(ActionEvent event) {
         String content = postContent.getText();
         if (content != null && !content.trim().isEmpty()) {
-            User user = MainStorage.getUsersIMap().get(LoginController.userID);
+            User user = MainStorage.getUsersIMap().get(LoginController.getUserID());
             if (user != null) {
                 Post newPost = new Post(content, user.getUserID());
                 DatabaseInsert.insertPost(newPost);
-                user.addPost(newPost);
+                MainStorage.addPost(newPost);
                 closeDialog();
             }
         }

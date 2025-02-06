@@ -22,8 +22,7 @@ public class LoginController {
   @FXML
   private AnchorPane rootPane;
 
-  public static String name;
-  public static int userID=0;
+  private static int userID;
   
   @FXML
   public void initialize() {
@@ -62,6 +61,7 @@ public class LoginController {
   }
   @FXML
   public void handleLogin(ActionEvent event) {
+    System.out.println("UserID assigned in LoginController: " + userID);
     passwordClue.setVisible(false);
     String u = loginUsername.getText();
     String p = loginPassword.getText();
@@ -69,8 +69,7 @@ public class LoginController {
     if (MainStorage.getUsersSMap().containsKey(u)) {
       if (MainStorage.getUsersSMap().get(u).getPassword().equals(p)) {
         System.out.println("Login Matched!");
-        name = u;
-        userID=MainStorage.getUsersSMap().get(u).getUserID();
+        setUserID(MainStorage.getUsersSMap().get(u).getUserID());
         errorMessage.setVisible(false);
         try {
           MainController.gotoHomepage();
@@ -86,5 +85,11 @@ public class LoginController {
       errorMessage.setText("Username not found. Please try again.");
       errorMessage.setVisible(true);
     }
+  }
+  public static int getUserID(){
+    return userID;
+  }
+  protected static void setUserID(int u){
+    userID = u;
   }
 }

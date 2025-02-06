@@ -21,12 +21,6 @@ public class Post {
 		this.userID = userID;
         this.postID = postID;
 		this.creationTime = LocalDateTime.now();
-        User user = MainStorage.getUsersIMap().get(userID);
-        if (user != null) {
-            user.addPost(this);
-        } else {
-            throw new IllegalArgumentException("User not found for userID: " + userID);
-        }
     }
 
     public Post(String content, int userID) {
@@ -34,28 +28,11 @@ public class Post {
 		this.userID = userID;
         generatePostID();
         this.creationTime = LocalDateTime.now();
-        User user = MainStorage.getUsersIMap().get(userID);
-        if (user != null) {
-            user.addPost(this);
-        } else {
-            throw new IllegalArgumentException("User not found for userID: " + userID);
-        }
     }
 
     public Comment addComment(String text, int userID) {
-        int commentID = generateInteractionID();
-        Comment comment = new Comment(text, commentID, this.postID, userID);
-		// this.commentCount++;
+        Comment comment = new Comment(text, this.postID, userID);
         return comment;
-    }
-
-    public void addReaction(int react, int userID) {
-        // int reactionID = generateInteractionID();
-        // Reaction reaction = new Reaction(react, reactionID, postID, userID);
-        if (react == 1)
-            this.totalReaction += 1;
-        else if (react == -1)
-            this.totalReaction -= 1;
     }
 
     private void generatePostID() {
@@ -67,15 +44,6 @@ public class Post {
             }
         }
         postID = n;
-    }
-
-    private int generateInteractionID() {
-        while(true){
-            int n = 100000000 + (int)(Math.random() * 900000000);
-            if(!MainStorage.getCommentsMap().containsKey(n)){
-                return n;
-            }
-        }
     }
 
     public String getUnformattedCreationTime() {
@@ -102,10 +70,6 @@ public class Post {
         this.postID = postID;
     }
 
-    public int getTotalReaction() {
-        return totalReaction;
-    }
-
     public int getUserID() {
         return userID;
     }
@@ -130,5 +94,9 @@ public class Post {
             }
         }
         return comments;
+    }
+
+    public int getTotalReaction() {
+        return totalReaction;
     }
 }

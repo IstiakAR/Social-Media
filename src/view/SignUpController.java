@@ -27,8 +27,6 @@ public class SignUpController {
   @FXML
   private AnchorPane rootPane;
 
-  public static String name;
-
   @FXML
   public void initialize() {
     errorMessage.setVisible(false);
@@ -36,7 +34,6 @@ public class SignUpController {
   }
   @FXML
   public void handleLogin(ActionEvent event) {
-    System.out.println("Sign In in sign up page clicked!");
     try {
       MainController.gotoLoginPage();
     } catch (Exception e) {
@@ -46,12 +43,10 @@ public class SignUpController {
   @FXML
   public void handleSignUp(ActionEvent event) {
     String username = signupUsername.getText();
-    name = username;
     String password = signupPassword.getText();
     String fullName = signupFullName.getText();
     String retypePassword = signupRePassword.getText();
     String passwordClue = signupPasswordClue.getText();
-    System.out.println("Sign Up clicked!");
     if(username.isEmpty() || password.isEmpty() || fullName.isEmpty() || retypePassword.isEmpty() || passwordClue.isEmpty()) {
       errorMessage.setText("Please fill all fields.");
       errorMessage.setVisible(true);
@@ -66,7 +61,7 @@ public class SignUpController {
     else {
       User user = new User(username, password, fullName, passwordClue);
       int userID = user.getUserID();
-      LoginController.userID = userID;
+      LoginController.setUserID(userID);
       DatabaseInsert.insertUser(user);
       MainStorage.getUsersSMap().put(username, user);
       MainStorage.getUsersIMap().put(userID, user);
