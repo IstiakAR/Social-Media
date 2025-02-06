@@ -11,13 +11,14 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="759.0" prefWidth="1293.0" style="-fx-background-color: #0e1113;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.HomeController">
+<AnchorPane fx:id="root" focusTraversable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="759.0" prefWidth="1293.0" style="-fx-background-color: #0e1113;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.HomeController">
    <children>
-      <VBox layoutX="4.0" layoutY="96.0" prefHeight="382.0" prefWidth="235.0">
+      <VBox layoutX="4.0" layoutY="85.0" prefHeight="393.0" prefWidth="235.0">
          <children>
             <HBox alignment="CENTER_LEFT" prefHeight="40.0" prefWidth="267.0" style="-fx-background-radius: 100;">
                <children>
@@ -29,14 +30,14 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                      <HBox.margin>
-                        <Insets left="5.0" right="10.0" />
+                        <Insets left="5.0" right="5.0" />
                      </HBox.margin>
                   </ImageView>
-                  <Text fill="#eceff1" strokeType="OUTSIDE" strokeWidth="0.0" text="Home" wrappingWidth="85.18199920654297">
+                  <Hyperlink onMouseClicked="#handleHome" prefHeight="32.0" prefWidth="110.0" text="Home" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="17.0" />
                      </font>
-                  </Text>
+                  </Hyperlink>
                </children>
                <opaqueInsets>
                   <Insets />
@@ -58,7 +59,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                      <HBox.margin>
-                        <Insets right="5.0" />
+                        <Insets />
                      </HBox.margin>
                   </ImageView>
                   <Hyperlink onAction="#handleFriends" text="Friends" textFill="WHITE">
@@ -66,32 +67,6 @@
                         <Font name="System Bold" size="17.0" />
                      </font>
                   </Hyperlink>
-               </children>
-               <padding>
-                  <Insets left="30.0" />
-               </padding>
-               <VBox.margin>
-                  <Insets bottom="5.0" />
-               </VBox.margin>
-            </HBox>
-            <HBox alignment="CENTER_LEFT" prefHeight="40.0" prefWidth="267.0" style="-fx-background-radius: 100;">
-               <children>
-                  <ImageView accessibleRole="BUTTON" fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../images/todo_white.png" />
-                     </image>
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                     <HBox.margin>
-                        <Insets right="10.0" />
-                     </HBox.margin>
-                  </ImageView>
-                  <Text fill="#eceff1" strokeType="OUTSIDE" strokeWidth="0.0" text="ToDo" wrappingWidth="80.18199920654297">
-                     <font>
-                        <Font name="System Bold" size="17.0" />
-                     </font>
-                  </Text>
                </children>
                <padding>
                   <Insets left="30.0" />
@@ -130,36 +105,7 @@
                <children>
                   <ImageView accessibleRole="BUTTON" fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../images/saved_white.png" />
-                     </image>
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                     <HBox.margin>
-                        <Insets right="15.0" />
-                     </HBox.margin>
-                  </ImageView>
-                  <Hyperlink text="Saved" textFill="WHITE">
-                     <font>
-                        <Font name="System Bold" size="17.0" />
-                     </font>
-                     <HBox.margin>
-                        <Insets />
-                     </HBox.margin>
-                  </Hyperlink>
-               </children>
-               <padding>
-                  <Insets left="30.0" />
-               </padding>
-               <VBox.margin>
-                  <Insets bottom="5.0" />
-               </VBox.margin>
-            </HBox>
-            <HBox alignment="CENTER_LEFT" prefHeight="40.0" prefWidth="267.0" style="-fx-background-radius: 100;">
-               <children>
-                  <ImageView accessibleRole="BUTTON" fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../images/birthday_white.png" />
+                        <Image url="@../images/message_white.png" />
                      </image>
                      <cursor>
                         <Cursor fx:constant="HAND" />
@@ -168,59 +114,7 @@
                         <Insets right="10.0" />
                      </HBox.margin>
                   </ImageView>
-                  <Text fill="#eceff1" strokeType="OUTSIDE" strokeWidth="0.0" text="Birthdays" wrappingWidth="100.18199920654297">
-                     <font>
-                        <Font name="System Bold" size="17.0" />
-                     </font>
-                  </Text>
-               </children>
-               <padding>
-                  <Insets left="30.0" />
-               </padding>
-               <VBox.margin>
-                  <Insets bottom="5.0" />
-               </VBox.margin>
-            </HBox>
-            <HBox alignment="CENTER_LEFT" prefHeight="40.0" prefWidth="267.0" style="-fx-background-radius: 100;">
-               <children>
-                  <ImageView accessibleRole="BUTTON" fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../images/stats_white.png" />
-                     </image>
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                     <HBox.margin>
-                        <Insets right="15.0" />
-                     </HBox.margin>
-                  </ImageView>
-                  <Text fill="#eceff1" strokeType="OUTSIDE" strokeWidth="0.0" text="Stats" wrappingWidth="74.18199920654297">
-                     <font>
-                        <Font name="System Bold" size="17.0" />
-                     </font>
-                  </Text>
-               </children>
-               <padding>
-                  <Insets left="30.0" />
-               </padding>
-               <VBox.margin>
-                  <Insets bottom="5.0" />
-               </VBox.margin>
-            </HBox>
-            <HBox alignment="CENTER_LEFT" prefHeight="40.0" prefWidth="267.0" style="-fx-background-radius: 100;">
-               <children>
-                  <ImageView accessibleRole="BUTTON" fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../images/messenger_white.png" />
-                     </image>
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                     <HBox.margin>
-                        <Insets right="10.0" />
-                     </HBox.margin>
-                  </ImageView>
-                  <Hyperlink onAction="#handleMassenger" prefHeight="34.0" prefWidth="168.0" text="Messenger" textFill="#f2f0f0">
+                  <Hyperlink onAction="#handleMessenger" prefHeight="34.0" prefWidth="137.0" text="Messenger" textFill="#f2f0f0">
                      <font>
                         <Font name="System Bold" size="16.0" />
                      </font>
@@ -234,8 +128,8 @@
       </VBox>
       <HBox alignment="CENTER" layoutX="384.0" layoutY="12.0" prefHeight="47.0" prefWidth="529.0">
          <children>
-            <TextField opacity="0.46" prefHeight="40.0" prefWidth="477.0" promptText="Search" style="-fx-background-radius: 100; -fx-background-color: #2a3236;" />
-            <ImageView accessibleRole="BUTTON" fitHeight="25.0" fitWidth="46.0" pickOnBounds="true" preserveRatio="true">
+            <TextField fx:id="searchText" opacity="0.46" prefHeight="40.0" prefWidth="477.0" promptText="Search" style="-fx-background-radius: 100; -fx-background-color: #2a3236; -fx-text-fill: #ffffff;" />
+            <ImageView accessibleRole="BUTTON" fitHeight="25.0" fitWidth="46.0" onMouseClicked="#handleSearch" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/search_white.png" />
                </image>
@@ -264,28 +158,7 @@
          </children>
       </HBox>
       <Line endX="-36.0" endY="644.0" layoutX="275.0" layoutY="115.0" startX="-36.0" startY="-47.5" stroke="#2f3233" />
-      <ImageView fx:id="userImage" fitHeight="40.0" fitWidth="40.0" layoutX="1226.0" layoutY="16.0" onMouseClicked="#handleProfile2" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/profile_white.png" />
-         </image>
-      </ImageView>
-      <ImageView accessibleRole="BUTTON" fitHeight="25.0" fitWidth="25.0" layoutX="1187.0" layoutY="23.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/notification_white.png" />
-         </image>
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-      </ImageView>
-      <ImageView accessibleRole="BUTTON" fitHeight="25.0" fitWidth="25.0" layoutX="1148.0" layoutY="24.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/message_white.png" />
-         </image>
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-      </ImageView>
-      <ImageView accessibleRole="BUTTON" fitHeight="30.0" fitWidth="30.0" layoutX="1107.0" layoutY="22.0" onMouseClicked="#handleAddPost" pickOnBounds="true" preserveRatio="true">
+      <ImageView accessibleRole="BUTTON" fitHeight="30.0" fitWidth="30.0" layoutX="1187.0" layoutY="21.0" onMouseClicked="#handleAddPost" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/add_white.png" />
          </image>
@@ -293,13 +166,13 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </ImageView>
-      <VBox layoutX="4.0" layoutY="657.0" prefHeight="88.0" prefWidth="235.0">
+      <VBox layoutX="4.0" layoutY="652.0" prefHeight="93.0" prefWidth="235.0">
          <children>
             <HBox alignment="CENTER_LEFT" prefHeight="40.0" prefWidth="267.0" style="-fx-background-radius: 100;">
                <children>
                   <ImageView accessibleRole="BUTTON" fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../images/help_white.png" />
+                        <Image url="@../images/settings_white.png" />
                      </image>
                      <cursor>
                         <Cursor fx:constant="HAND" />
@@ -308,7 +181,7 @@
                         <Insets right="15.0" />
                      </HBox.margin>
                   </ImageView>
-                  <Text fill="#eceff1" strokeType="OUTSIDE" strokeWidth="0.0" text="Help" wrappingWidth="58.18199920654297">
+                  <Text fill="#eceff1" onMouseClicked="#handleSettings" strokeType="OUTSIDE" strokeWidth="0.0" text="Settings" wrappingWidth="91.18199920654297">
                      <font>
                         <Font name="System Bold" size="17.0" />
                      </font>
@@ -325,7 +198,7 @@
                <children>
                   <ImageView accessibleRole="BUTTON" fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../images/about_white.png" />
+                        <Image url="@../images/logout_white.png" />
                      </image>
                      <cursor>
                         <Cursor fx:constant="HAND" />
@@ -334,7 +207,7 @@
                         <Insets right="15.0" />
                      </HBox.margin>
                   </ImageView>
-                  <Text fill="#eceff1" strokeType="OUTSIDE" strokeWidth="0.0" text="About Us" wrappingWidth="133.18199920654297">
+                  <Text fill="#eceff1" onMouseClicked="#handleLogOut" strokeType="OUTSIDE" strokeWidth="0.0" text="Log Out" wrappingWidth="91.18199920654297">
                      <font>
                         <Font name="System Bold" size="17.0" />
                      </font>
@@ -349,18 +222,12 @@
 
       <ScrollPane fx:id="ScrollPane" layoutX="259.0" layoutY="96.0" opacity="0.99" prefHeight="625.0" prefWidth="1014.0" style="-fx-background: #0e1113; -fx-border-color: #0e1113;" stylesheets="@../css/homePosts.css">
         <content>
-            <VBox fx:id="postsContainer" style="-fx-background-color: #000000;">
+            <VBox fx:id="mainContainer" style="-fx-background-color: #000000;">
             </VBox>
         </content>
     </ScrollPane>
       <ScrollBar fx:id="ScrollBar" layoutX="1273.0" layoutY="94.0" orientation="VERTICAL" prefHeight="625.0" prefWidth="28.0" stylesheets="@../css/scrollMain.css" />
-      <Hyperlink layoutX="1217.0" layoutY="24.0" opacity="0.06" />
-      <Hyperlink layoutX="1217.0" layoutY="24.0">
-         <font>
-            <Font size="1.0" />
-         </font>
-      </Hyperlink>
-      <Hyperlink layoutX="1217.0" layoutY="24.0" onAction="#handleProfile" />
+      <Circle fx:id="userImage" fill="DODGERBLUE" layoutX="1244.0" layoutY="34.0" radius="18.0" stroke="BLACK" strokeType="INSIDE" />
    </children>
    <padding>
       <Insets bottom="10.0" right="10.0" />

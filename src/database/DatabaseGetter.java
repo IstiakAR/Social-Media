@@ -1,6 +1,5 @@
 package database;
 
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -13,7 +12,7 @@ import java.util.Map;
 import model.*;
 
 public class DatabaseGetter {
-        public static List<User> getUsers() {
+    public static List<User> getUsers() {
         String sql = "SELECT * FROM users";
         List<User>users = new ArrayList<>();
 
@@ -163,20 +162,6 @@ public class DatabaseGetter {
             return false;
         }
     }
-    public static boolean updateFriendStatus(int userId, int friendId, String status) {
-        String sql = "UPDATE friendships SET status = ? WHERE userID = ? AND friendID = ?";
-        try (PreparedStatement pstmt = Database.connect().prepareStatement(sql)) {
-
-            pstmt.setString(1, status);
-            pstmt.setInt(2, userId);
-            pstmt.setInt(3, friendId);
-            int rowsAffected = pstmt.executeUpdate();
-            return rowsAffected > 0;
-        } catch (SQLException e) {
-            System.out.println("Error updating friend status: " + e.getMessage());
-            return false;
-        }
-    }
     public static List<User> getIncomingRequests(int userId) {
         List<User> requests = new ArrayList<>();
         String sql = "SELECT users.* FROM friendships " +
@@ -192,7 +177,8 @@ public class DatabaseGetter {
                     rs.getString("password"),
                     rs.getString("name"),
                     rs.getString("clue"),
-                    rs.getInt("userID")
+                    rs.getInt("userID"),
+                    rs.getBytes("profilePicture")
                 );
                 requests.add(user);
             }
@@ -217,7 +203,8 @@ public class DatabaseGetter {
                     rs.getString("password"),
                     rs.getString("name"),
                     rs.getString("clue"),
-                    rs.getInt("userID")
+                    rs.getInt("userID"),
+                    rs.getBytes("profilePicture")
                 );
                 requests.add(user);
             }
@@ -226,54 +213,29 @@ public class DatabaseGetter {
         }
         return requests;
     }
-    public static Map<Integer, Reaction> getReactionsMap() {
-        String sql = "SELECT * FROM votes";
-        Map<Integer, Reaction> reactions = new HashMap<>();
-    
-        try (PreparedStatement pstmt = Database.connect().prepareStatement(sql)) {
-            ResultSet rs = pstmt.executeQuery();
-    
-            while (rs.next()) {
-                int userID = rs.getInt("userID");
-                Reaction reaction = new Reaction(
-                    rs.getInt("vote"),
-                    rs.getInt("postID"),
-                    userID
-                );
-                reactions.put(userID, reaction);
-                System.out.println("Fetched data from database: vote=" + rs.getInt("vote") + ", postID=" + rs.getInt("postID") + ", userID=" + userID);
-            }
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
-        return reactions;
-    }
     public static int getTotalVotes(int postID) {
-        String sql = "SELECT totalVote FROM totalVotes WHERE postID = ?";
+        String sql = "SELECT COUNT(*) FROM votes WHERE postID = ?";
         try (PreparedStatement pstmt = Database.connect().prepareStatement(sql)) {
             pstmt.setInt(1, postID);
             ResultSet rs = pstmt.executeQuery();
-            if (rs.next()) {
-                return rs.getInt("totalVote");
-            }
+            return rs.next() ? rs.getInt(1) : 0;
         } catch (SQLException e) {
             System.out.println(e.getMessage());
+            return 0;
         }
-        return 0;
     }
-    
     public static List<Message> getSentMessages(int senderId, int friendId) {
         List<Message> sentMessages = new ArrayList<>();
-        String query = "SELECT * FROM messages " +
+        String sql = "SELECT * FROM messages " +
                    "WHERE (senderID = ? AND receiverID = ?) " +
                    "   OR (senderID = ? AND receiverID = ?) " +
                    "ORDER BY timestamp ASC";
-        try (Connection conn = Database.connect(); PreparedStatement pstmt = conn.prepareStatement(query)) {
+        try (PreparedStatement pstmt = Database.connect().prepareStatement(sql)) {
             pstmt.setInt(1, senderId);
             pstmt.setInt(2, friendId);
             pstmt.setInt(3, friendId);  
             pstmt.setInt(4, senderId); 
-            System.out.println("Executing query: " + query + " with senderId: " + senderId + " and friendId: " + friendId);
+            // System.out.println("Executing query: " + sql + " with senderId: " + senderId + " and friendId: " + friendId);
             ResultSet rs = pstmt.executeQuery();
     
             while (rs.next()) {
@@ -281,7 +243,6 @@ public class DatabaseGetter {
                     rs.getInt("senderID"),
                     rs.getInt("receiverID"),
                     rs.getString("content")
-                  
                 );
                 sentMessages.add(message);
             }

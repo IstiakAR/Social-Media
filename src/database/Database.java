@@ -7,16 +7,16 @@ import java.sql.Statement;
 
 public class Database {
     private static Connection connection;
-    private static final String URL = "jdbc:sqlite:res/database/social_media.db";
+    private static final String URL = "jdbc:sqlite:social_media.db";
 
     public static Connection connect() {
         connection = null;
         try {
             connection = DriverManager.getConnection(URL);
-            System.out.println("Connection to SQLite has been established.");
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
+        }catch (SQLException e) {
+            System.out.println("Database connection error: " + e.getMessage());
         }
+
         return connection;
     }
     public static void close() {
@@ -39,11 +39,10 @@ public class Database {
             + "clue TEXT NOT NULL,"
             + "profilePicture BLOB,"
             + "Bio TEXT,"
-            + "Education TEXT"
+            + "Education TEXT,"
             + "Workplace TEXT,"
-            + "Email TEXT,"
+            + "Email TEXT"
             + ");";
-    
 
         String postsTable = "CREATE TABLE IF NOT EXISTS posts ("
             + "postID INTEGER PRIMARY KEY,"
@@ -52,21 +51,12 @@ public class Database {
             + "creationTime TEXT,"
             + "FOREIGN KEY (userID) REFERENCES users(userID)"
             + ");";
-
-        String savedPostsTable = "CREATE TABLE IF NOT EXISTS saved_posts ("
-            + "id INTEGER PRIMARY KEY AUTOINCREMENT,"
-            + "userID INTEGER,"
-            + "postID INTEGER,"
-            + "FOREIGN KEY (userID) REFERENCES users(userID),"
-            + "FOREIGN KEY (postID) REFERENCES posts(postID)"
-            + ");";
             
         String friendshipsTable = "CREATE TABLE IF NOT EXISTS friendships ("
             + "friendshipID INTEGER PRIMARY KEY," 
             + "userID INTEGER NOT NULL,"        
             + "friendID INTEGER NOT NULL,"       
             + "status TEXT NOT NULL DEFAULT 'Pending'," 
-            + "creationTime TEXT,"
             + "FOREIGN KEY (userID) REFERENCES users(userID)," 
             + "FOREIGN KEY (friendID) REFERENCES users(userID)" 
             + ");";
@@ -76,7 +66,6 @@ public class Database {
             + "userID INTEGER NOT NULL, "        
             + "friendID INTEGER NOT NULL, "       
             + "status TEXT NOT NULL DEFAULT 'Pending', " 
-            + "creationTime TEXT,"
             + "FOREIGN KEY (userID) REFERENCES users(userID), " 
             + "FOREIGN KEY (friendID) REFERENCES users(userID)"
             + ");";
@@ -90,42 +79,35 @@ public class Database {
             + "FOREIGN KEY (postID) REFERENCES posts(postID),"
             + "FOREIGN KEY (userID) REFERENCES users(userID)"
             + ");";
+
         String voteTable = "CREATE TABLE IF NOT EXISTS votes ("
-            + "vote INTEGER NOT NULL,"
             + "postID INTEGER NOT NULL,"
             + "userID INTEGER NOT NULL,"
-            // + "UNIQUE(postID, userID),"
-            + "FOREIGN KEY (postID) REFERENCES posts(postID),"
-            + "FOREIGN KEY (userID) REFERENCES users(userID)"
-            + ");";
-        String totalVoteTable = "CREATE TABLE IF NOT EXISTS totalVotes ("
-            + "postID INTEGER PRIMARY KEY,"
-            + "totalVote INTEGER NOT NULL,"
-            + "FOREIGN KEY (postID) REFERENCES posts(postID)"
+            + "PRIMARY KEY (postID, userID),"
+            + "FOREIGN KEY (postID) REFERENCES posts(postID) ON DELETE CASCADE,"
+            + "FOREIGN KEY (userID) REFERENCES users(userID) ON DELETE CASCADE"
             + ");";
 
-            String messagesTable = "CREATE TABLE IF NOT EXISTS messages (" 
+        String messagesTable = "CREATE TABLE IF NOT EXISTS messages (" 
             + "messageID INTEGER PRIMARY KEY AUTOINCREMENT," 
             + "senderID INTEGER NOT NULL," 
             + "receiverID INTEGER NOT NULL," 
             + "content TEXT NOT NULL," 
             + "timestamp TEXT DEFAULT CURRENT_TIMESTAMP," 
-            + "status TEXT DEFAULT 'Sent', "  // Status: 'Sent', 'Received', 'Read', etc.
-            + "messageType TEXT DEFAULT 'Text', "  // Could be 'Text', 'Image', 'File', etc.
+            + "status TEXT DEFAULT 'Sent', "
+            + "messageType TEXT DEFAULT 'Text', "
             + "FOREIGN KEY (senderID) REFERENCES users(userID), " 
             + "FOREIGN KEY (receiverID) REFERENCES users(userID), " 
             + "CHECK (LENGTH(content) > 0)" 
             + ");";
-        try (Connection conn = connect();
-             Statement stmt = conn.createStatement()) {
+        
+        try (Statement stmt = connect().createStatement()) {
             stmt.execute(usersTable);
             stmt.execute(postsTable);
-            stmt.execute(savedPostsTable);
             stmt.execute(friendshipsTable);
             stmt.execute(allfriendTable);
             stmt.execute(commentTable);
             stmt.execute(voteTable);
-            stmt.execute(totalVoteTable);
             stmt.execute(messagesTable);
             System.out.println("Tables created.");
         } catch (SQLException e) {

@@ -8,9 +8,11 @@ import java.io.InputStream;
 import database.DatabaseUpdate;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
@@ -20,7 +22,7 @@ import main.MainController;
 import main.MainStorage;
 import model.User;
 
-public class ProfileController {
+public class ProfileController extends Handler{
     @FXML
     private Text profilename;
     @FXML
@@ -37,6 +39,8 @@ public class ProfileController {
     private Text email;
     @FXML
     private Text bio;
+    @FXML
+    protected Circle userImage;
 
     private User user;
 
@@ -47,17 +51,10 @@ public class ProfileController {
 
     @FXML
     public void initialize() {
-        user = MainStorage.getUsersIMap().get(LoginController.userID);
-
-        System.out.println(user.getBio() + ' ' + user.getEducation() + ' ' + user.getEmail() + ' ' + user.getWorkplace());
+        user = MainStorage.getUsersIMap().get(LoginController.getUserID());
 
         if (user != null) {
-            // String Username = validator(user.getUsername());
-            // String Workplace = validator(user.getWorkplace());
-            // String Education = validator(user.getEducation());
-            // String Email = validator(user.getEmail());
-            // String Bio = validator(user.getBio());
-            String Username = user.getUsername();
+            String Username = user.getName();
             String Workplace = user.getWorkplace();
             String Education = user.getEducation();
             String Email = user.getEmail();
@@ -69,29 +66,42 @@ public class ProfileController {
             education.setText(Education);
             email.setText(Email);
             bio.setText(Bio);
+                       
+            VBox.setMargin(profilename, new Insets(10, 0, 0, 0));
+            VBox.setMargin(workplace, new Insets(10, 0, 0, 0));
+            VBox.setMargin(education, new Insets(10, 0, 0, 0));
+            VBox.setMargin(email, new Insets(10, 0, 0, 0));
+            VBox.setMargin(bio, new Insets(40, 0, 0, 0));
             
+            profilename.setStyle("-fx-font-size: 24px;");
+            workplace.setStyle("-fx-font-size: 18px;");
+            education.setStyle("-fx-font-size: 18px;");
+            email.setStyle("-fx-font-size: 14px;");
+            bio.setStyle("-fx-font-size: 14px;");
+
             byte[] profilePicture = user.getProfilePicture();
             
             if (profilePicture != null && profilePicture.length > 0) {
                 try {
-                    System.out.println("Profile picture size: " + profilePicture.length);
                     Image profileImage = new Image(new ByteArrayInputStream(profilePicture));
                     circlepic.setRadius(50);
-                    circlepic.setFill(new ImagePattern(profileImage));
+                    if(profileImage != null) circlepic.setFill(new ImagePattern(profileImage));
                 } catch (Exception e) {
                     System.out.println("Error loading profile picture: " + e.getMessage());
                     circlepic.setRadius(50);
-                    circlepic.setFill(Color.GRAY);
+                    circlepic.setFill(Color.DODGERBLUE);
                 }
             } else {
-                System.out.println("No profile picture found for user.");
                 circlepic.setRadius(50);
-                circlepic.setFill(Color.GRAY);
+                circlepic.setFill(Color.DODGERBLUE);
             }
         } else {
             System.out.println("User not found!");
         }
+        Image im = BaseController.loadProfilePicture(user.getProfilePicture(), user.getUserID());
+        if(im!=null) userImage.setFill(new ImagePattern(im));
     }
+
 
     @FXML
     public void handleChangeProfilePicture(ActionEvent event) {
@@ -114,16 +124,6 @@ public class ProfileController {
             }
         }
     }
-
-    public void handleHome(ActionEvent event) {
-        System.out.println("Home clicked");
-        try {
-            MainController.gotoHomepage();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
     @FXML
     public void handleMyPost(ActionEvent event) {
         System.out.println("Posts clicked");

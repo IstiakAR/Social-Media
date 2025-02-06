@@ -7,10 +7,12 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.paint.ImagePattern;
+import javafx.scene.shape.Circle;
 
 public class AboutController {
-    // Link to the TextField in the FXML file
     @FXML
     private TextField Education;
     @FXML
@@ -21,9 +23,21 @@ public class AboutController {
     private TextField Email;
     @FXML
     private TextArea Bio;
+    @FXML
+    private Circle userImage;
+    User user;
     
     public void initialize() {
         rootPane.requestFocus();
+        rootPane.setStyle("-fx-background-color:  #0e1113");
+        user = MainStorage.getUsersIMap().get(LoginController.getUserID());
+        Workplace.setText(user.getWorkplace());
+        Bio.setText(user.getBio());
+        Email.setText(user.getEmail());
+        Education.setText(user.getEducation());
+        
+        Image profileImage = BaseController.loadProfilePicture(MainStorage.getUsersIMap().get(LoginController.getUserID()).getProfilePicture(), LoginController.getUserID());
+        if(profileImage!=null) userImage.setFill(new ImagePattern(profileImage));
     }
 
     @FXML
@@ -43,7 +57,7 @@ public class AboutController {
         String email = Email.getText();
         String bio = Bio.getText();
 
-        User user = MainStorage.getUsersIMap().get(LoginController.userID);
+        User user = MainStorage.getUsersIMap().get(LoginController.getUserID());
 
         user.setEducation(education);
         user.setWorkplace(workplace);
@@ -51,5 +65,11 @@ public class AboutController {
         user.setBio(bio);
         System.out.println("Bio" + user.getBio() + ' ' + user.getEducation() + ' ' + user.getWorkplace() + ' ' + user.getEmail());
         DatabaseUpdate.updateUserDetails(user);
+        try{
+            MainController.gotoProfile();
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
     }
 }

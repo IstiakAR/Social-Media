@@ -4,11 +4,13 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import model.Post;
 import view.AddPostController;
 import view.PostController;
+import view.SearchController;
 import view.AddProfilePictureController;
 
 public class MainController extends Application {
@@ -17,7 +19,13 @@ public class MainController extends Application {
   @Override
   public void start(Stage stage) throws Exception {
     primaryStage = stage;
+
+    var appIcon = new Image("/images/symbol_white.png");
+    primaryStage.getIcons().add(appIcon);
+    
     primaryStage.setTitle("Social Media");
+    primaryStage.setResizable(false);
+    primaryStage.setMaximized(false);
     gotoLoginPage();
     primaryStage.show();
   }
@@ -41,6 +49,16 @@ public class MainController extends Application {
   public static void gotoSignup() throws Exception {
     FXMLLoader loader = new FXMLLoader(MainController.class.getResource("/fxml/signupPage.fxml"));
     Parent root = loader.load();
+
+    Scene scene = new Scene(root);
+    primaryStage.setScene(scene);
+  }
+  public static void gotoSearch(String search, boolean searchPosts) throws Exception {
+    FXMLLoader loader = new FXMLLoader(MainController.class.getResource("/fxml/searchPage.fxml"));
+    Parent root = loader.load();
+
+    SearchController controller = loader.getController();
+    controller.search(search);
 
     Scene scene = new Scene(root);
     primaryStage.setScene(scene);
@@ -127,14 +145,23 @@ public class MainController extends Application {
   public static void showAddProfilePictureDialog(Runnable onCloseCallback) throws Exception {
     FXMLLoader loader = new FXMLLoader(MainController.class.getResource("/fxml/addProfilePicturedialog.fxml"));
     Parent root = loader.load();
+    
     AddProfilePictureController controller = loader.getController();
-    controller.setOnCloseCallback(v -> onCloseCallback.run());
+    controller.setProfileUpdateCallback(v -> onCloseCallback.run());
     Stage dialogStage = new Stage();
     dialogStage.setTitle("Update Profile Picture");
     dialogStage.initModality(Modality.WINDOW_MODAL);
     dialogStage.initOwner(primaryStage);
+
     Scene scene = new Scene(root);
     dialogStage.setScene(scene);
     dialogStage.showAndWait();
+  }
+
+  public static void gotoSettings() throws Exception {
+    FXMLLoader loader = new FXMLLoader(MainController.class.getResource("/fxml/settingsPage.fxml"));
+    Parent root = loader.load();
+    Scene scene = new Scene(root);
+    primaryStage.setScene(scene);
   }
 }
